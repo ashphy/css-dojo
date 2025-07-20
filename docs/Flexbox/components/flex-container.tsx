@@ -1,21 +1,4 @@
-function FlexItem({ children }: { children?: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        flex: "1",
-        padding: "15px",
-        backgroundColor: "#e3f2fd",
-        borderRadius: "4px",
-        textAlign: "center",
-        margin: 0,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function FlexContainer() {
+export function FlexContainer({ children }: { children?: React.ReactNode }) {
   return (
     <div
       style={{
@@ -27,9 +10,7 @@ export function FlexContainer() {
         backgroundColor: "#f9f9f9",
       }}
     >
-      <FlexItem>Item 1</FlexItem>
-      <FlexItem>Item 2</FlexItem>
-      <FlexItem>Item 3</FlexItem>
+      {children}
     </div>
   );
 }

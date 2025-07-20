@@ -1,41 +1,31 @@
 import { FlexContainer } from './components/flex-container';
+import { FlexItem } from './components/flex-items';
 
-# Flexbox の基礎
+# Flexboxの基礎
 
-## Flexbox とは
-
-**Flexbox**（CSS Flexible Box Layout Module）は、アイテムを行または列に並べるための 1 次元のレイアウト方法です。
-
-## Flexbox の主要な特徴
-
-### 1. 一次元レイアウト
-
-- 要素を一方向に配置（行または列）
-- 要素間の配置や配分を柔軟に制御
-- コンテナ内の要素を HTML の順序に関係なく配置
-
-### 2. レスポンシブ対応
-
-- 画面サイズに応じて要素が自動的に伸縮
-- 異なる画面サイズでも一貫したレイアウト
-
-### 3. 簡単な中央揃え
-
-- 垂直方向の中央揃えが簡単に実現
-- 複数の軸での配置制御が直感的
-
-以下のようなレイアウトを簡単に実現できます。
-
-<FlexContainer />
-
-## フレックスコンテナ（Flex Container）
+# フレックスコンテナ
 
 フレックスコンテナは、`display: flex` または `display: inline-flex` を設定した要素です。
 この要素が Flexbox レイアウトの親要素となります。
-フレックスコンテナの子要素は、フレックスアイテムと呼ばれます。
+フレックスコンテナの直接の子要素は、フレックスアイテムと呼ばれます。
 
-```css
+
+```html
+<div class="flex-container">
+  <div>フレックスアイテム 1</div>
+  <div>フレックスアイテム 2</div>
+  <div>フレックスアイテム 3</div>
+</div>
+```
+
+```css title="CSS"
 .flex-container {
   display: flex;
 }
 ```
+
+<FlexContainer>
+    <FlexItem>フレックスアイテム 1</FlexItem>
+    <FlexItem>フレックスアイテム 2</FlexItem>
+    <FlexItem>フレックスアイテム 3</FlexItem>
+</FlexContainer>
