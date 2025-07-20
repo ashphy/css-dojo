@@ -2,46 +2,30 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# CSS Dojo へようこそ
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**CSS 初心者から脱出したいあなたのための実践的な学習プラットフォームです。**
 
-## Getting Started
+「なんとなく分かったつもり」から「しっかり理解して使える」レベルまで、基礎からごまかしなしで学習していきましょう。
 
-Get started by **creating a new site**.
+## このサイトの特徴
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+### 📚 基礎から丁寧に
 
-### What you'll need
+CSS の基本概念から順序立てて学習できます。「なぜそうなるのか」を理解することで、応用力を身につけます。
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### 🎯 インタラクティブ学習
 
-## Generate a new site
+各プロパティの動作を実際に確認しながら学習できます。コードを変更すると即座に結果が反映され、視覚的に理解を深められます。
 
-Generate a new Docusaurus site using the **classic template**.
+### 💪 実践的なスキル習得
 
-The classic template will automatically be added to your project after you run the command:
+単なる暗記ではなく、実際の開発現場で使える実践的な CSS スキルを身につけられます。
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+## 学習の前提条件
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+このコースを始める前に、以下の知識があることを前提としています：
 
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- **HTML 基礎**: タグ、要素、属性の基本的な理解
+- **ブラウザの基本操作**: 開発者ツールの開き方
+- **テキストエディタの使用**: 基本的なコード編集
