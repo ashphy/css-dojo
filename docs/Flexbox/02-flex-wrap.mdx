@@ -1,0 +1,100 @@
+import { FlexWrapDemo } from './components/flex-wrap-demo';
+
+# flex-wrap
+
+フレックスコンテナでは、デフォルトでアイテムが1行（または1列）に収まるように自動的にサイズが調整されます。
+しかし、`flex-wrap` プロパティを使用することで、アイテムを複数行に折り返すことができます。
+
+## flex-wrap プロパティ
+
+`flex-wrap` プロパティは3つの値を取ることができます：
+
+### nowrap（デフォルト）
+
+デフォルトの値で、フレックスアイテムを折り返しません。すべてのアイテムが1行に配置されます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap; /* デフォルト値 */
+}
+```
+
+<FlexWrapDemo wrapValue="nowrap" interactive={false} />
+
+### wrap
+
+フレックスアイテムを必要に応じて複数行に折り返します。新しい行は主軸の正方向に沿って配置されます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+```
+
+<FlexWrapDemo wrapValue="wrap" interactive={false} />
+
+### wrap-reverse
+
+フレックスアイテムを必要に応じて複数行に折り返しますが、新しい行は主軸の逆方向に沿って配置されます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+```
+
+<FlexWrapDemo wrapValue="wrap-reverse" interactive={false} />
+
+## flex-flow ショートハンドプロパティ
+
+`flex-direction` と `flex-wrap` は、`flex-flow` プロパティを使用して一括で指定することができます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  /* flex-direction と flex-wrap を個別に指定 */
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  /* flex-flow で一括指定（上記と同じ意味） */
+  flex-flow: row wrap;
+}
+```
+
+### flex-flow の書式
+
+```css
+flex-flow: <flex-direction> <flex-wrap>;
+```
+
+一般的な組み合わせ例：
+
+```css title="CSS"
+/* 横方向に配置し、必要に応じて折り返す */
+.flex-container {
+  flex-flow: row wrap;
+}
+
+/* 縦方向に配置し、折り返しなし */
+.flex-container {
+  flex-flow: column nowrap;
+}
+
+/* 横方向逆順に配置し、逆方向に折り返す */
+.flex-container {
+  flex-flow: row-reverse wrap-reverse;
+}
+```
+
+## 実用的な使用例
+
+`flex-wrap` は、レスポンシブデザインでカードレイアウトやナビゲーションメニューを作成する際に特に有用です。コンテナの幅が小さくなったときに、アイテムが自動的に次の行に折り返されます。
+
+## 試してみよう
+
+以下のデモで、コンテナの幅を変更して `flex-wrap` の動作を確認してみましょう。
+
+<FlexWrapDemo />

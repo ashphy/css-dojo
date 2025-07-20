@@ -1,4 +1,9 @@
-export function FlexItemFixed({ children }: { children?: React.ReactNode }) {
+interface FlexItemFixedProps {
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+export function FlexItemFixed({ children, style }: FlexItemFixedProps) {
   return (
     <div
       style={{
@@ -7,6 +12,7 @@ export function FlexItemFixed({ children }: { children?: React.ReactNode }) {
         borderRadius: "4px",
         textAlign: "center",
         margin: 0,
+        ...style,
       }}
     >
       {children}
