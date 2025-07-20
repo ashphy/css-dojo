@@ -1,0 +1,236 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItem } from './components/flex-items';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# gap
+
+**gap** プロパティは、フレックスアイテム間のスペース（余白）を設定するためのプロパティです。
+従来はマージンを使用してアイテム間の余白を作成していましたが、gapプロパティを使用することで、より簡単で一貫性のある余白の設定が可能になります。
+
+## gap プロパティの基本
+
+gap プロパティは以下の方法で使用できます：
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  gap: 20px; /* すべての方向に20pxの余白 */
+}
+```
+
+### gap なし
+
+デフォルトでは、フレックスアイテム間に余白はありません。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  /* gap: 0; デフォルト値 */
+}
+```
+
+<FlexContainer style={{ gap: 0 }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+### gap あり
+
+gap プロパティを設定すると、アイテム間に統一された余白が生まれます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  gap: 20px;
+}
+```
+
+<FlexContainer style={{ gap: '20px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+## row-gap と column-gap
+
+gap プロパティは、`row-gap` と `column-gap` のショートハンドプロパティです。
+それぞれ個別に設定することも可能です。
+
+### row-gap
+
+`row-gap` は行間（垂直方向）の余白を設定します。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 15px;
+}
+```
+
+### column-gap
+
+`column-gap` は列間（水平方向）の余白を設定します。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 25px;
+}
+```
+
+### 個別設定の例
+
+行と列で異なる余白を設定する場合：
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;    /* 行間は10px */
+  column-gap: 30px; /* 列間は30px */
+  
+  /* 上記は以下と同じ */
+  gap: 10px 30px;
+}
+```
+
+<FlexContainer 
+  wrap="wrap" 
+  style={{ 
+    gap: '10px 30px',
+    width: '300px' 
+  }}
+>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+    <FlexItemFixed>アイテム 4</FlexItemFixed>
+    <FlexItemFixed>アイテム 5</FlexItemFixed>
+</FlexContainer>
+
+## flex-direction との組み合わせ
+
+gap プロパティは、flex-direction の値に関係なく動作します。
+
+### row（水平配置）
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+```
+
+<FlexContainer direction="row" style={{ gap: '15px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+### column（垂直配置）
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+```
+
+<FlexContainer direction="column" style={{ gap: '15px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+## 従来の方法との比較
+
+### マージンを使用した従来の方法
+
+```css title="従来の方法"
+.flex-container {
+  display: flex;
+}
+
+.flex-item {
+  margin-right: 20px;
+}
+
+.flex-item:last-child {
+  margin-right: 0; /* 最後の要素の右マージンを削除 */
+}
+```
+
+### gap を使用した現代的な方法
+
+```css title="現代的な方法"
+.flex-container {
+  display: flex;
+  gap: 20px; /* シンプルで一貫性がある */
+}
+```
+
+gap プロパティの利点：
+- **シンプル**: 1つのプロパティで余白を設定
+- **一貫性**: すべてのアイテム間で統一された余白
+- **メンテナンス性**: アイテムの追加・削除時に調整不要
+- **レスポンシブ対応**: メディアクエリと組み合わせやすい
+
+## 実用例
+
+カードレイアウトやボタングループなど、実際のWebデザインでよく使用される例：
+
+### カードレイアウト
+
+```css title="CSS"
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+```
+
+<FlexContainer 
+  wrap="wrap" 
+  style={{ 
+    gap: '20px',
+    width: '400px'
+  }}
+>
+    <div style={{
+      background: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      padding: '15px',
+      minWidth: '150px',
+      flex: '1'
+    }}>
+      カード 1
+    </div>
+    <div style={{
+      background: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      padding: '15px',
+      minWidth: '150px',
+      flex: '1'
+    }}>
+      カード 2
+    </div>
+    <div style={{
+      background: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      padding: '15px',
+      minWidth: '150px',
+      flex: '1'
+    }}>
+      カード 3
+    </div>
+</FlexContainer>
+
+gap プロパティを使用することで、より保守性が高く、理解しやすいFlexboxレイアウトを作成できます。
