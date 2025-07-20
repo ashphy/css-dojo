@@ -1,17 +1,24 @@
-# Website
+# CSS Dojo
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+A hands-on CSS learning platform where you can explore and understand CSS fundamentals through interactive practice. Built with [Docusaurus](https://docusaurus.io/).
+
+## Features
+
+- 🎯 Interactive CSS fundamentals learning
+- 📚 Tutorial-based documentation
+- 🔄 Real-time preview functionality
+- 📱 Responsive design support
 
 ## Installation
 
 ```bash
-yarn
+npm install
 ```
 
 ## Local Development
 
 ```bash
-yarn start
+npm start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
@@ -19,23 +26,20 @@ This command starts a local development server and opens up a browser window. Mo
 ## Build
 
 ```bash
-yarn build
+npm run build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## Deployment
+## Project Structure
 
-Using SSH:
+- `docs/` - Learning content and tutorials
+- `blog/` - Blog posts and articles
+- `src/` - Website source code
+  - `components/` - React components
+  - `css/` - Custom styles
+  - `pages/` - Static pages
 
-```bash
-USE_SSH=true yarn deploy
-```
+## Tech Stack
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- [Docusaurus](https://docusaurus.io/) - Static site generator
