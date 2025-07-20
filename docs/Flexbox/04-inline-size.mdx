@@ -1,0 +1,293 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItem } from './components/flex-items';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# フレックスアイテムのサイズ
+
+フレックスアイテムのサイズは、`flex-grow`、`flex-shrink`、`flex-basis` の3つのプロパティによって決定されます。
+これらのプロパティを理解することで、レスポンシブなレイアウトを柔軟に作成できるようになります。
+
+## flex-basis
+
+**flex-basis** は、フレックスアイテムの初期サイズ（ベースサイズ）を指定するプロパティです。
+このプロパティは、flex-growやflex-shrinkが適用される前の、アイテムの理想的なサイズを定義します。
+
+```css title="CSS"
+.flex-item {
+  flex-basis: 200px; /* 初期サイズを200pxに設定 */
+}
+```
+
+### flex-basis の値
+
+- `auto`（デフォルト）: アイテムのコンテンツサイズに基づく
+- `<length>`（px, em, remなど）: 具体的な長さを指定
+- `<percentage>`（%）: コンテナのサイズに対する割合
+- `content`: コンテンツのサイズに基づく（IE非対応）
+
+### flex-basis の例
+
+#### auto（デフォルト）
+
+コンテンツのサイズに基づいてサイズが決まります。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>短いテキスト</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>これは長いテキストコンテンツです</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>中程度</FlexItemFixed>
+</FlexContainer>
+
+#### 固定サイズ
+
+具体的なサイズを指定した場合：
+
+<FlexContainer>
+    <FlexItemFixed style={{ flexBasis: '100px', flexGrow: 0, flexShrink: 0 }}>100px</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '200px', flexGrow: 0, flexShrink: 0 }}>200px</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '150px', flexGrow: 0, flexShrink: 0 }}>150px</FlexItemFixed>
+</FlexContainer>
+
+## flex-grow
+
+**flex-grow** は、フレックスコンテナに余剰スペースがある場合に、アイテムがどれくらい拡大するかを指定するプロパティです。
+値が大きいほど、より多くの余剰スペースを占有します。
+
+```css title="CSS"
+.flex-item {
+  flex-grow: 1; /* 他のアイテムと同じ比率で拡大 */
+}
+```
+
+### flex-grow の値
+
+- `0`（デフォルト）: 拡大しない
+- `<number>`（正の数）: 拡大の比率を指定
+
+### flex-grow の例
+
+#### すべて同じ値
+
+すべてのアイテムに `flex-grow: 1` を設定すると、等しく拡大します。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+</FlexContainer>
+
+#### 異なる値
+
+異なる `flex-grow` 値を設定すると、比率に応じて拡大します。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 2, flexBasis: '50px' }}>flex-grow: 2</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+</FlexContainer>
+
+#### 拡大しない要素
+
+`flex-grow: 0` のアイテムは拡大せず、他のアイテムが余剰スペースを占有します。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flexGrow: 0, flexBasis: '100px' }}>flex-grow: 0</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+</FlexContainer>
+
+## flex-shrink
+
+**flex-shrink** は、フレックスコンテナのスペースが不足している場合に、アイテムがどれくらい縮小するかを指定するプロパティです。
+値が大きいほど、より多く縮小されます。
+
+```css title="CSS"
+.flex-item {
+  flex-shrink: 1; /* 他のアイテムと同じ比率で縮小 */
+}
+```
+
+### flex-shrink の値
+
+- `1`（デフォルト）: 縮小可能
+- `0`: 縮小しない
+- `<number>`（正の数）: 縮小の比率を指定
+
+### flex-shrink の例
+
+#### 縮小可能（デフォルト）
+
+コンテナが狭い場合、アイテムは縮小されます。
+
+<FlexContainer style={{ width: '300px' }}>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+</FlexContainer>
+
+#### 縮小しない要素
+
+`flex-shrink: 0` のアイテムは縮小せず、固定サイズを保ちます。
+
+<FlexContainer style={{ width: '300px' }}>
+    <FlexItemFixed style={{ flexShrink: 0, flexBasis: '120px' }}>flex-shrink: 0</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItemFixed>
+</FlexContainer>
+
+#### 異なる縮小率
+
+異なる `flex-shrink` 値を設定すると、比率に応じて縮小します。
+
+<FlexContainer style={{ width: '300px' }}>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 3, flexBasis: '150px' }}>flex-shrink: 3</FlexItemFixed>
+    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+</FlexContainer>
+
+## flex ショートハンド
+
+`flex` プロパティは、`flex-grow`、`flex-shrink`、`flex-basis` をまとめて指定できるショートハンドプロパティです。
+
+```css title="CSS"
+.flex-item {
+  flex: 1 1 200px; /* flex-grow: 1, flex-shrink: 1, flex-basis: 200px */
+}
+```
+
+### よく使用される flex の値
+
+#### flex: 1
+
+`flex: 1` は `flex: 1 1 0%` の省略形で、等しく拡大・縮小するアイテムを作成します。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+</FlexContainer>
+
+#### flex: auto
+
+`flex: auto` は `flex: 1 1 auto` の省略形で、コンテンツサイズを基準に拡大・縮小します。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flex: 'auto' }}>短い</FlexItemFixed>
+    <FlexItemFixed style={{ flex: 'auto' }}>これは長いコンテンツです</FlexItemFixed>
+    <FlexItemFixed style={{ flex: 'auto' }}>中程度</FlexItemFixed>
+</FlexContainer>
+
+#### flex: none
+
+`flex: none` は `flex: 0 0 auto` の省略形で、拡大も縮小もしません。
+
+<FlexContainer>
+    <FlexItemFixed style={{ flex: 'none' }}>flex: none</FlexItemFixed>
+    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+</FlexContainer>
+
+## 実用例
+
+### カードレイアウト
+
+異なるサイズのカードを含むレスポンシブなレイアウト：
+
+```css title="CSS"
+.card-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+}
+
+.card.featured {
+  flex: 2; /* プレミアムプランは2倍の幅 */
+}
+```
+
+<FlexContainer style={{ gap: '20px' }}>
+    <div style={{
+      flex: '1',
+      minWidth: '200px',
+      padding: '20px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>基本プラン</h3>
+      <p style={{ margin: 0, color: '#666' }}>月額 ¥1,000</p>
+    </div>
+    <div style={{
+      flex: '2',
+      minWidth: '200px',
+      padding: '20px',
+      backgroundColor: '#e3f2fd',
+      border: '2px solid #2196f3',
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>プレミアムプラン</h3>
+      <p style={{ margin: 0, color: '#666' }}>月額 ¥2,000（推奨）</p>
+    </div>
+    <div style={{
+      flex: '1',
+      minWidth: '200px',
+      padding: '20px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>エンタープライズ</h3>
+      <p style={{ margin: 0, color: '#666' }}>要お問い合わせ</p>
+    </div>
+</FlexContainer>
+
+### サイドバーレイアウト
+
+固定幅のサイドバーと可変幅のメインコンテンツ：
+
+```css title="CSS"
+.layout-container {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 200px; /* 固定幅200px、拡大・縮小しない */
+}
+
+.main-content {
+  flex: 1; /* 残りのスペースを占有 */
+}
+```
+
+<FlexContainer style={{ height: '200px', alignItems: 'stretch' }}>
+    <div style={{
+      flex: '0 0 200px',
+      padding: '20px',
+      backgroundColor: '#f5f5f5',
+      border: '1px solid #ddd',
+      borderRadius: '8px 0 0 8px'
+    }}>
+      <strong>サイドバー</strong><br />
+      （固定幅: 200px）
+    </div>
+    <div style={{
+      flex: '1',
+      padding: '20px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderLeft: 'none',
+      borderRadius: '0 8px 8px 0'
+    }}>
+      <strong>メインコンテンツ</strong><br />
+      （可変幅: 残りのスペースを占有）
+    </div>
+</FlexContainer>
+
+これらのプロパティを組み合わせることで、様々なレイアウトパターンを実現できます。
+特に、レスポンシブデザインにおいて、画面サイズに応じて柔軟に調整されるレイアウトの作成に威力を発揮します。
