@@ -1,13 +1,15 @@
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
+import { FlexItemFixed } from './components/flex-items-fixed';
+import { FlexAxis } from './components/flex-axis';
 
 # Flexboxの基礎
 
-# フレックスコンテナ
+## フレックスコンテナ
 
-フレックスコンテナは、`display: flex` または `display: inline-flex` を設定した要素です。
+**フレックスコンテナ(flex container)** は、`display: flex` または `display: inline-flex` を設定した要素です。
 この要素が Flexbox レイアウトの親要素となります。
-フレックスコンテナの直接の子要素は、フレックスアイテムと呼ばれます。
+フレックスコンテナの直接の子要素は、**フレックスアイテム(flex item)** と呼ばれます。
 
 
 ```html
@@ -29,3 +31,106 @@ import { FlexItem } from './components/flex-items';
     <FlexItem>フレックスアイテム 2</FlexItem>
     <FlexItem>フレックスアイテム 3</FlexItem>
 </FlexContainer>
+
+## 軸 Axis
+
+Flexbox では、要素の配置を制御するために「軸」を使用します。**主軸** と **交差軸** の2つがあります。
+
+- **主軸(main axis)** は、フレックスアイテムが配置される方向に走る軸です。
+- **交差軸(cross axis)** は、主軸に対して垂直な方向の軸です。
+
+![flexbox-axis](./assets/flex-axis.drawio.svg)
+
+### flex-direction
+
+主軸はデフォルトで水平方向（左から右）ですが、`flex-direction` プロパティを使用して変更できます。
+4種類の値を取ることができます。
+
+- `row`
+- `row-reverse`
+- `column`
+- `column-reverse`
+
+```css title="CSS"
+.flex-container {
+  flex-direction: column;
+}
+```
+
+実際にどうなるか見てみましょう。
+
+#### row: 主軸は水平方向（左から右）
+
+<FlexContainer direction='row'>
+    <FlexItemFixed>フレックスアイテム 1</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 2</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### row-reverse: 主軸は水平方向（右から左）
+
+<FlexContainer direction='row-reverse'>
+    <FlexItemFixed>フレックスアイテム 1</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 2</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### column: 主軸は垂直方向（上から下）
+
+<FlexContainer direction='column'>
+    <FlexItemFixed>フレックスアイテム 1</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 2</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### column-reverse: 主軸は垂直方向（下から上）
+
+<FlexContainer direction='column-reverse'>
+    <FlexItemFixed>フレックスアイテム 1</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 2</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 3</FlexItemFixed>
+</FlexContainer>
+
+### 書字方向
+
+各値の説明に左から右といった説明を加えましたが、実際には書字方向によって異なります。
+日本語や英語では文字は左から右へ書きますが、アラビア語やヘブライ語では右から左へ書きます。
+Flexboxは書字方向に対応しており、`flex-direction`の値は書字方向によって変わります。
+
+`row`という値は実際にはインライン方向（文字を書く方向）に沿った軸となります。
+以下はすべて`row`の値を使用していますが、書字方向によって主軸の方向が異なります。
+
+#### 日本語
+
+<FlexContainer direction='row'>
+    <FlexItemFixed>フレックスアイテム 1</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 2</FlexItemFixed>
+    <FlexItemFixed>フレックスアイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### アラビア語
+
+<div dir="rtl">
+  <FlexContainer direction='row'>
+    <FlexItemFixed>عنصر فليكس 1</FlexItemFixed>
+    <FlexItemFixed>عنصر فليكس 2</FlexItemFixed>
+    <FlexItemFixed>عنصر فليكس 3</FlexItemFixed>
+  </FlexContainer>
+</div>
+
+
+#### 日本語縦書き
+
+CSSは縦書きにも対応していますので、この場合は`row`が上から下方向に沿う軸になります。
+
+<div style={{ writingMode: 'vertical-rl' }}>
+<FlexContainer direction='row'>
+    <FlexItemFixed>アイテム壱</FlexItemFixed>
+    <FlexItemFixed>アイテム弐</FlexItemFixed>
+    <FlexItemFixed>アイテム参</FlexItemFixed>
+</FlexContainer>
+</div>
+
+## 試してみよう
+
+<FlexAxis />
