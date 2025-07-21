@@ -15,10 +15,17 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-html": "^6.4.9",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
     "@mdx-js/react": "^3.0.0",
+    "@monaco-editor/react": "^4.7.0-rc.0",
+    "@uiw/codemirror-extensions-color": "^4.24.1",
+    "@uiw/react-codemirror": "^4.24.1",
     "clsx": "^2.0.0",
+    "i": "^0.3.7",
+    "npm": "^11.4.2",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
