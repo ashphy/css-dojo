@@ -52,9 +52,27 @@ This is a Docusaurus-based CSS learning platform with the following key architec
 - **MDX** - Markdown with React component support for interactive content
 - **Infima** - CSS framework optimized for content-centric websites
 
+### Interactive Components Architecture
+- **Playground Component** (`docs/Flexbox/components/playground.tsx`) - Interactive HTML/CSS editor using Monaco Editor with live preview
+- **Demo Components** - Various interactive demos for Flexbox concepts (alignment, wrapping, sizing)
+- Components located in `docs/[Topic]/components/` folders for topic-specific interactive elements
+- Uses iframe-based preview system for safe code execution
+
+### Content Organization
+- **Japanese Language** - Site configured for Japanese locale (`ja`) with Japanese content
+- **MDX Support** - Docs use MDX format allowing React components within markdown
+- **Auto-generated Sidebars** - Navigation automatically generated from `docs/` folder structure
+- **Component Co-location** - Interactive components stored alongside related documentation
+
+### Dependencies of Note
+- **@monaco-editor/react** - Code editor for interactive playground
+- **@uiw/react-codemirror** - Alternative code editor (with CSS/HTML language support)
+- **React 19** - Latest React version for cutting-edge features
+- **TypeScript 5.6** - Strong typing throughout codebase
+
 ### Development Notes
 - Hot reload enabled for development workflow
-- Content is primarily markdown-based for easy authoring
+- No testing framework configured - this is a documentation-focused project
+- Site configured for GitHub Pages deployment to `ashphy.com/css-dojo/`
+- Interactive learning approach with hands-on CSS experimentation
 - Component architecture follows Docusaurus patterns with `@theme/` imports
-- Site uses auto-generated sidebars but can be customized in `sidebars.ts`
-- Configuration currently contains placeholder values (title: "My Site", etc.) that should be customized for CSS Dojo branding
