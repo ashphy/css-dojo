@@ -1,0 +1,500 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItem } from './components/flex-items';
+import { FlexItemFixed } from './components/flex-items-fixed';
+import { FlexAlignDemo, FlexAlignExamples } from './components/flex-align-demo';
+
+# フレックスボックスの配置制御
+
+フレックスボックスの配置制御は、**justify-content** と **align-items** の2つの主要なプロパティによって行われます。
+これらのプロパティを理解することで、アイテムを自在に配置できるようになります。
+
+## 軸と配置の関係
+
+フレックスボックスでは、配置を制御する際に**主軸（main axis）**と**交差軸（cross axis）**を意識することが重要です。
+
+- **justify-content**: 主軸方向（通常は水平方向）のアイテム配置を制御
+- **align-items**: 交差軸方向（通常は垂直方向）のアイテム配置を制御
+
+![flexbox配置の基本概念](./assets/flex-axis.drawio.svg)
+
+## justify-content: 主軸方向の配置
+
+**justify-content** プロパティは、フレックスアイテムを主軸方向にどのように配置するかを指定します。
+余剰スペースがある場合の分配方法を制御できます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  justify-content: center; /* アイテムを中央に配置 */
+}
+```
+
+### justify-content の値
+
+#### flex-start（デフォルト）
+
+アイテムを主軸の開始位置に配置します。
+
+```css title="CSS"
+.flex-container {
+  justify-content: flex-start;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'flex-start' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### flex-end
+
+アイテムを主軸の終了位置に配置します。
+
+```css title="CSS"
+.flex-container {
+  justify-content: flex-end;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'flex-end' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### center
+
+アイテムを主軸の中央に配置します。
+
+```css title="CSS"
+.flex-container {
+  justify-content: center;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'center' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### space-between
+
+最初のアイテムを開始位置に、最後のアイテムを終了位置に配置し、残りのアイテムを等間隔で配置します。
+
+```css title="CSS"
+.flex-container {
+  justify-content: space-between;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-between' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### space-around
+
+各アイテムの周りに等しいスペースを配置します。アイテム間のスペースは、端のスペースの2倍になります。
+
+```css title="CSS"
+.flex-container {
+  justify-content: space-around;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-around' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### space-evenly
+
+すべてのスペース（アイテム間、端）を等しく配置します。
+
+```css title="CSS"
+.flex-container {
+  justify-content: space-evenly;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-evenly' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+## align-items: 交差軸方向の配置
+
+**align-items** プロパティは、フレックスアイテムを交差軸方向にどのように配置するかを指定します。
+アイテムの高さが異なる場合の配置方法を制御できます。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  align-items: center; /* アイテムを交差軸の中央に配置 */
+}
+```
+
+### align-items の値
+
+#### stretch（デフォルト）
+
+アイテムをコンテナの高さいっぱいに伸ばします。
+
+```css title="CSS"
+.flex-container {
+  align-items: stretch;
+}
+```
+
+<FlexContainer style={{ alignItems: 'stretch', height: '120px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2<br/>（複数行）</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### flex-start
+
+アイテムを交差軸の開始位置に配置します。
+
+```css title="CSS"
+.flex-container {
+  align-items: flex-start;
+}
+```
+
+<FlexContainer style={{ alignItems: 'flex-start', height: '120px' }}>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### flex-end
+
+アイテムを交差軸の終了位置に配置します。
+
+```css title="CSS"
+.flex-container {
+  align-items: flex-end;
+}
+```
+
+<FlexContainer style={{ alignItems: 'flex-end', height: '120px' }}>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### center
+
+アイテムを交差軸の中央に配置します。
+
+```css title="CSS"
+.flex-container {
+  align-items: center;
+}
+```
+
+<FlexContainer style={{ alignItems: 'center', height: '120px' }}>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### baseline
+
+アイテムのベースライン（文字のベースライン）を揃えて配置します。
+
+```css title="CSS"
+.flex-container {
+  align-items: baseline;
+}
+```
+
+<FlexContainer style={{ alignItems: 'baseline', height: '120px' }}>
+    <FlexItemFixed style={{ height: 'auto', fontSize: '14px' }}>小さい文字</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto', fontSize: '24px', padding: '10px' }}>大きい文字</FlexItemFixed>
+    <FlexItemFixed style={{ height: 'auto', fontSize: '18px' }}>中くらい</FlexItemFixed>
+</FlexContainer>
+
+## 組み合わせの実例
+
+justify-content と align-items を組み合わせることで、様々な配置パターンを実現できます。
+
+### 完全中央配置
+
+最も一般的な使用例の一つです。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'center', alignItems: 'center', height: '200px' }}>
+    <FlexItemFixed>完全中央配置</FlexItemFixed>
+</FlexContainer>
+
+### 右下配置
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 150px;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'flex-end', alignItems: 'flex-end', height: '150px' }}>
+    <FlexItemFixed>右下配置</FlexItemFixed>
+</FlexContainer>
+
+### カードレイアウトの配置
+
+```css title="CSS"
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  gap: 20px;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-around', alignItems: 'stretch', height: '120px', gap: '20px' }}>
+    <div style={{
+      flex: 1,
+      padding: '15px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      カード 1
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '15px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      カード 2
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '15px',
+      backgroundColor: '#fff',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      カード 3
+    </div>
+</FlexContainer>
+
+## flex-direction との関係
+
+**重要**: justify-content と align-items の効果は、flex-direction の値によって変わります。
+
+### row の場合（デフォルト）
+
+- **justify-content**: 水平方向（左右）の配置を制御
+- **align-items**: 垂直方向（上下）の配置を制御
+
+### column の場合
+
+- **justify-content**: 垂直方向（上下）の配置を制御
+- **align-items**: 水平方向（左右）の配置を制御
+
+#### column での justify-content
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+}
+```
+
+<FlexContainer direction="column" style={{ justifyContent: 'center', height: '200px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+#### column での align-items
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+}
+```
+
+<FlexContainer direction="column" style={{ alignItems: 'center', height: '200px' }}>
+    <FlexItemFixed>アイテム 1</FlexItemFixed>
+    <FlexItemFixed>アイテム 2</FlexItemFixed>
+    <FlexItemFixed>アイテム 3</FlexItemFixed>
+</FlexContainer>
+
+## 実用的なレイアウトパターン
+
+### ヘッダーレイアウト
+
+ロゴを左に、ナビゲーションを右に配置する一般的なパターン：
+
+```css title="CSS"
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px' }}>
+    <div style={{ 
+      fontSize: '20px', 
+      fontWeight: 'bold',
+      color: '#333'
+    }}>
+      ロゴ
+    </div>
+    <nav style={{ display: 'flex', gap: '20px' }}>
+      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>ホーム</a>
+      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>サービス</a>
+      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>お問い合わせ</a>
+    </nav>
+</FlexContainer>
+
+### モーダルの中央配置
+
+画面中央にモーダルを配置する場合：
+
+```css title="CSS"
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+```
+
+<div style={{
+  position: 'relative',
+  height: '200px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  borderRadius: '8px'
+}}>
+  <div style={{
+    padding: '30px',
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+    textAlign: 'center'
+  }}>
+    モーダルコンテンツ
+  </div>
+</div>
+
+### フッター配置
+
+コンテンツの量に関係なく、フッターをページ下部に固定：
+
+```css title="CSS"
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+```
+
+<div style={{
+  height: '300px',
+  display: 'flex',
+  flexDirection: 'column',
+  border: '1px solid #ddd',
+  borderRadius: '8px',
+  overflow: 'hidden'
+}}>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    backgroundColor: '#fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}>
+    メインコンテンツ エリア
+  </div>
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    backgroundColor: '#f5f5f5'
+  }}>
+    フッター (常に下部に配置)
+  </div>
+</div>
+
+## 試してみよう
+
+以下のインタラクティブなデモで、justify-content と align-items の組み合わせを試してみてください：
+
+<FlexAlignDemo />
+
+## 各プロパティ値の一覧
+
+すべての値を確認して、違いを理解しましょう：
+
+<FlexAlignExamples />
+
+## まとめ
+
+- **justify-content**: 主軸方向（通常は水平）のアイテム配置を制御
+- **align-items**: 交差軸方向（通常は垂直）のアイテム配置を制御
+- **flex-direction の値によって軸が変わる**ことに注意
+- 2つのプロパティを組み合わせることで、柔軟で実用的なレイアウトを実現
+- **完全中央配置**、**ヘッダーレイアウト**、**モーダル配置**など、実際のWebサイトでよく使われるパターンを習得
+
+これらのプロパティを理解することで、従来のCSSでは複雑だったレイアウトを、シンプルで直感的なコードで実現できるようになります。
