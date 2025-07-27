@@ -18,6 +18,7 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white'
   }}>
     <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
@@ -28,6 +29,7 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white'
   }}>
     <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
@@ -41,6 +43,7 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white'
   }}>
     <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
@@ -72,6 +75,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column'
@@ -84,6 +88,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column'
@@ -99,6 +104,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
     padding: '20px',
     border: '1px solid #ddd',
     borderRadius: '8px',
+    color: 'black',
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column'
@@ -122,7 +128,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 
 フレックスアイテム内の長いテキストが親要素からはみ出してしまう場合があります。
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #ff0000', marginBottom: '20px' }}>
+<div style={{ display: 'flex', width: '400px', border: '2px solid #ff0000', marginBottom: '20px', color: "black" }}>
   <div style={{
     flex: 1,
     padding: '10px',
@@ -150,7 +156,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 }
 ```
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #00aa00', marginBottom: '20px' }}>
+<div style={{ display: 'flex', width: '400px', border: '2px solid #00aa00', marginBottom: '20px', color: "black" }}>
   <div style={{
     flex: 1,
     minWidth: 0,
@@ -180,7 +186,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 }
 ```
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #0066cc', marginBottom: '20px' }}>
+<div style={{ display: 'flex', width: '400px', border: '2px solid #0066cc', marginBottom: '20px', color: "black" }}>
   <div style={{
     flex: 1,
     padding: '10px',
@@ -376,7 +382,9 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
   flexDirection: 'column',
   height: '200px',
   border: '2px solid #ccc',
-  borderRadius: '8px'
+  borderRadius: '8px',
+  color: 'black',
+  backgroundColor: "white"
 }}>
   <div style={{
     padding: '10px',
@@ -389,7 +397,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
     flex: 1,
     minHeight: 0,
     overflowY: 'auto',
-    padding: '10px'
+    padding: '10px'    
   }}>
     <p>スクロール可能なコンテンツ</p>
     <p>長いテキストがここに入ります。</p>

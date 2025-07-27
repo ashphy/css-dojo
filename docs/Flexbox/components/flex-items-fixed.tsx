@@ -8,6 +8,7 @@ export function FlexItemFixed({ children, style }: FlexItemFixedProps) {
     <div
       style={{
         padding: "15px",
+        color: "black",
         backgroundColor: "#e3f2fd",
         borderRadius: "4px",
         textAlign: "center",
