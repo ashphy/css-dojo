@@ -245,6 +245,7 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
             <iframe
               title="Preview"
               srcDoc={previewContent}
+              sandbox=""
               style={{
                 flex: 1,
                 backgroundColor: "white",
