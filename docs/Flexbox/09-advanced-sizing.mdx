@@ -1,0 +1,761 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# 高度なサイズ制御
+
+このセクションでは、Flexboxにおけるより高度なサイズ制御について詳しく解説します。
+`min-width`、`max-width`、`width`プロパティとFlexプロパティの相互作用、そして `margin: auto` の特殊な動作について理解しましょう。
+
+## width と flex-basis の違い
+
+多くの開発者が混同しがちな `width` と `flex-basis` の違いを明確にしましょう。
+
+### width プロパティ
+
+`width` は要素の幅を直接指定します。Flexboxでない通常の要素と同じ動作をします。
+
+```css title="CSS"
+.flex-item {
+  width: 200px; /* 固定幅 */
+}
+```
+
+### flex-basis プロパティ
+
+`flex-basis` はFlexboxの計算における「理想的なサイズ」を指定します。実際のサイズは `flex-grow` や `flex-shrink` によって調整されます。
+
+```css title="CSS"
+.flex-item {
+  flex-basis: 200px; /* 理想的なサイズ */
+  flex-grow: 1;      /* 余剰スペースがあれば拡大 */
+}
+```
+
+### 比較例
+
+<div style={{ marginBottom: '20px' }}>
+<h4>width を使用した場合</h4>
+<FlexContainer style={{ gap: '10px' }}>
+  <div style={{
+    width: '100px',
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    width: 100px
+  </div>
+  <div style={{
+    width: '150px',
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    width: 150px
+  </div>
+  <div style={{
+    width: '100px',
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',  
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    width: 100px
+  </div>
+</FlexContainer>
+
+<h4>flex-basis + flex-grow を使用した場合</h4>
+<FlexContainer style={{ gap: '10px' }}>
+  <div style={{
+    flexBasis: '100px',
+    flexGrow: 1,
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex-basis: 100px<br/>flex-grow: 1
+  </div>
+  <div style={{
+    flexBasis: '150px',
+    flexGrow: 1,
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex-basis: 150px<br/>flex-grow: 1
+  </div>
+  <div style={{
+    flexBasis: '100px',
+    flexGrow: 1,
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex-basis: 100px<br/>flex-grow: 1
+  </div>
+</FlexContainer>
+</div>
+
+## min-width と max-width の影響
+
+`min-width` と `max-width` は、Flexの計算結果を制限します。
+
+### min-width の効果
+
+要素が `min-width` より小さくなることを防ぎます。
+
+```css title="CSS"
+.flex-item {
+  flex: 1;
+  min-width: 150px; /* 最小幅を保証 */
+}
+```
+
+<div style={{ marginBottom: '20px' }}>
+<h4>min-width なし（コンテナ幅: 300px）</h4>
+<FlexContainer style={{ width: '300px', gap: '10px' }}>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+</FlexContainer>
+
+<h4>min-width: 120px あり（コンテナ幅: 300px）</h4>
+<FlexContainer style={{ width: '300px', gap: '10px' }}>
+  <div style={{
+    flex: 1,
+    minWidth: '120px',
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1<br/>min-width: 120px
+  </div>
+  <div style={{
+    flex: 1,
+    minWidth: '120px',
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1<br/>min-width: 120px
+  </div>
+  <div style={{
+    flex: 1,
+    minWidth: '120px',
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1<br/>min-width: 120px
+  </div>
+</FlexContainer>
+</div>
+
+### max-width の効果
+
+要素が `max-width` より大きくなることを防ぎます。
+
+```css title="CSS"
+.flex-item {
+  flex: 1;
+  max-width: 200px; /* 最大幅を制限 */
+}
+```
+
+<div style={{ marginBottom: '20px' }}>
+<h4>max-width なし</h4>
+<FlexContainer style={{ gap: '10px' }}>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+  <div style={{
+    flex: 3,
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 3（大きく拡大）
+  </div>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+</FlexContainer>
+
+<h4>中央のアイテムに max-width: 250px</h4>
+<FlexContainer style={{ gap: '10px' }}>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+  <div style={{
+    flex: 3,
+    maxWidth: '250px',
+    height: '50px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 3<br/>max-width: 250px
+  </div>
+  <div style={{
+    flex: 1,
+    height: '50px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    flex: 1
+  </div>
+</FlexContainer>
+</div>
+
+## Flexboxの計算ロジック
+
+Flexboxのサイズ計算は以下の段階で行われます：
+
+### 1. 初期サイズの決定
+
+1. `flex-basis` が設定されている場合はその値
+2. `flex-basis: auto` の場合は `width` プロパティの値
+3. `width` も未設定の場合はコンテンツサイズ
+
+### 2. 余剰・不足スペースの計算
+
+コンテナのサイズから全アイテムの初期サイズを引いた値
+
+### 3. flex-grow / flex-shrink の適用
+
+- 余剰スペースがある場合: `flex-grow` に応じて拡大
+- 不足している場合: `flex-shrink` に応じて縮小
+
+### 4. min-width / max-width の制約適用
+
+計算結果が制約を超える場合は制約値に調整
+
+### 実例で確認
+
+```css title="CSS"
+.container {
+  width: 500px;
+  display: flex;
+}
+
+.item1 {
+  flex-basis: 100px;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.item2 {
+  flex-basis: 200px;
+  flex-grow: 2;
+  flex-shrink: 1;
+  max-width: 300px;
+}
+
+.item3 {
+  flex-basis: 100px;
+  flex-grow: 1;
+  flex-shrink: 1;      
+  min-width: 120px;
+}
+```
+
+**計算過程:**
+1. **初期サイズ**: 100px + 200px + 100px = 400px
+2. **余剰スペース**: 500px - 400px = 100px
+3. **flex-grow の合計**: 1 + 2 + 1 = 4
+4. **分配**:
+   - item1: 100px + (100px × 1/4) = 125px
+   - item2: 200px + (100px × 2/4) = 250px（max-width: 300px 内）
+   - item3: 100px + (100px × 1/4) = 125px（min-width: 120px 以上）
+
+<FlexContainer style={{ width: '500px', gap: '0' }}>
+  <div style={{
+    flexBasis: '100px',
+    flexGrow: 1,
+    flexShrink: 1,
+    height: '60px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '11px',
+    textAlign: 'center'
+  }}>
+    flex-basis: 100px<br/>
+    flex-grow: 1<br/>
+    → 125px
+  </div>
+  <div style={{
+    flexBasis: '200px',
+    flexGrow: 2,
+    flexShrink: 1,
+    maxWidth: '300px',
+    height: '60px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '11px',
+    textAlign: 'center'
+  }}>
+    flex-basis: 200px<br/>
+    flex-grow: 2<br/>
+    max-width: 300px<br/>
+    → 250px
+  </div>
+  <div style={{
+    flexBasis: '100px',
+    flexGrow: 1,
+    flexShrink: 1,
+    minWidth: '120px',
+    height: '60px',
+    backgroundColor: '#dc3545',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '11px',
+    textAlign: 'center'
+  }}>
+    flex-basis: 100px<br/>
+    flex-grow: 1<br/>
+    min-width: 120px<br/>
+    → 125px
+  </div>
+</FlexContainer>
+
+## margin: auto の特殊な動作
+
+Flexboxでは `margin: auto` が特殊な動作をします。
+
+### 水平方向の margin: auto
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+}
+
+.item {
+  margin-left: auto; /* 要素を右端に押し出す */
+}
+```
+
+<FlexContainer>
+  <FlexItemFixed>左端の要素</FlexItemFixed>
+  <FlexItemFixed style={{ marginLeft: 'auto' }}>margin-left: auto</FlexItemFixed>
+</FlexContainer>
+
+### 複数要素での margin: auto
+
+```css title="CSS"
+.item2 {
+  margin-left: auto;
+  margin-right: auto; /* 中央に配置 */
+}
+```
+
+<FlexContainer>
+  <FlexItemFixed>左端</FlexItemFixed>
+  <FlexItemFixed style={{ marginLeft: 'auto', marginRight: 'auto' }}>中央</FlexItemFixed>
+  <FlexItemFixed>右端</FlexItemFixed>
+</FlexContainer>
+
+### 垂直方向の margin: auto
+
+```css title="CSS"
+.flex-container {
+  height: 150px;
+  align-items: flex-start;
+}
+
+.item {
+  margin-top: auto; /* 下端に配置 */
+}
+```
+
+<FlexContainer style={{ height: '150px', alignItems: 'flex-start' }}>
+  <FlexItemFixed style={{ height: 'auto' }}>通常の位置</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto', marginTop: 'auto' }}>margin-top: auto</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto' }}>通常の位置</FlexItemFixed>
+</FlexContainer>
+
+### margin: auto の優先順位
+
+`margin: auto` は `justify-content` や `align-items` よりも優先されます。
+
+```css title="CSS"
+.flex-container {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.special-item {
+  margin: auto; /* justify-content と align-items を無視 */
+}
+```
+
+<FlexContainer style={{ height: '120px', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto', margin: 'auto' }}>margin: auto</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
+</FlexContainer>
+
+## 実用的なレイアウトパターン
+
+### カードの価格を右端に配置
+
+```css title="CSS"
+.product-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-price {
+  margin-left: auto; /* 価格を右端に */
+  font-weight: bold;
+  color: #007bff;
+}
+```
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+  }}
+>
+  <div style={{ flex: 1 }}>
+    <h3 style={{ margin: '0 0 5px 0', fontSize: '18px' }}>商品名</h3>
+    <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>商品の説明文がここに入ります</p>
+  </div>
+  <div
+    style={{
+      marginLeft: 'auto',
+      fontWeight: 'bold',
+      color: '#007bff',
+      fontSize: '20px',
+    }}
+  >
+    ¥1,980
+  </div>
+</div>
+
+### 検索フォームのレイアウト
+
+```css title="CSS"
+.search-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px; /* 最小幅を保証 */
+}
+
+.search-button {
+  flex: 0 0 auto; /* 縮小しないボタン */
+}
+
+.advanced-link {
+  margin-left: auto; /* 右端に配置 */
+}
+```
+
+<div
+  style={{
+    display: 'flex',
+    gap: '10px',
+    alignItems: 'center',
+    padding: '15px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: '#f8f9fa',
+  }}
+>
+  <input
+    type="text"
+    placeholder="検索キーワード"
+    style={{
+      flex: 1,
+      minWidth: '200px',
+      padding: '8px 12px',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+    }}
+  />
+  <button
+    style={{
+      flex: '0 0 auto',
+      padding: '8px 16px',
+      backgroundColor: '#007bff',
+      color: 'white',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+    }}
+  >
+    検索
+  </button>
+  <a
+    href="#"
+    style={{
+      marginLeft: 'auto',
+      color: '#007bff',
+      textDecoration: 'none',
+      fontSize: '14px',
+    }}
+  >
+    詳細検索
+  </a>
+</div>
+
+### レスポンシブなナビゲーション
+
+```css title="CSS"
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  flex: 0 0 auto;
+}
+
+.nav-menu {
+  display: flex;
+  margin-left: auto;
+  min-width: 0; /* 縮小を許可 */
+}
+
+.nav-item {
+  white-space: nowrap;
+  min-width: 80px; /* 各アイテムの最小幅 */
+}
+
+@media (max-width: 600px) {
+  .nav-menu {
+    display: none; /* モバイルでは非表示 */
+  }
+}
+```
+
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#333',
+    color: 'white',
+    borderRadius: '8px',
+  }}
+>
+  <div style={{ flex: '0 0 auto', fontSize: '20px', fontWeight: 'bold' }}>
+    MyLogo
+  </div>
+  <nav
+    style={{
+      display: 'flex',
+      marginLeft: 'auto',
+      minWidth: 0,
+      gap: '20px',
+    }}
+  >
+    <a href="#" style={{ 
+      color: 'white', 
+      textDecoration: 'none',
+      whiteSpace: 'nowrap',
+      minWidth: '80px',
+      textAlign: 'center'
+    }}>
+      ホーム
+    </a>
+    <a href="#" style={{ 
+      color: 'white', 
+      textDecoration: 'none',
+      whiteSpace: 'nowrap',
+      minWidth: '80px',
+      textAlign: 'center'
+    }}>
+      サービス
+    </a>
+    <a href="#" style={{ 
+      color: 'white', 
+      textDecoration: 'none',
+      whiteSpace: 'nowrap',
+      minWidth: '80px',
+      textAlign: 'center'
+    }}>
+      お問い合わせ
+    </a>
+  </nav>
+</div>
+
+## トラブルシューティング
+
+### 問題1: アイテムが予想より小さくなる
+
+**原因**: `min-width` が設定されていない、または `flex-shrink` の影響
+
+**解決策**:
+```css title="CSS"
+.flex-item {
+  min-width: 150px; /* 最小幅を設定 */
+  /* または */
+  flex-shrink: 0;   /* 縮小を無効化 */
+}
+```
+
+### 問題2: アイテムが予想より大きくなる
+
+**原因**: `max-width` が設定されていない、または `flex-grow` の影響
+
+**解決策**:
+```css title="CSS"
+.flex-item {
+  max-width: 300px; /* 最大幅を設定 */
+  /* または */
+  flex-grow: 0;     /* 拡大を無効化 */
+}
+```
+
+### 問題3: テキストがはみ出る
+
+**原因**: `min-width: 0` が設定されていない
+
+**解決策**:
+```css title="CSS"
+.flex-item {
+  min-width: 0;     /* 縮小を許可 */
+  overflow: hidden; /* あふれを制御 */
+  text-overflow: ellipsis; /* ...で省略 */
+}
+```
+
+## まとめ
+
+- **width** と **flex-basis** は異なる役割を持つ
+- **min-width** / **max-width** はFlexの計算結果を制限
+- Flexboxの計算は段階的に行われる
+- **margin: auto** は特殊な動作をし、justify-content より優先される  
+- レスポンシブデザインでは制約プロパティが特に重要
+- 問題が発生した際は計算過程を追って原因を特定
+
+これらの高度なサイズ制御を理解することで、より精密で堅牢なFlexboxレイアウトを作成できるようになります。

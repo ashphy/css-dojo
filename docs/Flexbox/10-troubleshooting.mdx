@@ -1,0 +1,532 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# よくある問題と解決法
+
+Flexboxを使用していると遭遇しがちな問題とその解決方法を、実例とともに解説します。
+これらの問題を理解することで、より効果的にFlexboxを活用できるようになります。
+
+## 問題1: 高さが揃わない
+
+### 問題の発生例
+
+カードレイアウトで、コンテンツの長さが異なるために高さが揃わない場合があります。
+
+<div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
+    <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
+    <p style={{ margin: 0, color: '#666' }}>
+      これはとても長いテキストです。複数行にわたって表示されるため、
+      他のカードよりも高さが大きくなってしまいます。
+    </p>
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
+    <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
+  </div>
+</div>
+
+### 解決法1: align-items: stretch（デフォルト）
+
+Flexboxのデフォルト動作である `align-items: stretch` を利用します。
+
+```css title="CSS"
+.card-container {
+  display: flex;
+  align-items: stretch; /* デフォルト値 */
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+```
+
+<div style={{ display: 'flex', alignItems: 'stretch', gap: '20px', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
+    <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
+    <p style={{ margin: 0, color: '#666' }}>
+      これはとても長いテキストです。複数行にわたって表示されるため、
+      他のカードよりも高さが大きくなってしまいます。
+    </p>
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    display: 'flex',
+    flexDirection: 'column'
+  }}>
+    <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
+    <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
+  </div>
+</div>
+
+### 解決法2: 最小高さの設定
+
+```css title="CSS"
+.card {
+  min-height: 200px;
+}
+```
+
+## 問題2: テキストがはみ出る・溢れる
+
+### 問題の発生例
+
+フレックスアイテム内の長いテキストが親要素からはみ出してしまう場合があります。
+
+<div style={{ display: 'flex', width: '400px', border: '2px solid #ff0000', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    padding: '10px',
+    backgroundColor: '#f0f0f0',
+    whiteSpace: 'nowrap'
+  }}>
+    このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '10px',
+    backgroundColor: '#e0e0e0'
+  }}>
+    短いテキスト
+  </div>
+</div>
+
+### 解決法1: min-width: 0 を設定
+
+```css title="CSS"
+.flex-item {
+  min-width: 0; /* 縮小を許可 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
+<div style={{ display: 'flex', width: '400px', border: '2px solid #00aa00', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    minWidth: 0,
+    padding: '10px',
+    backgroundColor: '#f0f0f0',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  }}>
+    このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '10px',
+    backgroundColor: '#e0e0e0'
+  }}>
+    短いテキスト
+  </div>
+</div>
+
+### 解決法2: 改行を許可
+
+```css title="CSS"
+.flex-item {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+```
+
+<div style={{ display: 'flex', width: '400px', border: '2px solid #0066cc', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    padding: '10px',
+    backgroundColor: '#f0f0f0',
+    wordWrap: 'break-word',
+    overflowWrap: 'break-word'
+  }}>
+    このテキストは非常に長く、コンテナからはみ出してしまう可能性がありますが、改行されます
+  </div>
+  <div style={{
+    flex: 1,
+    padding: '10px',
+    backgroundColor: '#e0e0e0'
+  }}>
+    短いテキスト
+  </div>
+</div>
+
+## 問題3: 中央配置が効かない
+
+### 問題の発生例
+
+`justify-content: center` や `align-items: center` が期待通りに動作しない場合があります。
+
+```css title="問題のあるCSS"
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.flex-item {
+  width: 100px;
+  height: 50px;
+  margin: 10px; /* これが原因で中央配置が崩れる */
+}
+```
+
+### 解決法1: marginを調整またはgapを使用
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* marginの代わりにgapを使用 */
+  height: 200px;
+}
+
+.flex-item {
+  width: 100px;
+  height: 50px;
+  /* margin: 10px; 削除 */
+}
+```
+
+<FlexContainer style={{ justifyContent: 'center', alignItems: 'center', gap: '20px', height: '200px' }}>
+  <FlexItemFixed style={{ width: '100px', height: '50px' }}>アイテム 1</FlexItemFixed>
+  <FlexItemFixed style={{ width: '100px', height: '50px' }}>アイテム 2</FlexItemFixed>
+</FlexContainer>
+
+### 解決法2: 完全中央配置の確実な方法
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* ビューポート全体の高さ */
+}
+
+.centered-content {
+  text-align: center;
+}
+```
+
+## 問題4: フレックスアイテムが縮小しすぎる
+
+### 問題の発生例
+
+画像や重要なコンテンツが小さくなりすぎてしまう場合があります。
+
+<div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
+  <div style={{
+    flex: 1,
+    height: '60px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    重要な画像エリア<br/>（縮小されすぎ）
+  </div>
+  <div style={{
+    flex: 1,
+    height: '60px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    長いテキストコンテンツがここに入ります
+  </div>
+</div>
+
+### 解決法1: flex-shrink: 0 を設定
+
+```css title="CSS"
+.important-content {
+  flex-shrink: 0; /* 縮小を防止 */
+  width: 150px;   /* 固定幅を設定 */
+}
+```
+
+<div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
+  <div style={{
+    flexShrink: 0,
+    width: '150px',
+    height: '60px',
+    backgroundColor: '#007bff',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    重要な画像エリア<br/>（固定幅）
+  </div>
+  <div style={{
+    flex: 1,
+    height: '60px',
+    backgroundColor: '#28a745',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px'
+  }}>
+    テキスト
+  </div>
+</div>
+
+### 解決法2: min-width を設定
+
+```css title="CSS"
+.important-content {
+  flex: 1;
+  min-width: 120px; /* 最小幅を保証 */
+}
+```
+
+## 問題5: 縦方向のスクロールが発生しない
+
+### 問題の発生例
+
+フレックスコンテナの高さが固定されている場合、子要素が溢れてもスクロールが表示されない場合があります。
+
+```css title="問題のあるCSS"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 200px; /* 固定高さ */
+}
+
+.flex-item {
+  flex: 1; /* 子要素が親の高さを超える可能性 */
+}
+```
+
+### 解決法: min-height: 0 とoverflowの設定
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+}
+
+.scrollable-item {
+  flex: 1;
+  min-height: 0; /* 縮小を許可 */
+  overflow-y: auto; /* スクロールを有効化 */
+}
+```
+
+<div style={{
+  display: 'flex',
+  flexDirection: 'column',
+  height: '200px',
+  border: '2px solid #ccc',
+  borderRadius: '8px'
+}}>
+  <div style={{
+    padding: '10px',
+    backgroundColor: '#f0f0f0',
+    borderBottom: '1px solid #ccc'
+  }}>
+    ヘッダー（固定）
+  </div>
+  <div style={{
+    flex: 1,
+    minHeight: 0,
+    overflowY: 'auto',
+    padding: '10px'
+  }}>
+    <p>スクロール可能なコンテンツ</p>
+    <p>長いテキストがここに入ります。</p>
+    <p>さらに多くのコンテンツ...</p>
+    <p>もっと多くのコンテンツ...</p>
+    <p>スクロールして確認してください。</p>
+    <p>まだまだコンテンツがあります。</p>
+    <p>最後のコンテンツです。</p>
+  </div>
+</div>
+
+## 問題6: フレックスアイテムが期待した幅にならない
+
+### 問題の発生例
+
+`flex-basis` と `width` の設定が競合している場合があります。
+
+```css title="問題のあるCSS"
+.flex-item {
+  flex-basis: 200px;
+  width: 300px; /* flex-basisと競合 */
+}
+```
+
+### 解決法: 適切なプロパティの選択
+
+```css title="CSS"
+/* パターン1: flex-basis を使用 */
+.flex-item {
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/* パターン2: width を使用 */
+.flex-item {
+  width: 200px;
+  flex: none; /* flex: 0 0 auto と同じ */
+}
+```
+
+## 問題7: Safariでの表示崩れ
+
+### 問題の発生例
+
+SafariブラウザでFlexboxの動作が異なる場合があります。
+
+### 解決法: ベンダープレフィックスとflex値の明示
+
+```css title="CSS"
+.flex-container {
+  display: -webkit-flex; /* Safari用 */
+  display: flex;
+}
+
+.flex-item {
+  -webkit-flex: 1 1 auto; /* Safari用 */
+  flex: 1 1 auto;
+  
+  /* Safari用のflex-basis回避策 */
+  flex-basis: auto;
+  width: auto;
+}
+```
+
+## デバッグ手法
+
+### 1. ブラウザ開発者ツールの活用
+
+Flexboxの問題をデバッグする際は、ブラウザの開発者ツールを活用しましょう：
+
+- **Chrome DevTools**: Flexboxコンテナにフレックスバッジが表示される
+- **Firefox Developer Tools**: Flexboxインスペクターでアイテムの配置を視覚的に確認
+- **Safari Web Inspector**: フレックスプロパティの計算値を確認
+
+### 2. 境界線での確認
+
+```css title="デバッグ用CSS"
+.flex-container {
+  border: 2px solid red !important;
+}
+
+.flex-item {
+  border: 1px solid blue !important;
+  background-color: rgba(0, 255, 0, 0.1) !important;
+}
+```
+
+### 3. 段階的な実装
+
+複雑なレイアウトは段階的に実装します：
+
+1. 基本的なflexコンテナの設定
+2. アイテムの配置（justify-content, align-items）
+3. サイズ調整（flex-grow, flex-shrink, flex-basis）
+4. 制約の追加（min-width, max-width）
+
+## 予防策
+
+### 1. モバイルファーストのアプローチ
+
+```css title="CSS"
+/* モバイル用（デフォルト） */
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* デスクトップ用 */
+@media (min-width: 768px) {
+  .flex-container {
+    flex-direction: row;
+  }
+}
+```
+
+### 2. フォールバックの設定
+
+```css title="CSS"
+.flex-item {
+  width: 50%; /* フォールバック */
+  flex: 1;    /* Flexbox対応ブラウザ */
+}
+```
+
+### 3. テストの実施
+
+異なるブラウザ、画面サイズ、コンテンツ量でのテストを必ず実施しましょう。
+
+## まとめ
+
+- **高さの不揃い**: `align-items: stretch` やFlexboxのネストを活用
+- **テキスト溢れ**: `min-width: 0` と適切な `overflow` 設定
+- **中央配置の問題**: `margin` と `gap` の使い分け
+- **縮小問題**: `flex-shrink: 0` や `min-width` で制御
+- **スクロール問題**: `min-height: 0` と `overflow` の組み合わせ
+- **幅の問題**: `width` と `flex-basis` の使い分けを理解
+- **ブラウザ互換性**: ベンダープレフィックスと段階的な実装
+
+これらの問題と解決策を理解することで、Flexboxをより確実に使いこなせるようになります。問題が発生した際は、ブラウザの開発者ツールを活用して、段階的にデバッグを行いましょう。

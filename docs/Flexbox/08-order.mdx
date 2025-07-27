@@ -1,0 +1,568 @@
+import { OrderDemo, OrderExample, OrderExamples } from './components/order-demo';
+import { FlexContainer } from './components/flex-container';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# 表示順序の制御
+
+**order** プロパティは、フレックスアイテムの表示順序をHTMLの順序を変更することなく制御できるプロパティです。
+
+このプロパティを使用することで、レスポンシブデザインやレイアウトの最適化において、HTMLの構造を保ったまま視覚的な順序を変更できます。
+
+## order の基本概念
+
+- **HTMLの順序**: ドキュメントの論理的な順序（スクリーンリーダーが読み上げる順序）
+- **視覚的順序**: ブラウザで実際に表示される順序
+- **order** プロパティは視覚的順序のみを変更し、HTML の順序は変更しません
+
+### デフォルトの動作
+
+```html title="HTML"
+<div class="flex-container">
+  <div class="item">A</div>
+  <div class="item">B</div>
+  <div class="item">C</div>
+  <div class="item">D</div>
+</div>
+```
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+}
+
+.item {
+  /* order: 0; すべてのアイテムのデフォルト値 */
+}
+```
+
+<FlexContainer>
+  <FlexItemFixed style={{ backgroundColor: '#007bff' }}>A</FlexItemFixed>
+  <FlexItemFixed style={{ backgroundColor: '#28a745' }}>B</FlexItemFixed>
+  <FlexItemFixed style={{ backgroundColor: '#dc3545' }}>C</FlexItemFixed>
+  <FlexItemFixed style={{ backgroundColor: '#ffc107', color: '#333' }}>D</FlexItemFixed>
+</FlexContainer>
+
+## order の値
+
+order プロパティは整数値（正の数、負の数、0）を取ります：
+
+### 基本的な使用方法
+
+```css title="CSS"
+.item-a { order: 0; }  /* デフォルト */
+.item-b { order: 1; }  /* 後に表示 */
+.item-c { order: -1; } /* 前に表示 */
+.item-d { order: 2; }  /* 最後に表示 */
+```
+
+<FlexContainer>
+  <FlexItemFixed style={{ order: 0, backgroundColor: '#007bff' }}>A (order: 0)</FlexItemFixed>
+  <FlexItemFixed style={{ order: 1, backgroundColor: '#28a745' }}>B (order: 1)</FlexItemFixed>
+  <FlexItemFixed style={{ order: -1, backgroundColor: '#dc3545' }}>C (order: -1)</FlexItemFixed>
+  <FlexItemFixed style={{ order: 2, backgroundColor: '#ffc107', color: '#333' }}>D (order: 2)</FlexItemFixed>
+</FlexContainer>
+
+**表示順序**: C → A → B → D
+
+### 並び替えのルール
+
+1. **order の値が小さいものから順に表示**
+2. **同じ order 値の場合は HTML の順序を維持**
+3. **デフォルト値は 0**
+
+## 実用例
+
+### レスポンシブナビゲーション
+
+モバイルではメニューボタンを右端に、デスクトップでは左端に配置する場合：
+
+```css title="CSS"
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  order: 1;
+}
+
+.menu-button {
+  order: 2;
+  margin-left: auto;
+}
+
+.nav-menu {
+  order: 3;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    order: 2;
+  }
+  
+  .menu-button {
+    order: 1;
+    display: none;
+  }
+  
+  .nav-menu {
+    order: 3;
+    display: flex;
+    margin-left: auto;
+  }
+}
+```
+
+**モバイル表示**:
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#333',
+    color: 'white',
+    borderRadius: '8px',
+    marginBottom: '10px',
+  }}
+>
+  <div style={{ order: 1, fontSize: '20px', fontWeight: 'bold' }}>MyLogo</div>
+  <button
+    style={{
+      order: 2,
+      marginLeft: 'auto',
+      padding: '8px 12px',
+      backgroundColor: 'transparent',
+      border: '1px solid white',
+      color: 'white',
+      borderRadius: '4px',
+      fontSize: '14px',
+    }}
+  >
+    ☰ メニュー
+  </button>
+</div>
+
+**デスクトップ表示**:
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#333',
+    color: 'white',
+    borderRadius: '8px',
+  }}
+>
+  <div style={{ order: 2, fontSize: '20px', fontWeight: 'bold' }}>MyLogo</div>
+  <nav
+    style={{
+      order: 3,
+      marginLeft: 'auto',
+      display: 'flex',
+      gap: '20px',
+    }}
+  >
+    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>ホーム</a>
+    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>サービス</a>
+    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>お問い合わせ</a>
+  </nav>
+</div>
+
+### サイドバーレイアウト
+
+モバイルではサイドバーを下に、デスクトップでは左に配置する場合：
+
+```css title="CSS"
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  order: 1;
+}
+
+.sidebar {
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    flex-direction: row;
+  }
+  
+  .main-content {
+    order: 2;
+    flex: 1;
+  }
+  
+  .sidebar {
+    order: 1;
+    flex: 0 0 200px;
+  }
+}
+```
+
+**モバイル表示（縦）**:
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    height: '200px',
+    border: '2px solid #ccc',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    marginBottom: '10px',
+  }}
+>
+  <div
+    style={{
+      order: 1,
+      flex: 1,
+      padding: '20px',
+      backgroundColor: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    メインコンテンツ
+  </div>
+  <div
+    style={{
+      order: 2,
+      padding: '15px',
+      backgroundColor: '#f8f9fa',
+      borderTop: '1px solid #ddd',
+      textAlign: 'center',
+    }}
+  >
+    サイドバー
+  </div>
+</div>
+
+**デスクトップ表示（横）**:
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'row',
+    height: '150px',
+    border: '2px solid #ccc',
+    borderRadius: '8px',
+    overflow: 'hidden',
+  }}
+>
+  <div
+    style={{
+      order: 1,
+      flex: '0 0 150px',
+      padding: '15px',
+      backgroundColor: '#f8f9fa',
+      borderRight: '1px solid #ddd',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    サイドバー
+  </div>
+  <div
+    style={{
+      order: 2,
+      flex: 1,
+      padding: '20px',
+      backgroundColor: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    メインコンテンツ
+  </div>
+</div>
+
+### カードの優先順位
+
+重要な情報を最初に表示し、補足情報を後に配置する場合：
+
+```css title="CSS"
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  order: 1;
+}
+
+.card-price {
+  order: 2;
+}
+
+.card-description {
+  order: 3;
+}
+
+.card-features {
+  order: 4;
+}
+
+/* 特別オファーの場合は価格を最初に表示 */
+.special-offer .card-price {
+  order: 0; /* タイトルよりも前に表示 */
+  color: #e74c3c;
+  font-size: 1.5em;
+}
+```
+
+**通常の表示**:
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    width: '250px',
+    marginBottom: '10px',
+  }}
+>
+  <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
+    スタンダードプラン
+  </h3>
+  <p style={{ order: 2, margin: '0 0 10px 0', fontSize: '20px', fontWeight: 'bold', color: '#007bff' }}>
+    ¥1,000/月
+  </p>
+  <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
+    基本的な機能を含むプランです。
+  </p>
+  <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
+    <li>機能A</li>
+    <li>機能B</li>
+  </ul>
+</div>
+
+**スペシャルオファー表示**:
+<div
+  style={{
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px',
+    border: '2px solid #e74c3c',
+    borderRadius: '8px',
+    backgroundColor: 'white',
+    width: '250px',
+  }}
+>
+  <p style={{ order: 0, margin: '0 0 10px 0', fontSize: '24px', fontWeight: 'bold', color: '#e74c3c' }}>
+    特価！¥500/月
+  </p>
+  <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
+    スペシャルプラン
+  </h3>
+  <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
+    期間限定の特別価格です。
+  </p>
+  <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
+    <li>機能A</li>
+    <li>機能B</li>
+    <li>特別機能C</li>
+  </ul>
+</div>
+
+## アクセシビリティへの配慮
+
+### 重要な注意点
+
+`order` プロパティは**視覚的な順序のみ**を変更し、以下には影響しません：
+
+1. **スクリーンリーダーの読み上げ順序**（HTML順序を維持）
+2. **キーボードのTab順序**（HTML順序を維持）
+3. **音声ブラウザの認識順序**（HTML順序を維持）
+
+### 適切な使用方法
+
+```html title="HTML構造を論理的に保つ"
+<!-- 良い例：論理的な順序でHTML を記述 -->
+<article class="card">
+  <h2>記事タイトル</h2>
+  <p class="summary">概要</p>
+  <img src="image.jpg" alt="記事画像">
+  <div class="metadata">投稿日: 2024-01-15</div>
+</article>
+```
+
+```css title="CSS で視覚的順序を調整"
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card h2 {
+  order: 1;
+}
+
+.card img {
+  order: 2;
+}
+
+.card .summary {
+  order: 3;
+}
+
+.card .metadata {
+  order: 4;
+}
+```
+
+### 避けるべき使用方法
+
+```html title="避けるべき例"
+<!-- 悪い例：視覚的順序に合わせてHTMLを記述 -->
+<div class="card">
+  <img src="image.jpg" alt="記事画像">
+  <div class="metadata">投稿日: 2024-01-15</div>
+  <h2>記事タイトル</h2> <!-- 論理的には最初に来るべき -->
+  <p class="summary">概要</p>
+</div>
+```
+
+## flex-direction との相互作用
+
+`order` は `flex-direction` の値に関係なく同じように動作します：
+
+### flex-direction: row
+
+```css title="CSS"
+.container {
+  flex-direction: row;
+}
+
+.item-a { order: 2; }
+.item-b { order: 1; }
+```
+
+<FlexContainer direction="row">
+  <FlexItemFixed style={{ order: 2, backgroundColor: '#007bff' }}>A (order: 2)</FlexItemFixed>
+  <FlexItemFixed style={{ order: 1, backgroundColor: '#28a745' }}>B (order: 1)</FlexItemFixed>
+</FlexContainer>
+
+### flex-direction: column
+
+```css title="CSS"
+.container {
+  flex-direction: column;
+}
+
+.item-a { order: 2; }
+.item-b { order: 1; }
+```
+
+<FlexContainer direction="column" style={{ height: '150px', width: '200px' }}>
+  <FlexItemFixed style={{ order: 2, backgroundColor: '#007bff', width: 'auto' }}>A (order: 2)</FlexItemFixed>
+  <FlexItemFixed style={{ order: 1, backgroundColor: '#28a745', width: 'auto' }}>B (order: 1)</FlexItemFixed>
+</FlexContainer>
+
+## 試してみよう
+
+以下のインタラクティブなデモで、各アイテムの `order` を変更して動作を確認してみてください：
+
+<OrderDemo />
+
+## さまざまなパターン
+
+<OrderExamples />
+
+## パフォーマンスへの影響
+
+`order` プロパティは比較的軽量な CSS プロパティですが、以下の点に注意：
+
+### 良いパフォーマンス例
+
+```css title="静的な order 設定"
+.sidebar {
+  order: 1;
+}
+
+.main {
+  order: 2;
+}
+```
+
+### 避けるべき例
+
+```css title="動的な order 変更（パフォーマンスに影響）"
+.item {
+  transition: order 0.3s ease; /* orderはアニメーション不可 */
+}
+
+.item:hover {
+  order: -1; /* 頻繁な変更は避ける */
+}
+```
+
+## 実装のベストプラクティス
+
+### 1. 論理的なHTML構造を維持
+
+```html title="HTML"
+<!-- 論理的な順序でHTMLを記述 -->
+<nav>
+  <h1>ロゴ</h1>
+  <ul>メニュー</ul>
+  <button>ハンバーガーボタン</button>
+</nav>
+```
+
+### 2. order値は整理して管理
+
+```css title="CSS"
+/* order値を体系的に管理 */
+.layout-header {
+  order: 10;
+}
+
+.layout-sidebar {
+  order: 20;
+}
+
+.layout-main {
+  order: 30;
+}
+
+.layout-footer {
+  order: 40;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 767px) {
+  .layout-sidebar {
+    order: 35; /* mainの後に移動 */
+  }
+}
+```
+
+### 3. コメントで意図を明記
+
+```css title="CSS"
+.card-price {
+  order: 1; /* 通常時はタイトルの後 */
+}
+
+.special-offer .card-price {
+  order: -1; /* 特別オファー時は最初に表示 */
+}
+```
+
+## まとめ
+
+- **order** プロパティはHTMLを変更せずに視覚的順序を制御
+- **整数値**（負の数、0、正の数）を使用し、小さい値から順に表示
+- **レスポンシブデザイン**で特に威力を発揮
+- **アクセシビリティ**を考慮し、論理的なHTML構造を保つことが重要
+- **スクリーンリーダー**やキーボードナビゲーションには影響しない
+- **パフォーマンス**への影響は軽微だが、頻繁な変更は避ける
+
+`order` プロパティを適切に使用することで、ユーザビリティを損なうことなく、デザイン要求に応えられる柔軟なレイアウトを実現できます。特に、モバイルファーストのレスポンシブデザインにおいて非常に有用な機能です。
