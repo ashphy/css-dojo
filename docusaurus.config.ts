@@ -50,6 +50,11 @@ const config: Config = {
         theme: {
           customCss: "./src/css/custom.css",
         },
+        svgr: {
+          svgrConfig: {
+            /* SVGR config */
+          },
+        },
       } satisfies Preset.Options,
     ],
   ],

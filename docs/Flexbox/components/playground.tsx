@@ -1,6 +1,64 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useColorMode } from "@docusaurus/theme-common";
+import StackBlitzSDK from "@stackblitz/sdk";
+import { OpenInStackBlitzButton } from "./open-in-stack-blitz-button";
+import dedent from "ts-dedent";
+
+interface SectionProps {
+  children?: React.ReactNode;
+}
+
+function Section({ children }: SectionProps) {
+  return (
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        border: "1px solid var(--ifm-color-emphasis-300)",
+        borderRadius: "var(--ifm-border-radius)",
+        overflow: "hidden",
+        backgroundColor: "var(--ifm-background-color)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface HeaderProps {
+  children?: React.ReactNode;
+  color: string;
+}
+
+function SectionHeader({ children, color }: HeaderProps) {
+  return (
+    <div
+      style={{
+        backgroundColor: "var(--ifm-color-emphasis-100)",
+        padding: "0.5rem 0.75rem",
+        borderBottom: "1px solid var(--ifm-color-emphasis-200)",
+        fontSize: "0.75rem",
+        fontWeight: 600,
+        color: "var(--ifm-color-emphasis-700)",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+      }}
+    >
+      <span
+        style={{
+          width: "8px",
+          height: "8px",
+          backgroundColor: color,
+          borderRadius: "50%",
+        }}
+      />
+      {children}
+    </div>
+  );
+}
 
 interface PlaygroundProps {
   htmlCode: string;
@@ -18,19 +76,20 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
   const editorTheme = colorMode === "dark" ? "vs-dark" : "vs";
 
   const generatePreviewContent = (html: string, css: string) => {
-    return `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    ${css}
-  </style>
-</head>
-<body>
-  ${html}
-</body>
-</html>`;
+    return dedent`<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          ${css}
+        </style>
+      </head>
+
+      <body>
+        ${html}
+      </body>
+    </html>`;
   };
 
   const previewContent = generatePreviewContent(
@@ -45,6 +104,22 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
   const handleCssChange = (value: string | undefined) => {
     setCurrentCssCode(value || "");
   };
+
+  const handleOnOpenInStackBlitz = useCallback(() => {
+    StackBlitzSDK.openProject(
+      {
+        files: {
+          "index.html": generatePreviewContent(currentHtmlCode, currentCssCode),
+        },
+        template: "html",
+        title: "CSS Dojo",
+        description: `This is an example of my first doc!`,
+      },
+      {
+        newWindow: true,
+      }
+    );
+  }, []);
 
   return (
     <div
@@ -66,11 +141,15 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
           color: "white",
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: "0.5rem",
         }}
       >
-        <span style={{ fontSize: "1.1em" }}>🎨</span>
-        Playground
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{ fontSize: "1.1em" }}>🎨</span>
+          Playground
+        </div>
+        <OpenInStackBlitzButton onClick={handleOnOpenInStackBlitz} />
       </div>
 
       {/* Content Area */}
@@ -87,44 +166,13 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
           style={{
             flex: 1,
             display: "flex",
+            minWidth: "0px",
             flexDirection: "column",
           }}
         >
           {/* HTML Editor */}
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              border: "1px solid var(--ifm-color-emphasis-300)",
-              borderRadius: "var(--ifm-border-radius)",
-              overflow: "hidden",
-              backgroundColor: "var(--ifm-background-color)",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "var(--ifm-color-emphasis-100)",
-                padding: "0.5rem 0.75rem",
-                borderBottom: "1px solid var(--ifm-color-emphasis-200)",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                color: "var(--ifm-color-emphasis-700)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  backgroundColor: "#e34c26",
-                  borderRadius: "50%",
-                }}
-              />
-              HTML
-            </div>
+          <Section>
+            <SectionHeader color="#e34c26">HTML</SectionHeader>
             <Editor
               height="180px"
               defaultLanguage="html"
@@ -140,47 +188,16 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
                 renderLineHighlight: "line",
                 smoothScrolling: true,
                 wordWrap: "off",
+                automaticLayout: true,
               }}
             />
-          </div>
+          </Section>
 
           {/* CSS Editor */}
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              flexDirection: "column",
-              border: "1px solid var(--ifm-color-emphasis-300)",
-              borderRadius: "var(--ifm-border-radius)",
-              overflow: "hidden",
-              backgroundColor: "var(--ifm-background-color)",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "var(--ifm-color-emphasis-100)",
-                padding: "0.5rem 0.75rem",
-                borderBottom: "1px solid var(--ifm-color-emphasis-200)",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                color: "var(--ifm-color-emphasis-700)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  backgroundColor: "#1572b6",
-                  borderRadius: "50%",
-                }}
-              />
-              CSS
-            </div>
+          <Section>
+            <SectionHeader color="#1572b6">CSS</SectionHeader>
             <Editor
-              height="180px"
+              height="400px"
               defaultLanguage="css"
               theme={editorTheme}
               value={currentCssCode}
@@ -194,9 +211,10 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
                 renderLineHighlight: "line",
                 smoothScrolling: true,
                 wordWrap: "off",
+                automaticLayout: true,
               }}
             />
-          </div>
+          </Section>
         </div>
 
         {/* Preview Panel */}
@@ -205,43 +223,11 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            minWidth: "300px",
+            minWidth: "0px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-              border: "1px solid var(--ifm-color-emphasis-300)",
-              borderRadius: "var(--ifm-border-radius)",
-              overflow: "hidden",
-              backgroundColor: "var(--ifm-background-color)",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: "var(--ifm-color-emphasis-100)",
-                padding: "0.5rem 0.75rem",
-                borderBottom: "1px solid var(--ifm-color-emphasis-200)",
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                color: "var(--ifm-color-emphasis-700)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  backgroundColor: "var(--ifm-color-primary)",
-                  borderRadius: "50%",
-                }}
-              />
-              プレビュー
-            </div>
+          <Section>
+            <SectionHeader color="#1572b6">プレビュー</SectionHeader>
             <iframe
               title="Preview"
               srcDoc={previewContent}
@@ -254,7 +240,7 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
                 width: "100%",
               }}
             />
-          </div>
+          </Section>
         </div>
       </div>
     </div>
