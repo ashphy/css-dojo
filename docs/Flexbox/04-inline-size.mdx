@@ -4,8 +4,7 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 
 # フレックスアイテムのサイズ
 
-フレックスアイテムのサイズは、`flex-grow`、`flex-shrink`、`flex-basis` の3つのプロパティによって決定されます。
-これらのプロパティを理解することで、レスポンシブなレイアウトを柔軟に作成できるようになります。
+フレックスアイテムのサイズは、`flex-grow`、`flex-shrink`、`flex-basis` の3つのプロパティによって決まります。
 
 ## flex-basis
 
@@ -23,7 +22,7 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 - `auto`（デフォルト）: アイテムのコンテンツサイズに基づく
 - `<length>`（px, em, remなど）: 具体的な長さを指定
 - `<percentage>`（%）: コンテナのサイズに対する割合
-- `content`: コンテンツのサイズに基づく（IE非対応）
+- `content`: コンテンツのサイズに基づく
 
 ### flex-basis の例
 
@@ -160,6 +159,15 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 
 `flex: 1` は `flex: 1 1 0%` の省略形で、等しく拡大・縮小するアイテムを作成します。
 
+:::info 仕様とブラウザ実装の違い
+実は、`flex: 1` の動作には仕様とブラウザ実装で微妙な違いがあります：
+
+- **CSS仕様上**: `flex: 1` は `flex: 1 1 0` に展開されるべき
+- **ブラウザ実装**: 多くのブラウザは `flex: 1 1 0%` として実装
+
+この違いは、`flex-basis` の値が `0`（絶対値）か `0%`（パーセンテージ）かという重要な差を生み出します。現在のブラウザはより予測可能な動作のために `0%` を採用していますが、これが後述する「flex-basis: 0 と 0% の違い」につながっています。
+:::
+
 <FlexContainer>
     <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
     <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
@@ -185,6 +193,90 @@ import { FlexItemFixed } from './components/flex-items-fixed';
     <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
     <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
 </FlexContainer>
+
+## flex-basis: 0 と 0% の違い
+
+前述した通り、CSS仕様では `flex: 1` は `flex: 1 1 0` に展開されるべきですが、多くのブラウザは `flex: 1 1 0%` として実装しています。では、`flex-basis: 0` と `flex-basis: 0%` は実際に何が違うのでしょうか？
+
+多くの開発者が見落としがちな重要な違いがあります。見た目は似ていますが、内部的な計算方法が異なり、特定の状況で異なる結果を生み出すことがあります。
+
+### 技術的な違い
+
+**flex-basis: 0**
+- 絶対値として常に0ピクセル
+- コンテナのサイズに関係なく常に0
+- アイテムは完全に縮小され、flex-growによる拡大のみに依存
+
+**flex-basis: 0%**
+- パーセンテージ値としてコンテナサイズの0%を計算
+- コンテナのサイズが確定している場合は0ピクセルと同じ結果
+- コンテナのサイズが不確定な場合は `content` サイズにフォールバック
+
+### 通常のケース（確定したコンテナサイズ）
+
+コンテナのサイズが確定している場合、両者の動作は同じです：
+
+<div style={{ marginBottom: '20px' }}>
+<h4>flex-basis: 0 を使用</h4>
+<FlexContainer style={{ width: '400px' }}>
+    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 2 }}>flex-basis: 0 (grow: 2)</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItemFixed>
+</FlexContainer>
+
+<h4>flex-basis: 0% を使用</h4>
+<FlexContainer style={{ width: '400px' }}>
+    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 2 }}>flex-basis: 0% (grow: 2)</FlexItemFixed>
+    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItemFixed>
+</FlexContainer>
+</div>
+
+### なぜブラウザは 0% を採用するのか
+
+ブラウザが仕様と異なり `0%` を採用する理由は、より予測可能で一貫した動作を提供するためです：
+
+```css title="CSS"
+/* ブラウザ実装: flex: 1 のショートハンドは実際には以下と同等 */
+.flex-item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%; /* ブラウザは 0% を使用 */
+}
+
+/* CSS仕様: 本来は以下であるべき */
+.flex-item-spec {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0; /* 仕様では 0 */
+}
+```
+
+この実装の違いは、特にコンテナのサイズが不確定な場合に影響を与える可能性があります。
+
+### 推奨される使い方
+
+異なるブラウザやコンテキストでの一貫した動作を保証するため：
+
+**推奨事項:**
+- `flex: 1`, `flex: 2` などのショートハンドを使用
+- 直接 `flex-basis` を指定する場合は `0%` を使用
+- 古いブラウザ対応が必要な場合は十分なテストを実施
+
+```css title="CSS"
+/* 良い例 */
+.equal-width-items {
+  flex: 1; /* 標準的で予測可能 */
+}
+
+/* 避けるべき例 */
+.manual-specification {
+  flex-basis: 0;  /* 予期しない動作の可能性 */
+  flex-grow: 1;
+}
+```
+
+この違いを理解することで、より堅牢で予測可能なFlexboxレイアウトを作成できます。
 
 ## 実用例
 
