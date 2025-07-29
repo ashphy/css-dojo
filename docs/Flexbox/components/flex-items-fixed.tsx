@@ -7,6 +7,11 @@ export function FlexItemFixed({ children, style }: FlexItemFixedProps) {
   return (
     <div
       style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "200px",
+        height: "80px",
         padding: "15px",
         color: "black",
         backgroundColor: "#e3f2fd",

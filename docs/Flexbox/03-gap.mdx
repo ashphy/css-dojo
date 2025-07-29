@@ -1,6 +1,7 @@
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
 import { FlexItemFixed } from './components/flex-items-fixed';
+import { GapDemo } from './components/gap-demo';
 
 # gap
 
@@ -83,7 +84,11 @@ gap プロパティは、`row-gap` と `column-gap` のショートハンドプ�
 
 ### 個別設定の例
 
-行と列で異なる余白を設定する場合：
+gap プロパティを使用して、行と列で異なる余白を設定することもできます。
+
+```css
+gap: <row-gap> <column-gap>;
+```
 
 ```css title="CSS"
 .flex-container {
@@ -98,10 +103,10 @@ gap プロパティは、`row-gap` と `column-gap` のショートハンドプ�
 ```
 
 <FlexContainer 
-  wrap="wrap" 
-  style={{ 
+  wrap="wrap"  
+  style={{     
     gap: '10px 30px',
-    width: '300px' 
+    width: '500px',
   }}
 >
     <FlexItemFixed>アイテム 1</FlexItemFixed>
@@ -109,6 +114,7 @@ gap プロパティは、`row-gap` と `column-gap` のショートハンドプ�
     <FlexItemFixed>アイテム 3</FlexItemFixed>
     <FlexItemFixed>アイテム 4</FlexItemFixed>
     <FlexItemFixed>アイテム 5</FlexItemFixed>
+    <FlexItemFixed>アイテム 6</FlexItemFixed>
 </FlexContainer>
 
 ## flex-direction との組み合わせ
@@ -147,7 +153,15 @@ gap プロパティは、flex-direction の値に関係なく動作します。
     <FlexItemFixed>アイテム 3</FlexItemFixed>
 </FlexContainer>
 
+## 試してみよう
+
+以下のデモでは、row-gap、column-gap、flex-directionを変更して、gapプロパティがフレックスアイテムの配置にどのような影響を与えるかを確認できます。
+
+<GapDemo />
+
 ## 従来の方法との比較
+
+複数の項目をリストのように配置することを考えてみましょう。
 
 ### マージンを使用した従来の方法
 
@@ -165,7 +179,9 @@ gap プロパティは、flex-direction の値に関係なく動作します。
 }
 ```
 
-### gap を使用した現代的な方法
+マージンを使う方法では最後の要素の右マージンを削除するために、特別なスタイルを追加する必要があります。
+
+### gap を使用した方法
 
 ```css title="現代的な方法"
 .flex-container {
@@ -174,25 +190,15 @@ gap プロパティは、flex-direction の値に関係なく動作します。
 }
 ```
 
+
 gap プロパティの利点：
 - **シンプル**: 1つのプロパティで余白を設定
 - **一貫性**: すべてのアイテム間で統一された余白
 - **メンテナンス性**: アイテムの追加・削除時に調整不要
-- **レスポンシブ対応**: メディアクエリと組み合わせやすい
 
 ## 実用例
 
-カードレイアウトやボタングループなど、実際のWebデザインでよく使用される例：
-
 ### カードレイアウト
-
-```css title="CSS"
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-```
 
 <FlexContainer 
   wrap="wrap" 
