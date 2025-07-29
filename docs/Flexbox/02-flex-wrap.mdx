@@ -1,6 +1,6 @@
 import { FlexWrapDemo } from './components/flex-wrap-demo';
 
-# flex-wrap
+# アイテムを折り返す
 
 フレックスコンテナでは、デフォルトでアイテムが1行（または1列）に収まるように自動的にサイズが調整されます。
 しかし、`flex-wrap` プロパティを使用することで、アイテムを複数行に折り返すことができます。
@@ -24,7 +24,7 @@ import { FlexWrapDemo } from './components/flex-wrap-demo';
 
 ### wrap
 
-フレックスアイテムを必要に応じて複数行に折り返します。新しい行は主軸の正方向に沿って配置されます。
+フレックスアイテムを必要に応じて複数行に折り返します。新しい行は主軸に沿って配置されます。
 
 ```css title="CSS"
 .flex-container {
@@ -37,7 +37,7 @@ import { FlexWrapDemo } from './components/flex-wrap-demo';
 
 ### wrap-reverse
 
-フレックスアイテムを必要に応じて複数行に折り返しますが、新しい行は主軸の逆方向に沿って配置されます。
+フレックスアイテムを必要に応じて複数行に折り返しますが、**交差軸**の先頭と末尾が入れ替わります。
 
 ```css title="CSS"
 .flex-container {
