@@ -2,7 +2,11 @@
 hide_table_of_contents: true
 ---
 
+import dedent from 'ts-dedent';
 import { Playground } from './components/playground';
+import { TargetLayout } from './components/target-layout';
+
+import exercise_1_style from './exercises/exercise-1.module.css';
 
 # 演習課題
 
@@ -16,30 +20,38 @@ Flexboxを使って実用的なレイアウトを段階的に作成してみま�
 
 3つの要素を横一列に並べ、コンテナの中央に配置してください。
 
-**期待される結果:**
+**要件:**
 - 3つの要素が水平方向に並んでいる
 - 要素全体がコンテナの中央に配置されている
 - 要素間に適度な余白がある
 
-<Playground
-  htmlCode={`<div class="container">
-  <div class="item">アイテム1</div>
-  <div class="item">アイテム2</div>
-  <div class="item">アイテム3</div>
-</div>`}
-  cssCode={`.container {
-  height: 200px;
-  background-color: #f0f0f0;
-  border: 2px solid #ccc;
-  /* ここにFlexboxのプロパティを追加してください */
-}
+<TargetLayout> 
+  <div className={exercise_1_style.container}>
+    <div className={exercise_1_style.item}>アイテム1</div>
+    <div className={exercise_1_style.item}>アイテム2</div>
+    <div className={exercise_1_style.item}>アイテム3</div>
+  </div>
+</TargetLayout>
 
-.item {
-  background-color: #007bff;
-  color: white;
-  padding: 15px 20px;
-  border-radius: 5px;
-}`}
+<Playground
+  htmlCode={dedent`<div class="container">
+    <div class="item">アイテム1</div>
+    <div class="item">アイテム2</div>
+    <div class="item">アイテム3</div>
+  </div>`}
+  cssCode={dedent`.container {
+    height: 200px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    /* ここにFlexboxのプロパティを追加してください */
+  }
+
+  .item {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+  }`}
 />
 
 **ヒント:** `display: flex`, `justify-content`, `gap` プロパティを使用してください。

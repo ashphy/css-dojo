@@ -92,6 +92,21 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
     </html>`;
   };
 
+  const generateStackBlitzContent = (html: string) => {
+    return dedent`<!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+      </head>
+
+      <body>
+        ${html}
+      </body>
+    </html>`;
+  };
+
   const previewContent = generatePreviewContent(
     currentHtmlCode,
     currentCssCode
@@ -109,14 +124,26 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
     StackBlitzSDK.openProject(
       {
         files: {
-          "index.html": generatePreviewContent(currentHtmlCode, currentCssCode),
+          "index.html": generateStackBlitzContent(currentHtmlCode),
+          "style.css": currentCssCode,
+          "package.json": dedent`{
+            "scripts": {
+              "start": "servor --reload"
+            },
+            "dependencies": {
+              "servor": "^4.0.2"
+            }
+          }`,
         },
-        template: "html",
+        template: "node",
         title: "CSS Dojo",
         description: `This is an example of my first doc!`,
       },
       {
         newWindow: true,
+        openFile: ["index.html", "style.css"],
+        showSidebar: false,
+        terminalHeight: 0,
       }
     );
   }, []);
@@ -135,10 +162,10 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
       {/* Header */}
       <div
         style={{
+          color: "white",
           background: `var(--ifm-color-primary-lighter)`,
           padding: "0.75rem 1rem",
           fontWeight: 600,
-          color: "white",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
