@@ -1,4 +1,4 @@
-import { AlignContentDemo, AlignContentExamples } from './components/align-content-demo';
+import { AlignContentDemo } from './components/align-content-demo';
 import { FlexContainer } from './components/flex-container';
 import { FlexItemFixed } from './components/flex-items-fixed';
 
@@ -14,69 +14,6 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 
 - **align-items**: 各行内のアイテムを個別に配置（行ごとの配置）
 - **align-content**: 複数の行全体をまとめて配置（行グループの配置）
-
-### 1行の場合（align-items が有効）
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  align-items: center; /* 1行内でのアイテム配置 */
-  height: 150px;
-}
-```
-
-<FlexContainer style={{ alignItems: 'center', height: '150px' }}>
-    <FlexItemFixed>アイテム 1</FlexItemFixed>
-    <FlexItemFixed>アイテム 2</FlexItemFixed>
-    <FlexItemFixed>アイテム 3</FlexItemFixed>
-</FlexContainer>
-
-### 複数行の場合（align-content が有効）
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center; /* 複数行全体の配置 */
-  width: 200px;
-  height: 200px;
-}
-```
-
-<div
-  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignContent: 'center',
-    width: '200px',
-    height: '200px',
-    border: '2px solid #333',
-    borderRadius: '8px',
-    padding: '10px',
-    backgroundColor: '#f8f9fa',
-    gap: '10px',
-  }}
->
-  {Array.from({ length: 6 }, (_, i) => (
-    <div
-      key={i}
-      style={{
-        width: '60px',
-        height: '30px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '4px',
-        fontSize: '12px',
-        fontWeight: 'bold',
-      }}
-    >
-      {i + 1}
-    </div>
-  ))}
-</div>
 
 ## align-content の値
 
@@ -166,140 +103,6 @@ align-content プロパティは以下の値を取ることができます：
 
 <AlignContentDemo alignContent="stretch" interactive={false} />
 
-## 実用例
-
-### カードグリッドレイアウト
-
-複数行のカードレイアウトで、カードの行を中央に配置する場合：
-
-```css title="CSS"
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 20px;
-  height: 300px;
-}
-
-.card {
-  flex: 0 0 120px;
-  height: 80px;
-}
-```
-
-<div
-  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignContent: 'center',
-    gap: '20px',
-    height: '300px',
-    width: '300px',
-    border: '2px solid #ccc',
-    borderRadius: '8px',
-    padding: '20px',
-    backgroundColor: '#f8f9fa',
-  }}
->
-  {Array.from({ length: 4 }, (_, i) => (
-    <div
-      key={i}
-      style={{
-        flex: '0 0 120px',
-        height: '80px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '8px',
-        fontSize: '14px',
-        fontWeight: 'bold',
-      }}
-    >
-      カード {i + 1}
-    </div>
-  ))}
-</div>
-
-### ツールバーレイアウト
-
-複数行になる可能性があるツールバーで、ボタン群を上部に寄せる場合：
-
-```css title="CSS"
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 10px;
-  height: 150px;
-  padding: 15px;
-}
-
-.tool-button {
-  flex: 0 0 auto;
-}
-```
-
-<div
-  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignContent: 'flex-start',
-    gap: '10px',
-    height: '150px',
-    width: '250px',
-    padding: '15px',
-    border: '2px solid #ccc',
-    borderRadius: '8px',
-    backgroundColor: '#f8f9fa',
-  }}
->
-  {['保存', 'コピー', '貼り付け', '元に戻す', '削除', '印刷'].map((text, i) => (
-    <button
-      key={i}
-      style={{
-        flex: '0 0 auto',
-        padding: '8px 12px',
-        border: '1px solid #007bff',
-        borderRadius: '4px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        fontSize: '12px',
-        cursor: 'pointer',
-      }}
-    >
-      {text}
-    </button>
-  ))}
-</div>
-
-## 注意点
-
-### 1行の場合は効果なし
-
-`align-content` は複数行の場合にのみ効果があります。1行しかない場合は `align-items` を使用してください。
-
-```css title="効果なし（1行の場合）"
-.flex-container {
-  display: flex;
-  /* flex-wrap: nowrap; デフォルト値 */
-  align-content: center; /* 効果なし */
-}
-```
-
-### flex-wrap が必要
-
-`align-content` を使用する場合は、必ず `flex-wrap: wrap` または `flex-wrap: wrap-reverse` を設定してください。
-
-```css title="必要な設定"
-.flex-container {
-  display: flex;
-  flex-wrap: wrap; /* 必須 */
-  align-content: center;
-}
-```
-
 ## align-items との組み合わせ
 
 `align-content` と `align-items` は同時に使用できます：
@@ -351,20 +154,6 @@ align-content プロパティは以下の値を取ることができます：
 
 ## 試してみよう
 
-以下のインタラクティブなデモで、`align-content` の各値の動作を確認してみてください：
+`align-content`と`align-items` の各値の動作を確認してみましょう。
 
 <AlignContentDemo />
-
-## すべての値の比較
-
-<AlignContentExamples />
-
-## まとめ
-
-- **align-content** は複数行のフレックスアイテムの行全体を配置
-- **flex-wrap: wrap** または **wrap-reverse** が必要
-- **align-items** は各行内でのアイテム配置を制御
-- 2つのプロパティを組み合わせることで、より細かい制御が可能
-- カードグリッドやツールバーなど、実用的なレイアウトで威力を発揮
-
-複数行レイアウトの理解は、レスポンシブデザインにおいて特に重要です。画面サイズに応じてアイテムが折り返される際の配置を適切に制御できるようになりましょう。
