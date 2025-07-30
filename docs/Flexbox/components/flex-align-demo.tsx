@@ -13,11 +13,14 @@ type JustifyValues =
   | "space-between"
   | "space-around"
   | "space-evenly";
+type FlexDirectionValues = "row" | "row-reverse" | "column" | "column-reverse";
 
 export function FlexAlignDemo() {
   const [justifyContent, setJustifyContent] =
     useState<JustifyValues>("flex-start");
   const [alignItems, setAlignItems] = useState<AlignValues>("stretch");
+  const [flexDirection, setFlexDirection] =
+    useState<FlexDirectionValues>("row");
 
   return (
     <div style={{ marginBottom: "30px" }}>
@@ -85,14 +88,44 @@ export function FlexAlignDemo() {
             <option value="baseline">baseline</option>
           </select>
         </div>
+
+        <div>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "8px",
+              fontWeight: "bold",
+            }}
+          >
+            flex-direction（要素の方向）:
+          </label>
+          <select
+            value={flexDirection}
+            onChange={(e) =>
+              setFlexDirection(e.target.value as FlexDirectionValues)
+            }
+            style={{
+              padding: "8px 12px",
+              borderRadius: "4px",
+              border: "1px solid #ddd",
+              fontSize: "14px",
+            }}
+          >
+            <option value="row">row</option>
+            <option value="row-reverse">row-reverse</option>
+            <option value="column">column</option>
+            <option value="column-reverse">column-reverse</option>
+          </select>
+        </div>
       </div>
 
       <div
         style={{
           display: "flex",
+          flexDirection,
           justifyContent,
           alignItems,
-          height: "200px",
+          height: "360px",
           padding: "20px",
           border: "2px solid #ddd",
           borderRadius: "8px",

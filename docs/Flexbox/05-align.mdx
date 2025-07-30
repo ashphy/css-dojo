@@ -150,10 +150,10 @@ import { FlexAlignDemo } from './components/flex-align-demo';
 }
 ```
 
-<FlexContainer style={{ alignItems: 'stretch', height: '120px' }}>
-    <FlexItemFixed>アイテム 1</FlexItemFixed>
-    <FlexItemFixed>アイテム 2<br/>（複数行）</FlexItemFixed>
-    <FlexItemFixed>アイテム 3</FlexItemFixed>
+<FlexContainer style={{ alignItems: 'stretch', height: '160px' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2<br/>（複数行）</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
 </FlexContainer>
 
 #### flex-start
@@ -166,10 +166,10 @@ import { FlexAlignDemo } from './components/flex-align-demo';
 }
 ```
 
-<FlexContainer style={{ alignItems: 'flex-start', height: '120px' }}>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+<FlexContainer style={{ alignItems: 'flex-start', height: '160px' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem style={{ padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
 </FlexContainer>
 
 #### flex-end
@@ -182,10 +182,10 @@ import { FlexAlignDemo } from './components/flex-align-demo';
 }
 ```
 
-<FlexContainer style={{ alignItems: 'flex-end', height: '120px' }}>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+<FlexContainer style={{ alignItems: 'flex-end', height: '160px' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem style={{ padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
 </FlexContainer>
 
 #### center
@@ -198,10 +198,10 @@ import { FlexAlignDemo } from './components/flex-align-demo';
 }
 ```
 
-<FlexContainer style={{ alignItems: 'center', height: '120px' }}>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+<FlexContainer style={{ alignItems: 'center', height: '160px' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem style={{ padding: '20px 10px' }}>アイテム 2<br/>（高さ異なる）</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
 </FlexContainer>
 
 #### baseline
@@ -215,9 +215,9 @@ import { FlexAlignDemo } from './components/flex-align-demo';
 ```
 
 <FlexContainer style={{ alignItems: 'baseline', height: '120px' }}>
-    <FlexItemFixed style={{ height: 'auto', fontSize: '14px' }}>小さい文字</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', fontSize: '24px', padding: '10px' }}>大きい文字</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', fontSize: '18px' }}>中くらい</FlexItemFixed>
+    <FlexItem style={{ fontSize: '14px' }}>小さい文字</FlexItem>
+    <FlexItem style={{ fontSize: '24px', padding: '10px' }}>大きい文字</FlexItem>
+    <FlexItem style={{ fontSize: '18px' }}>中くらい</FlexItem>
 </FlexContainer>
 
 ## 組み合わせの実例
@@ -239,21 +239,6 @@ justify-content と align-items を組み合わせることで、様々な配置
 
 <FlexContainer style={{ justifyContent: 'center', alignItems: 'center', height: '200px' }}>
     <FlexItemFixed>完全中央配置</FlexItemFixed>
-</FlexContainer>
-
-### 右下配置
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  height: 150px;
-}
-```
-
-<FlexContainer style={{ justifyContent: 'flex-end', alignItems: 'flex-end', height: '150px' }}>
-    <FlexItemFixed>右下配置</FlexItemFixed>
 </FlexContainer>
 
 ### カードレイアウトの配置
@@ -311,51 +296,14 @@ justify-content と align-items を組み合わせることで、様々な配置
 
 ## flex-direction との関係
 
-**重要**: justify-content と align-items の効果は、flex-direction の値によって変わります。
+justify-content は主軸の方向の配置、align-items は交差軸の方向の配置を制御しますので、
+flex-direction の値によって影響を与える方向が変わります。
 
-### row の場合（デフォルト）
+### 試してみよう
 
-- **justify-content**: 水平方向（左右）の配置を制御
-- **align-items**: 垂直方向（上下）の配置を制御
+flex-direction、justify-content と align-items の組み合わせを試してみましょう。
 
-### column の場合
-
-- **justify-content**: 垂直方向（上下）の配置を制御
-- **align-items**: 水平方向（左右）の配置を制御
-
-#### column での justify-content
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 200px;
-}
-```
-
-<FlexContainer direction="column" style={{ justifyContent: 'center', height: '200px' }}>
-    <FlexItemFixed>アイテム 1</FlexItemFixed>
-    <FlexItemFixed>アイテム 2</FlexItemFixed>
-    <FlexItemFixed>アイテム 3</FlexItemFixed>
-</FlexContainer>
-
-#### column での align-items
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 200px;
-}
-```
-
-<FlexContainer direction="column" style={{ alignItems: 'center', height: '200px' }}>
-    <FlexItemFixed>アイテム 1</FlexItemFixed>
-    <FlexItemFixed>アイテム 2</FlexItemFixed>
-    <FlexItemFixed>アイテム 3</FlexItemFixed>
-</FlexContainer>
+<FlexAlignDemo />
 
 ## 実用的なレイアウトパターン
 
@@ -481,19 +429,3 @@ justify-content と align-items を組み合わせることで、様々な配置
     フッター (常に下部に配置)
   </div>
 </div>
-
-## 試してみよう
-
-以下のインタラクティブなデモで、justify-content と align-items の組み合わせを試してみてください：
-
-<FlexAlignDemo />
-
-## まとめ
-
-- **justify-content**: 主軸方向（通常は水平）のアイテム配置を制御
-- **align-items**: 交差軸方向（通常は垂直）のアイテム配置を制御
-- **flex-direction の値によって軸が変わる**ことに注意
-- 2つのプロパティを組み合わせることで、柔軟で実用的なレイアウトを実現
-- **完全中央配置**、**ヘッダーレイアウト**、**モーダル配置**など、実際のWebサイトでよく使われるパターンを習得
-
-これらのプロパティを理解することで、従来のCSSでは複雑だったレイアウトを、シンプルで直感的なコードで実現できるようになります。
