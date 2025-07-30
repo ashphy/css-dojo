@@ -1,0 +1,525 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItem } from './components/flex-items';
+
+# Chakra UIのFlexboxコンポーネント
+
+Chakra UIは、ReactアプリケーションでFlexboxレイアウトを簡単に実装できる強力なコンポーネントライブラリです。このページでは、Chakra UIの主要なFlexboxベースコンポーネント（Stack、Flex、Center、Spacer）がどのようなCSS Flexboxプロパティで実装されているかを詳しく解説します。
+
+## Flexコンポーネント
+
+Chakra UIの **Flex** コンポーネントは、`display: flex` が設定されたBoxコンポーネントの特殊版です。CSS Flexboxの機能を React コンポーネントとして使いやすくラップしています。
+
+### 基本的な実装
+
+```jsx title="React (Chakra UI)"
+import { Flex } from "@chakra-ui/react"
+
+<Flex gap="4">
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</Flex>
+```
+
+これは以下のCSSと同等です：
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  gap: 1rem; /* gap="4" = 1rem (16px) */
+}
+```
+
+<FlexContainer style={{ gap: '1rem' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
+</FlexContainer>
+
+### Flexコンポーネントの主要プロパティ
+
+| Chakra UI プロパティ | CSS プロパティ | 説明 |
+|---------------------|----------------|------|
+| `direction` | `flex-direction` | アイテムの配置方向（row, column など） |
+| `wrap` | `flex-wrap` | アイテムの折り返し制御 |
+| `justify` | `justify-content` | 主軸方向の配置 |
+| `align` | `align-items` | 交差軸方向の配置 |
+| `gap` | `gap` | アイテム間のスペース |
+
+#### 方向の制御
+
+```jsx title="React (Chakra UI)"
+<Flex direction="column" gap="2">
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</Flex>
+```
+
+```css title="CSS 相当"
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+```
+
+<FlexContainer style={{ flexDirection: 'column', gap: '0.5rem' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
+</FlexContainer>
+
+#### 配置の制御
+
+```jsx title="React (Chakra UI)"
+<Flex justify="space-between" align="center" height="100px">
+  <Box>左端</Box>
+  <Box>中央</Box>
+  <Box>右端</Box>
+</Flex>
+```
+
+```css title="CSS 相当"
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+```
+
+<FlexContainer style={{ justifyContent: 'space-between', alignItems: 'center', height: '100px' }}>
+    <FlexItem>左端</FlexItem>
+    <FlexItem>中央</FlexItem>
+    <FlexItem>右端</FlexItem>
+</FlexContainer>
+
+## Stackコンポーネント
+
+**Stack** コンポーネントは、一方向に要素を並べるためのFlexboxベースのコンポーネントです。垂直方向（VStack）と水平方向（HStack）の両方をサポートします。
+
+### Stack（基本）
+
+```jsx title="React (Chakra UI)"
+import { Stack } from "@chakra-ui/react"
+
+<Stack spacing="4">
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</Stack>
+```
+
+```css title="CSS 相当"
+.stack-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+```
+
+<FlexContainer style={{ flexDirection: 'column', gap: '1rem' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
+</FlexContainer>
+
+### VStack（垂直スタック）
+
+**VStack** は垂直方向に要素を並べる専用コンポーネントです。
+
+```jsx title="React (Chakra UI)"
+import { VStack } from "@chakra-ui/react"
+
+<VStack spacing="3" align="start">
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</VStack>
+```
+
+```css title="CSS 相当"
+.vstack-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+```
+
+<FlexContainer style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.75rem' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
+</FlexContainer>
+
+### HStack（水平スタック）
+
+**HStack** は水平方向に要素を並べる専用コンポーネントです。
+
+```jsx title="React (Chakra UI)"
+import { HStack } from "@chakra-ui/react"
+
+<HStack spacing="5">
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</HStack>
+```
+
+```css title="CSS 相当"
+.hstack-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+}
+```
+
+<FlexContainer style={{ flexDirection: 'row', gap: '1.25rem' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem>アイテム 2</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
+</FlexContainer>
+
+### レスポンシブなStack
+
+Stackコンポーネントは、画面サイズに応じて方向を変更できます。
+
+```jsx title="React (Chakra UI)"
+<Stack 
+  direction={["column", "row"]} 
+  spacing="4"
+>
+  <Box>アイテム 1</Box>
+  <Box>アイテム 2</Box>
+  <Box>アイテム 3</Box>
+</Stack>
+```
+
+```css title="CSS 相当"
+.responsive-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 30em) {
+  .responsive-stack {
+    flex-direction: row;
+  }
+}
+```
+
+## Spacerコンポーネント
+
+**Spacer** コンポーネントは、Flexコンテナ内で利用可能なスペースを埋めるために使用します。CSS の `flex-grow: 1` と同等の機能を提供します。
+
+### 基本的な使用法
+
+```jsx title="React (Chakra UI)"
+import { Flex, Spacer } from "@chakra-ui/react"
+
+<Flex>
+  <Box>左端のコンテンツ</Box>
+  <Spacer />
+  <Box>右端のコンテンツ</Box>
+</Flex>
+```
+
+```css title="CSS 相当"
+.flex-with-spacer {
+  display: flex;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+```
+
+<FlexContainer>
+    <FlexItem style={{ flexGrow: 0 }}>左端のコンテンツ</FlexItem>
+    <div style={{ flexGrow: 1 }}></div>
+    <FlexItem style={{ flexGrow: 0 }}>右端のコンテンツ</FlexItem>
+</FlexContainer>
+
+### 複数のSpacerの使用
+
+```jsx title="React (Chakra UI)"
+<Flex>
+  <Box>左</Box>
+  <Spacer />
+  <Box>中央</Box>
+  <Spacer />
+  <Box>右</Box>
+</Flex>
+```
+
+```css title="CSS 相当"
+.flex-multiple-spacers {
+  display: flex;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+```
+
+<FlexContainer>
+    <FlexItem style={{ flexGrow: 0 }}>左</FlexItem>
+    <div style={{ flexGrow: 1 }}></div>
+    <FlexItem style={{ flexGrow: 0 }}>中央</FlexItem>
+    <div style={{ flexGrow: 1 }}></div>
+    <FlexItem style={{ flexGrow: 0 }}>右</FlexItem>
+</FlexContainer>
+
+## Centerコンポーネント
+
+**Center** コンポーネントは、子要素を中央に配置するためのFlexboxベースのコンポーネントです。
+
+### 基本的な中央配置
+
+```jsx title="React (Chakra UI)"
+import { Center } from "@chakra-ui/react"
+
+<Center height="200px" bg="gray.100">
+  <Box>中央に配置されたコンテンツ</Box>
+</Center>
+```
+
+```css title="CSS 相当"
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: #f7fafc;
+}
+```
+
+<div style={{ 
+  display: 'flex', 
+  alignItems: 'center', 
+  justifyContent: 'center', 
+  height: '200px', 
+  backgroundColor: '#f7fafc',
+  border: '1px solid #e2e8f0',
+  borderRadius: '8px'
+}}>
+  <div style={{ 
+    padding: '10px 20px', 
+    backgroundColor: '#4299e1', 
+    color: 'white', 
+    borderRadius: '6px' 
+  }}>
+    中央に配置されたコンテンツ
+  </div>
+</div>
+
+### Square（正方形の中央配置）
+
+```jsx title="React (Chakra UI)"
+import { Square } from "@chakra-ui/react"
+
+<Square size="150px" bg="blue.500" color="white">
+  <Box>正方形の中央</Box>
+</Square>
+```
+
+```css title="CSS 相当"
+.square-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  background-color: #3182ce;
+  color: white;
+}
+```
+
+<div style={{ 
+  display: 'flex', 
+  alignItems: 'center', 
+  justifyContent: 'center', 
+  width: '150px', 
+  height: '150px', 
+  backgroundColor: '#3182ce',
+  color: 'white',
+  borderRadius: '8px'
+}}>
+  正方形の中央
+</div>
+
+## FlexとStackの違い
+
+### Flex vs Stack: サイズの扱い
+
+FlexとStackには重要な違いがあります：
+
+- **Flex**: 子要素はコンテナの幅全体を使用する傾向がある
+- **Stack**: 子要素は必要な分だけのスペースを使用する
+
+```jsx title="Flex の場合"
+<Flex gap="4">
+  <Box bg="red.200">短い</Box>
+  <Box bg="green.200">これは長いコンテンツです</Box>
+  <Box bg="blue.200">中程度</Box>
+</Flex>
+```
+
+<FlexContainer style={{ gap: '1rem' }}>
+    <FlexItem style={{ backgroundColor: '#fed7d7', flexGrow: 1 }}>短い</FlexItem>
+    <FlexItem style={{ backgroundColor: '#c6f6d5', flexGrow: 1 }}>これは長いコンテンツです</FlexItem>
+    <FlexItem style={{ backgroundColor: '#bee3f8', flexGrow: 1 }}>中程度</FlexItem>
+</FlexContainer>
+
+```jsx title="HStack の場合"
+<HStack spacing="4">
+  <Box bg="red.200">短い</Box>
+  <Box bg="green.200">これは長いコンテンツです</Box>
+  <Box bg="blue.200">中程度</Box>
+</HStack>
+```
+
+<FlexContainer style={{ gap: '1rem' }}>
+    <FlexItem style={{ backgroundColor: '#fed7d7', flexGrow: 0, flexShrink: 0 }}>短い</FlexItem>
+    <FlexItem style={{ backgroundColor: '#c6f6d5', flexGrow: 0, flexShrink: 0 }}>これは長いコンテンツです</FlexItem>
+    <FlexItem style={{ backgroundColor: '#bee3f8', flexGrow: 0, flexShrink: 0 }}>中程度</FlexItem>
+</FlexContainer>
+
+## 実践的な使用例
+
+### ナビゲーションバー
+
+```jsx title="React (Chakra UI)"
+<Flex as="nav" padding="4" bg="blue.500" color="white">
+  <Box fontSize="xl" fontWeight="bold">ロゴ</Box>
+  <Spacer />
+  <HStack spacing="4">
+    <Link>ホーム</Link>
+    <Link>サービス</Link>
+    <Link>お問い合わせ</Link>
+  </HStack>
+</Flex>
+```
+
+```css title="CSS 相当"
+.navbar {
+  display: flex;
+  padding: 1rem;
+  background-color: #3182ce;
+  color: white;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+```
+
+<div style={{ 
+  display: 'flex', 
+  padding: '1rem', 
+  backgroundColor: '#3182ce', 
+  color: 'white',
+  borderRadius: '8px',
+  marginBottom: '1rem'
+}}>
+  <div style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>ロゴ</div>
+  <div style={{ flexGrow: 1 }}></div>
+  <div style={{ display: 'flex', gap: '1rem' }}>
+    <span>ホーム</span>
+    <span>サービス</span>
+    <span>お問い合わせ</span>
+  </div>
+</div>
+
+### カードレイアウト
+
+```jsx title="React (Chakra UI)"
+<VStack spacing="6">
+  <HStack spacing="4">
+    <Box flex="1" p="4" bg="white" shadow="md" borderRadius="md">
+      <VStack align="start">
+        <Text fontWeight="bold">基本プラン</Text>
+        <Text color="gray.600">月額 ¥1,000</Text>
+      </VStack>
+    </Box>
+    <Box flex="2" p="4" bg="blue.50" shadow="md" borderRadius="md" border="2px solid blue">
+      <VStack align="start">
+        <Text fontWeight="bold">プレミアムプラン</Text>
+        <Text color="gray.600">月額 ¥2,000（推奨）</Text>
+      </VStack>
+    </Box>
+    <Box flex="1" p="4" bg="white" shadow="md" borderRadius="md">
+      <VStack align="start">
+        <Text fontWeight="bold">エンタープライズ</Text>
+        <Text color="gray.600">要お問い合わせ</Text>
+      </VStack>
+    </Box>
+  </HStack>
+</VStack>
+```
+
+<FlexContainer style={{ gap: '1rem' }}>
+    <div style={{
+      flex: '1',
+      padding: '1rem',
+      backgroundColor: '#fff',
+      border: '1px solid #e2e8f0',
+      borderRadius: '8px',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+        <div style={{ fontWeight: 'bold' }}>基本プラン</div>
+        <div style={{ color: '#718096' }}>月額 ¥1,000</div>
+      </div>
+    </div>
+    <div style={{
+      flex: '2',
+      padding: '1rem',
+      backgroundColor: '#ebf8ff',
+      border: '2px solid #3182ce',
+      borderRadius: '8px',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+        <div style={{ fontWeight: 'bold' }}>プレミアムプラン</div>
+        <div style={{ color: '#718096' }}>月額 ¥2,000（推奨）</div>
+      </div>
+    </div>
+    <div style={{
+      flex: '1',
+      padding: '1rem',
+      backgroundColor: '#fff',
+      border: '1px solid #e2e8f0',
+      borderRadius: '8px',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+        <div style={{ fontWeight: 'bold' }}>エンタープライズ</div>
+        <div style={{ color: '#718096' }}>要お問い合わせ</div>
+      </div>
+    </div>
+</FlexContainer>
+
+## まとめ
+
+Chakra UIのFlexboxコンポーネントは、CSS Flexboxの強力な機能をReactコンポーネントとして使いやすくラップしています：
+
+- **Flex**: 汎用的なFlexboxコンテナ、CSS の `display: flex` 相当
+- **Stack/VStack/HStack**: 一方向レイアウト専用、スペーシングが簡単
+- **Spacer**: `flex-grow: 1` の簡潔な表現
+- **Center**: `justify-content: center` と `align-items: center` の組み合わせ
+
+これらのコンポーネントを適切に組み合わせることで、レスポンシブで保守性の高いレイアウトを効率的に構築できます。CSS Flexboxの基礎を理解した上でChakra UIを使用することで、より意図的で予測可能なレイアウト設計が可能になります。
