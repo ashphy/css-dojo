@@ -50,6 +50,11 @@ import { FlexItem } from './components/flex-items';
 **flex-grow** は、フレックスコンテナに余剰スペースがある場合に、アイテムがどれくらい拡大するかを指定するプロパティです。
 値が大きいほど、より多くの余剰スペースを占有します。
 
+![flexbox-grow](./assets/flex-grow.drawio.svg)
+
+フレックスコンテナーに余剰スペースがある場合、これを **正の余白** と呼びます。
+正の余白はフレックスアイテム間で分配され、flex-grow に設定された値で按分された比率で拡大されます。
+
 ```css title="CSS"
 .flex-item {
   flex-grow: 1; /* 他のアイテムと同じ比率で拡大 */
@@ -97,6 +102,11 @@ import { FlexItem } from './components/flex-items';
 
 **flex-shrink** は、フレックスコンテナのスペースが不足している場合に、アイテムがどれくらい縮小するかを指定するプロパティです。
 値が大きいほど、より多く縮小されます。
+
+![flexbox-shrink](./assets/flex-shrink.drawio.svg)
+
+フレックスコンテナからフレックスアイテムがはみ出すとき、はみ出した領域を **負の余白** と呼びます。
+負の余白はフレックスアイテム間で分配され、flex-shrink に設定された値で按分された比率で縮小されます。
 
 ```css title="CSS"
 .flex-item {
