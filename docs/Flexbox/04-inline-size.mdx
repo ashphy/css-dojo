@@ -1,6 +1,5 @@
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
-import { FlexItemFixed } from './components/flex-items-fixed';
 
 # フレックスアイテムのサイズ
 
@@ -31,9 +30,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 コンテンツのサイズに基づいてサイズが決まります。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>短いテキスト</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>これは長いテキストコンテンツです</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0 }}>中程度</FlexItemFixed>
+    <FlexItem style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0, width: "auto" }}>短いテキスト</FlexItem>
+    <FlexItem style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0, width: "auto" }}>これは長いテキストコンテンツです</FlexItem>
+    <FlexItem style={{ flexBasis: 'auto', flexGrow: 0, flexShrink: 0, width: "auto" }}>中程度</FlexItem>
 </FlexContainer>
 
 #### 固定サイズ
@@ -41,9 +40,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 具体的なサイズを指定した場合：
 
 <FlexContainer>
-    <FlexItemFixed style={{ flexBasis: '100px', flexGrow: 0, flexShrink: 0 }}>100px</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '200px', flexGrow: 0, flexShrink: 0 }}>200px</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '150px', flexGrow: 0, flexShrink: 0 }}>150px</FlexItemFixed>
+    <FlexItem style={{ flexBasis: '100px', flexGrow: 0, flexShrink: 0, width: "auto" }}>100px</FlexItem>
+    <FlexItem style={{ flexBasis: '200px', flexGrow: 0, flexShrink: 0, width: "auto" }}>200px</FlexItem>
+    <FlexItem style={{ flexBasis: '150px', flexGrow: 0, flexShrink: 0, width: "auto" }}>150px</FlexItem>
 </FlexContainer>
 
 ## flex-grow
@@ -69,9 +68,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 すべてのアイテムに `flex-grow: 1` を設定すると、等しく拡大します。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
 </FlexContainer>
 
 #### 異なる値
@@ -79,9 +78,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 異なる `flex-grow` 値を設定すると、比率に応じて拡大します。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 2, flexBasis: '50px' }}>flex-grow: 2</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
+    <FlexItem style={{ flexGrow: 2, flexBasis: '50px' }}>flex-grow: 2</FlexItem>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
 </FlexContainer>
 
 #### 拡大しない要素
@@ -89,9 +88,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 `flex-grow: 0` のアイテムは拡大せず、他のアイテムが余剰スペースを占有します。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flexGrow: 0, flexBasis: '100px' }}>flex-grow: 0</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItemFixed>
+    <FlexItem style={{ flexGrow: 0, flexBasis: '100px' }}>flex-grow: 0</FlexItem>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
+    <FlexItem style={{ flexGrow: 1, flexBasis: '50px' }}>flex-grow: 1</FlexItem>
 </FlexContainer>
 
 ## flex-shrink
@@ -118,9 +117,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 コンテナが狭い場合、アイテムは縮小されます。
 
 <FlexContainer style={{ width: '300px' }}>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
 </FlexContainer>
 
 #### 縮小しない要素
@@ -128,9 +127,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 `flex-shrink: 0` のアイテムは縮小せず、固定サイズを保ちます。
 
 <FlexContainer style={{ width: '300px' }}>
-    <FlexItemFixed style={{ flexShrink: 0, flexBasis: '120px' }}>flex-shrink: 0</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItem style={{ flexShrink: 0, flexBasis: '120px' }}>flex-shrink: 0</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '120px' }}>flex-shrink: 1</FlexItem>
 </FlexContainer>
 
 #### 異なる縮小率
@@ -138,14 +137,23 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 異なる `flex-shrink` 値を設定すると、比率に応じて縮小します。
 
 <FlexContainer style={{ width: '300px' }}>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 3, flexBasis: '150px' }}>flex-shrink: 3</FlexItemFixed>
-    <FlexItemFixed style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItemFixed>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
+    <FlexItem style={{ flexShrink: 3, flexBasis: '150px' }}>flex-shrink: 3</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
 </FlexContainer>
 
 ## flex ショートハンド
 
 `flex` プロパティは、`flex-grow`、`flex-shrink`、`flex-basis` をまとめて指定できるショートハンドプロパティです。
+flex プロパティは 1 つ、2 つ、3 つの値を取ることができます。
+
+```css
+flex: <flex-grow> <flex-shrink> <flex-basis>;
+```
+
+:::info メモ
+ flexによる一括指定を使用する方が、個別に flex-grow、flex-shrink、flex-basis の宣言を使用するよりも推奨されています。
+:::
 
 ```css title="CSS"
 .flex-item {
@@ -153,13 +161,24 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 }
 ```
 
+- 1 つの値の場合: 値は以下のうちの 1 つです。
+  - `flex-grow` として有効な値の場合、すべてのブラウザーで、この一括指定は flex: `<flex-grow> 1 0%` と展開されます。ただし、仕様書では flex: `<flex-grow> 1 0` と展開すべきであるとしています。
+  - `flex-basis` として有効な値の場合、一括指定は `flex: 1 1 <flex-basis>` と展開されます。
+- 2 つの値の場合:
+  - 1つめの値は `flex-grow`
+  - 2つめの値は
+    - `flex-shrink` として有効な値の場合、この一括指定は `flex: <flex-grow> <flex-shrink> 0%` と展開されます。
+    - `flex-basis` として有効な値の場合、この一括指定は `flex: <flex-grow> 1 <flex-basis>` と展開されます。
+- 3 つの値の場合:
+  - `flex: <flex-grow> <flex-shrink> <flex-basis>;`（例: `flex: 1 1 0%;`）
+
 ### よく使用される flex の値
 
 #### flex: 1
 
 `flex: 1` は `flex: 1 1 0%` の省略形で、等しく拡大・縮小するアイテムを作成します。
 
-:::info 仕様とブラウザ実装の違い
+:::warning 仕様とブラウザ実装の違い
 実は、`flex: 1` の動作には仕様とブラウザ実装で微妙な違いがあります：
 
 - **CSS仕様上**: `flex: 1` は `flex: 1 1 0` に展開されるべき
@@ -169,9 +188,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 :::
 
 <FlexContainer>
-    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+    <FlexItem style={{ flex: '1' }}>flex: 1</FlexItem>
+    <FlexItem style={{ flex: '1' }}>flex: 1</FlexItem>
+    <FlexItem style={{ flex: '1' }}>flex: 1</FlexItem>
 </FlexContainer>
 
 #### flex: auto
@@ -179,9 +198,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 `flex: auto` は `flex: 1 1 auto` の省略形で、コンテンツサイズを基準に拡大・縮小します。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flex: 'auto' }}>短い</FlexItemFixed>
-    <FlexItemFixed style={{ flex: 'auto' }}>これは長いコンテンツです</FlexItemFixed>
-    <FlexItemFixed style={{ flex: 'auto' }}>中程度</FlexItemFixed>
+    <FlexItem style={{ flex: 'auto' }}>短い</FlexItem>
+    <FlexItem style={{ flex: 'auto' }}>これは長いコンテンツです</FlexItem>
+    <FlexItem style={{ flex: 'auto' }}>中程度です</FlexItem>
 </FlexContainer>
 
 #### flex: none
@@ -189,9 +208,9 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 `flex: none` は `flex: 0 0 auto` の省略形で、拡大も縮小もしません。
 
 <FlexContainer>
-    <FlexItemFixed style={{ flex: 'none' }}>flex: none</FlexItemFixed>
-    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
-    <FlexItemFixed style={{ flex: '1' }}>flex: 1</FlexItemFixed>
+    <FlexItem style={{ flex: 'none' }}>flex: none</FlexItem>
+    <FlexItem style={{ flex: '1' }}>flex: 1</FlexItem>
+    <FlexItem style={{ flex: '1' }}>flex: 1</FlexItem>
 </FlexContainer>
 
 ## flex-basis: 0 と 0% の違い
@@ -219,64 +238,18 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 <div style={{ marginBottom: '20px' }}>
 <h4>flex-basis: 0 を使用</h4>
 <FlexContainer style={{ width: '400px' }}>
-    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 2 }}>flex-basis: 0 (grow: 2)</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItemFixed>
+    <FlexItem style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItem>
+    <FlexItem style={{ flexBasis: '0', flexGrow: 2 }}>flex-basis: 0 (grow: 2)</FlexItem>
+    <FlexItem style={{ flexBasis: '0', flexGrow: 1 }}>flex-basis: 0</FlexItem>
 </FlexContainer>
 
 <h4>flex-basis: 0% を使用</h4>
 <FlexContainer style={{ width: '400px' }}>
-    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 2 }}>flex-basis: 0% (grow: 2)</FlexItemFixed>
-    <FlexItemFixed style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItemFixed>
+    <FlexItem style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItem>
+    <FlexItem style={{ flexBasis: '0%', flexGrow: 2 }}>flex-basis: 0% (grow: 2)</FlexItem>
+    <FlexItem style={{ flexBasis: '0%', flexGrow: 1 }}>flex-basis: 0%</FlexItem>
 </FlexContainer>
 </div>
-
-### なぜブラウザは 0% を採用するのか
-
-ブラウザが仕様と異なり `0%` を採用する理由は、より予測可能で一貫した動作を提供するためです：
-
-```css title="CSS"
-/* ブラウザ実装: flex: 1 のショートハンドは実際には以下と同等 */
-.flex-item {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0%; /* ブラウザは 0% を使用 */
-}
-
-/* CSS仕様: 本来は以下であるべき */
-.flex-item-spec {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0; /* 仕様では 0 */
-}
-```
-
-この実装の違いは、特にコンテナのサイズが不確定な場合に影響を与える可能性があります。
-
-### 推奨される使い方
-
-異なるブラウザやコンテキストでの一貫した動作を保証するため：
-
-**推奨事項:**
-- `flex: 1`, `flex: 2` などのショートハンドを使用
-- 直接 `flex-basis` を指定する場合は `0%` を使用
-- 古いブラウザ対応が必要な場合は十分なテストを実施
-
-```css title="CSS"
-/* 良い例 */
-.equal-width-items {
-  flex: 1; /* 標準的で予測可能 */
-}
-
-/* 避けるべき例 */
-.manual-specification {
-  flex-basis: 0;  /* 予期しない動作の可能性 */
-  flex-grow: 1;
-}
-```
-
-この違いを理解することで、より堅牢で予測可能なFlexboxレイアウトを作成できます。
 
 ## 実用例
 

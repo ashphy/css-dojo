@@ -1,4 +1,9 @@
-export function FlexItem({ children }: { children?: React.ReactNode }) {
+interface FlexItemProps {
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+export function FlexItem({ children, style }: FlexItemProps) {
   return (
     <div
       style={{
@@ -9,6 +14,7 @@ export function FlexItem({ children }: { children?: React.ReactNode }) {
         borderRadius: "4px",
         textAlign: "center",
         margin: 0,
+        ...style,
       }}
     >
       {children}
