@@ -1,17 +1,13 @@
-import { AlignSelfDemo, AlignSelfExample, AlignSelfExamples } from './components/align-self-demo';
+import { AlignSelfDemo, AlignSelfExample } from './components/align-self-demo';
 import { FlexContainer } from './components/flex-container';
 import { FlexItemFixed } from './components/flex-items-fixed';
+import { FlexItem } from './components/flex-items';
 
 # 個別アイテムの配置
 
 **align-self** プロパティは、特定のフレックスアイテムの交差軸方向の配置を個別に制御するプロパティです。
 
 このプロパティを使用することで、親コンテナの `align-items` の設定を上書きして、特定のアイテムだけ異なる配置にすることができます。
-
-## align-items との関係
-
-- **align-items**: コンテナ内のすべてのアイテムに適用される配置
-- **align-self**: 特定のアイテムにのみ適用される配置（align-items を上書き）
 
 ### 基本例
 
@@ -23,19 +19,19 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 }
 
 .special-item {
-  align-self: center; /* この要素だけ中央配置 */
+  align-self: flex-end; /* この要素だけ下端に配置 */
 }
 ```
 
-<FlexContainer style={{ alignItems: 'flex-start', height: '150px' }}>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 1</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto', alignSelf: 'center' }}>特別なアイテム<br/>(align-self: center)</FlexItemFixed>
-    <FlexItemFixed style={{ height: 'auto' }}>アイテム 3</FlexItemFixed>
+<FlexContainer style={{ alignItems: 'flex-start', height: '200px' }}>
+    <FlexItem>アイテム 1</FlexItem>
+    <FlexItem style={{ alignSelf: 'flex-end' }}>特別なアイテム<br/>(align-self: flex-end)</FlexItem>
+    <FlexItem>アイテム 3</FlexItem>
 </FlexContainer>
 
 ## align-self の値
 
-align-self プロパティは以下の値を取ることができます：
+align-self プロパティは以下の値を取ることができます
 
 ### auto（デフォルト）
 
@@ -140,7 +136,7 @@ align-self プロパティは以下の値を取ることができます：
       fontWeight: 'bold',
     }}
   >
-    MyLogo
+    <p style={{ margin: 0 }}>MyLogo</p>
   </div>
   <nav
     style={{
@@ -215,284 +211,8 @@ align-self プロパティは以下の値を取ることができます：
   </div>
 </div>
 
-### フォームのボタン配置
-
-フォーム内で、送信ボタンだけを右端に配置し、他の要素は左揃えにする場合：
-
-```css title="CSS"
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.form-group {
-  /* align-items: flex-start を継承 */
-}
-
-.submit-button {
-  align-self: flex-end; /* 送信ボタンのみ右端に配置 */
-}
-```
-
-<div
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    gap: '15px',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: '#f8f9fa',
-    width: '300px',
-  }}
->
-  <div>
-    <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', fontWeight: 'bold' }}>
-      お名前:
-    </label>
-    <input
-      type="text"
-      style={{
-        width: '200px',
-        padding: '8px 12px',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        backgroundColor: 'white',
-      }}
-    />
-  </div>
-  <div>
-    <label style={{ display: 'block', marginBottom: '5px', fontSize: '14px', fontWeight: 'bold' }}>
-      メールアドレス:
-    </label>
-    <input
-      type="email"
-      style={{
-        width: '200px',
-        padding: '8px 12px',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        backgroundColor: 'white',
-      }}
-    />
-  </div>
-  <button
-    style={{
-      alignSelf: 'flex-end',
-      padding: '10px 20px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      border: 'none',
-      borderRadius: '4px',
-      fontSize: '14px',
-      cursor: 'pointer',
-    }}
-  >
-    送信
-  </button>
-</div>
-
-### アバター付きメッセージ
-
-チャットアプリなどで、アバターだけを上端に固定し、メッセージ内容は中央揃えにする場合：
-
-```css title="CSS"
-.message {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px;
-}
-
-.avatar {
-  align-self: flex-start; /* アバターは上端に固定 */
-  width: 40px;
-  height: 40px;
-}
-
-.message-content {
-  /* align-items: center を継承 */
-}
-```
-
-<div
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    gap: '15px',
-    padding: '15px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    backgroundColor: 'white',
-    marginBottom: '10px',
-  }}
->
-  <div
-    style={{
-      alignSelf: 'flex-start',
-      width: '40px',
-      height: '40px',
-      backgroundColor: '#007bff',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      fontSize: '16px',
-      fontWeight: 'bold',
-    }}
-  >
-    A
-  </div>
-  <div>
-    <p style={{ margin: '0 0 5px 0', fontWeight: 'bold', fontSize: '14px', color: "black" }}>
-      Alice
-    </p>
-    <p style={{ margin: 0, color: '#666', fontSize: '14px', lineHeight: '1.4' }}>
-      こんにちは！今日の会議についてですが、<br />
-      資料の準備はいかがでしょうか？
-    </p>
-  </div>
-</div>
-
-## baseline の詳細
-
-`align-self: baseline` は、異なるフォントサイズやpadding を持つ要素のテキストベースラインを揃える際に特に有用です：
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  align-items: flex-start;
-}
-
-.item-small,
-.item-large {
-  align-self: baseline;
-}
-```
-
-<FlexContainer style={{ alignItems: 'flex-start', height: '100px' }}>
-  <div
-    style={{
-      alignSelf: 'baseline',
-      padding: '5px 10px',
-      backgroundColor: '#007bff',
-      color: 'white',
-      borderRadius: '4px',
-      fontSize: '14px',
-    }}
-  >
-    小さいテキスト
-  </div>
-  <div
-    style={{
-      alignSelf: 'baseline',
-      padding: '10px 15px',
-      backgroundColor: '#28a745',
-      color: 'white',
-      borderRadius: '4px',
-      fontSize: '24px',
-    }}
-  >
-    大きいテキスト
-  </div>
-  <div
-    style={{
-      alignSelf: 'baseline',
-      padding: '8px 12px',
-      backgroundColor: '#dc3545',
-      color: 'white',
-      borderRadius: '4px',
-      fontSize: '18px',
-    }}
-  >
-    中サイズ
-  </div>
-</FlexContainer>
-
-## flex-direction との関係
-
-`align-self` の効果は、`flex-direction` の値によって変わります：
-
-### flex-direction: row の場合
-
-```css title="CSS"
-.flex-container {
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.special-item {
-  align-self: center; /* 垂直方向（上下）の中央に配置 */
-}
-```
-
-### flex-direction: column の場合
-
-```css title="CSS"
-.flex-container {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.special-item {
-  align-self: center; /* 水平方向（左右）の中央に配置 */
-}
-```
-
-<FlexContainer direction="column" style={{ alignItems: 'flex-start', height: '200px', width: '200px' }}>
-  <FlexItemFixed style={{ width: 'auto' }}>アイテム 1</FlexItemFixed>
-  <FlexItemFixed style={{ width: 'auto', alignSelf: 'center' }}>中央配置</FlexItemFixed>
-  <FlexItemFixed style={{ width: 'auto' }}>アイテム 3</FlexItemFixed>
-</FlexContainer>
-
 ## 試してみよう
 
-以下のインタラクティブなデモで、各アイテムの `align-self` を個別に設定して動作を確認してみてください：
+各アイテムの `align-self` を個別に設定して動作を確認してみましょう。
 
 <AlignSelfDemo />
-
-## さまざまなパターン
-
-<AlignSelfExamples />
-
-## 注意点とベストプラクティス
-
-### 1. 過度な使用は避ける
-
-すべてのアイテムに異なる `align-self` を設定すると、レイアウトが複雑になり保守性が下がります。基本的には `align-items` でコンテナ全体の配置を決め、例外的なアイテムのみ `align-self` を使用しましょう。
-
-### 2. レスポンシブデザインでの考慮
-
-メディアクエリと組み合わせて、画面サイズに応じて `align-self` の値を変更することで、より柔軟なレスポンシブレイアウトを作成できます：
-
-```css title="CSS"
-.special-item {
-  align-self: flex-start;
-}
-
-@media (min-width: 768px) {
-  .special-item {
-    align-self: center;
-  }
-}
-```
-
-### 3. アクセシビリティへの配慮
-
-視覚的な順序を変更する際は、論理的な順序（HTML の順序）も考慮し、スクリーンリーダーユーザーにとって理解しやすい構造を保ちましょう。
-
-## まとめ
-
-- **align-self** は個別のフレックスアイテムの交差軸方向の配置を制御
-- 親の **align-items** をオーバーライドして例外的な配置を実現
-- **auto**、**flex-start**、**flex-end**、**center**、**baseline**、**stretch** の6つの値
-- ナビゲーション、カード、フォームなど様々な実用的レイアウトで活用
-- **flex-direction** の値により配置方向が変わることに注意
-- 過度な使用は避け、保守性とアクセシビリティを考慮して使用
-
-`align-self` を理解することで、Flexbox の配置制御がより柔軟になり、デザインの細かな要求に応えられるようになります。
