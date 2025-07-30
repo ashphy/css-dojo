@@ -1,0 +1,288 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItemFixed } from './components/flex-items-fixed';
+
+# 開発者ツールでのデバッグ
+
+Flexboxレイアウトの問題をデバッグする際、ブラウザの開発者ツールは必須のツールです。
+2025年現在、主要ブラウザはすべて専用のFlexboxデバッグ機能を提供しており、
+視覚的にレイアウトを理解・修正することが可能です。
+
+## Chrome DevToolsでのFlexboxデバッグ
+
+### Flexboxバッジの活用
+
+ChromeのElements パネルでは、`display: flex` や `display: inline-flex` が適用された要素の横に
+**「flex」バッジ**が表示されます。
+
+<div style={{ 
+  padding: '20px', 
+  border: '2px solid #4285f4', 
+  borderRadius: '8px', 
+  backgroundColor: '#f8f9fa',
+  color: '#333',
+  marginBottom: '20px'
+}}>
+  💡 **ポイント**: バッジをクリックすると、Flexboxオーバーレイの表示を切り替えできます
+</div>
+
+### 視覚的オーバーレイ機能
+
+ChromeのFlexboxオーバーレイは以下の要素を視覚化します：
+
+- **コンテナの境界**: 点線でフレックスコンテナを表示
+- **アイテムの位置**: 各フレックスアイテムの配置
+- **フリースペース**: `justify-content` による余白の分布
+- **軸の方向**: メイン軸とクロス軸の向き
+
+<FlexContainer style={{ 
+  justifyContent: 'space-between', 
+  alignItems: 'center', 
+  height: '120px',
+  backgroundColor: '#e3f2fd',
+  border: '2px dashed #1976d2',
+  position: 'relative'
+}}>
+  <FlexItemFixed style={{ 
+    width: '80px', 
+    height: '60px',
+    backgroundColor: '#2196f3',
+    color: 'white'
+  }}>Item 1</FlexItemFixed>
+  <FlexItemFixed style={{ 
+    width: '80px', 
+    height: '60px',
+    backgroundColor: '#2196f3',
+    color: 'white'
+  }}>Item 2</FlexItemFixed>
+  <FlexItemFixed style={{ 
+    width: '80px', 
+    height: '60px',
+    backgroundColor: '#2196f3',
+    color: 'white'
+  }}>Item 3</FlexItemFixed>
+  <div style={{
+    position: 'absolute',
+    top: '-10px',
+    left: '10px',
+    backgroundColor: '#ff9800',
+    color: 'white',
+    padding: '2px 8px',
+    borderRadius: '4px',
+    fontSize: '12px',
+    fontWeight: 'bold'
+  }}>
+    flex container
+  </div>
+</FlexContainer>
+
+### Flexboxエディター
+
+Stylesパネルの `display: flex` 宣言の横にあるアイコンをクリックすると、
+**Flexboxエディター**が開きます。
+
+#### エディターの主な機能：
+
+1. **justify-content**: 水平方向の配置をアイコンで選択
+2. **align-items**: 垂直方向の配置をアイコンで選択  
+3. **flex-direction**: 軸の方向をクリックで変更
+4. **flex-wrap**: 折り返しの設定を切り替え
+
+```css title="エディターから適用される例"
+.flex-container {
+  display: flex;
+  justify-content: center;    /* エディターで選択 */
+  align-items: center;        /* エディターで選択 */
+  flex-direction: row;        /* エディターで選択 */
+  flex-wrap: nowrap;          /* エディターで選択 */
+}
+```
+
+### Layoutパネルの活用
+
+DevToolsの**Layout**パネル（Stylesの隣）には**Flexbox**セクションがあり、
+ページ内のすべてのFlexboxコンテナを一覧表示します。
+
+<div style={{ 
+  backgroundColor: '#fff3e0',
+  border: '1px solid #ff9800',
+  borderRadius: '8px',
+  padding: '16px',
+  color: '#333',
+  marginBottom: '20px'
+}}>
+  📋 **Layout パネルでできること**:
+  <ul style={{ marginBottom: 0 }}>
+    <li>全Flexboxコンテナの一覧表示</li>
+    <li>個別オーバーレイの表示切り替え</li>
+    <li>オーバーレイ色のカスタマイズ</li>
+    <li>DOMツリー内の要素への自動ジャンプ</li>
+  </ul>
+</div>
+
+## Firefox Developer ToolsでのFlexboxデバッグ
+
+### Flexboxインスペクター
+
+Firefoxは**Flexboxインスペクター**として、最も高機能なFlexboxデバッグツールを提供しています。
+
+#### 主な特徴：
+
+1. **高度な視覚化**: アイテムのサイズ決定プロセスを詳細表示
+2. **フリースペースの表現**: 斜線パターンで余白を明示
+3. **flex-basis/grow/shrink の視覚化**: サイズ計算の内訳を表示
+4. **子要素の詳細情報**: 各アイテムの計算値とプロパティ
+
+### オーバーレイの特徴
+
+FirefoxのFlexboxオーバーレイは以下の要素を区別して表示します：
+
+- **コンテナ**: 点線の枠
+- **アイテム**: 実線の枠  
+- **フリースペース**: 斜線パターン
+- **ベースライン**: アイテム間の基準線
+
+<div style={{
+  backgroundColor: '#f3e5f5',
+  border: '2px dashed #9c27b0',
+  borderRadius: '8px',
+  padding: '20px',
+  color: '#333',
+  marginBottom: '20px'
+}}>
+  <div style={{
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height: '80px',
+    backgroundColor: 'rgba(156, 39, 176, 0.1)',
+    position: 'relative'
+  }}>
+    <div style={{ 
+      width: '60px', 
+      height: '40px', 
+      backgroundColor: '#9c27b0',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>A</div>
+    <div style={{
+      width: '60px',
+      background: 'repeating-linear-gradient(45deg, #e1bee7, #e1bee7 4px, transparent 4px, transparent 8px)',
+      height: '20px'
+    }}></div>
+    <div style={{ 
+      width: '60px', 
+      height: '40px', 
+      backgroundColor: '#9c27b0',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>B</div>
+  </div>
+  <div style={{
+    textAlign: 'center',
+    marginTop: '10px',
+    fontSize: '14px',
+    fontWeight: 'bold'
+  }}>
+    Firefoxのフリースペース視覚化（斜線パターン）
+  </div>
+</div>
+
+### Layoutパネルでの詳細情報
+
+FirefoxのLayoutパネルでは、選択されたFlexboxコンテナに対して：
+
+1. **Flex Container情報**: 方向、折り返し設定
+2. **Flex Items一覧**: 各アイテムの計算値
+3. **サイズ決定の詳細**: basis → grow/shrink → final size
+
+## 実践的なデバッグワークフロー
+
+### 1. 問題の特定段階
+
+```css title="デバッグ用の一時的なスタイル"
+.flex-container {
+  border: 3px solid red !important;
+  background-color: rgba(255, 0, 0, 0.1) !important;
+}
+
+.flex-item {
+  border: 2px solid blue !important;
+  background-color: rgba(0, 0, 255, 0.1) !important;
+  min-height: 20px !important;
+}
+```
+
+### 2. 開発者ツールでの確認手順
+
+1. **Elements パネル**でFlexboxバッジを確認
+2. **オーバーレイ表示**でレイアウト構造を視覚化
+3. **Computed スタイル**で実際の計算値を確認
+4. **Layout パネル**で全体的な構造を把握
+
+### 3. よくあるデバッグシナリオ
+
+#### シナリオ1: アイテムが中央に配置されない
+
+<FlexContainer style={{ 
+  justifyContent: 'flex-start',  // 問題のある設定
+  alignItems: 'flex-start',
+  height: '100px',
+  backgroundColor: '#ffebee',
+  border: '2px solid #f44336'
+}}>
+  <FlexItemFixed style={{ 
+    width: '80px', 
+    height: '40px',
+    backgroundColor: '#f44336',
+    color: 'white'
+  }}>未中央</FlexItemFixed>
+</FlexContainer>
+
+**デバッグ手順**:
+1. オーバーレイでコンテナとアイテムの位置関係を確認
+2. `justify-content` と `align-items` の値をFlexboxエディターで調整
+3. 期待する配置になるまで値を変更
+
+<FlexContainer style={{ 
+  justifyContent: 'center',  // 修正後
+  alignItems: 'center',
+  height: '100px',
+  backgroundColor: '#e8f5e8',
+  border: '2px solid #4caf50'
+}}>
+  <FlexItemFixed style={{ 
+    width: '80px', 
+    height: '40px',
+    backgroundColor: '#4caf50',
+    color: 'white'
+  }}>中央配置</FlexItemFixed>
+</FlexContainer>
+
+#### シナリオ2: アイテムサイズが予期しない
+
+```css title="問題のあるCSS"
+.flex-item {
+  flex: 1;           /* すべて同サイズになる */
+  width: 200px;      /* 無視される */
+}
+```
+
+**デバッグ手順**:
+1. Computedスタイルで実際の `flex-grow`, `flex-shrink`, `flex-basis` を確認
+2. Layoutパネルでアイテムのサイズ計算過程を確認
+3. 必要に応じて `flex: none` や具体的な値に変更
+
+```css title="修正したCSS"
+.flex-item {
+  flex: 0 0 200px;   /* 固定サイズ */
+  /* または */
+  width: 200px;
+  flex: none;        /* flex: 0 0 auto と同じ */
+}
+```
