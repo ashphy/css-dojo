@@ -1,16 +1,15 @@
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
 import { FlexItemFixed } from './components/flex-items-fixed';
-import { FlexAlignDemo, FlexAlignExamples } from './components/flex-align-demo';
+import { FlexAlignDemo } from './components/flex-align-demo';
 
 # フレックスボックスの配置制御
 
 フレックスボックスの配置制御は、**justify-content** と **align-items** の2つの主要なプロパティによって行われます。
-これらのプロパティを理解することで、アイテムを自在に配置できるようになります。
 
 ## 軸と配置の関係
 
-フレックスボックスでは、配置を制御する際に**主軸（main axis）**と**交差軸（cross axis）**を意識することが重要です。
+フレックスボックスでは、配置を制御する際に**主軸（main axis）** と **交差軸（cross axis）** を意識することが重要です。
 
 - **justify-content**: 主軸方向（通常は水平方向）のアイテム配置を制御
 - **align-items**: 交差軸方向（通常は垂直方向）のアイテム配置を制御
@@ -488,12 +487,6 @@ justify-content と align-items を組み合わせることで、様々な配置
 以下のインタラクティブなデモで、justify-content と align-items の組み合わせを試してみてください：
 
 <FlexAlignDemo />
-
-## 各プロパティ値の一覧
-
-すべての値を確認して、違いを理解しましょう：
-
-<FlexAlignExamples />
 
 ## まとめ
 
