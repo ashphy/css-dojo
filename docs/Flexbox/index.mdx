@@ -25,8 +25,14 @@ import { FlexItem } from './components/flex-items';
 
 以下のようなレイアウトを簡単に実現できます。
 
-<FlexContainer>
+<FlexContainer style={{ margin: '20px' }}>
     <FlexItem>Item 1</FlexItem>
     <FlexItem>Item 2</FlexItem>
     <FlexItem>Item 3</FlexItem>
 </FlexContainer>
+
+:::tip
+
+初期の頃にCSSを学んだ人は float プロパティを段組みに使っていたかもしれませんが、Flexboxではそのほとんどを置き換えることができます。
+floatでしか作れないレイアウトは画像の回り込みなどの特殊なケースのみです。忘れましょう。
+:::
