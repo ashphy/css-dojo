@@ -33,94 +33,96 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 
 ### 比較例
 
-<div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>
-  <div>
-    <h4>width を使用した場合</h4>
-    <FlexContainer style={{ gap: '10px' }}>
-      <div style={{
-        width: '100px',
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        width: 100px
-      </div>
-      <div style={{
-        width: '200px',
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        width: 200px
-      </div>
-      <div style={{
-        width: '100px',
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',  
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        width: 100px
-      </div>
-    </FlexContainer>
-  </div>
+{
+  <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>
+    <div>
+      <h4>width を使用した場合</h4>
+      <FlexContainer style={{ gap: '10px' }}>
+        <div style={{
+          width: '100px',
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          width: 100px
+        </div>
+        <div style={{
+          width: '200px',
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          width: 200px
+        </div>
+        <div style={{
+          width: '100px',
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          width: 100px
+        </div>
+      </FlexContainer>
+    </div>
 
-  <div>
-    <h4>flex-basis + flex-grow を使用した場合</h4>
-    <FlexContainer style={{ gap: '10px' }}>
-      <div style={{
-        flexBasis: '100px',
-        flexGrow: 1,
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex-basis: 100px<br/>flex-grow: 1
-      </div>
-      <div style={{
-        flexBasis: '200px',
-        flexGrow: 1,
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex-basis: 200px<br/>flex-grow: 1
-      </div>
-      <div style={{
-        flexBasis: '100px',
-        flexGrow: 1,
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex-basis: 100px<br/>flex-grow: 1
-      </div>
-    </FlexContainer>
+    <div>
+      <h4>flex-basis + flex-grow を使用した場合</h4>
+      <FlexContainer style={{ gap: '10px' }}>
+        <div style={{
+          flexBasis: '100px',
+          flexGrow: 1,
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex-basis: 100px<br />flex-grow: 1
+        </div>
+        <div style={{
+          flexBasis: '200px',
+          flexGrow: 1,
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex-basis: 200px<br />flex-grow: 1
+        </div>
+        <div style={{
+          flexBasis: '100px',
+          flexGrow: 1,
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex-basis: 100px<br />flex-grow: 1
+        </div>
+      </FlexContainer>
+    </div>
   </div>
-</div>
+}
 
 ## min-width と max-width の影響
 
@@ -137,94 +139,96 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 }
 ```
 
-<div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>  
-  <div>
-    <h4>min-width なし（コンテナ幅: 300px）</h4>
-    <FlexContainer style={{ width: '300px', gap: '10px' }}>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-    </FlexContainer>
-  </div>
+{
+  <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>  
+    <div>
+      <h4>min-width なし（コンテナ幅: 300px）</h4>
+      <FlexContainer style={{ width: '300px', gap: '10px' }}>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+      </FlexContainer>
+    </div>
 
-  <div>
-    <h4>min-width: 120px あり（コンテナ幅: 300px）</h4>
-    <FlexContainer style={{ width: '300px', gap: '10px' }}>
-      <div style={{
-        flex: 1,
-        minWidth: '120px',
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1<br/>min-width: 120px
-      </div>
-      <div style={{
-        flex: 1,
-        minWidth: '120px',
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1<br/>min-width: 120px
-      </div>
-      <div style={{
-        flex: 1,
-        minWidth: '120px',
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1<br/>min-width: 120px
-      </div>
-    </FlexContainer>
+    <div>
+      <h4>min-width: 120px あり（コンテナ幅: 300px）</h4>
+      <FlexContainer style={{ width: '300px', gap: '10px' }}>
+        <div style={{
+          flex: 1,
+          minWidth: '120px',
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1<br/>min-width: 120px
+        </div>
+        <div style={{
+          flex: 1,
+          minWidth: '120px',
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1<br/>min-width: 120px
+        </div>
+        <div style={{
+          flex: 1,
+          minWidth: '120px',
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1<br/>min-width: 120px
+        </div>
+      </FlexContainer>
+    </div>
   </div>
-</div>
+}
 
 ### max-width の効果
 
@@ -237,92 +241,94 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 }
 ```
 
-<div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>
-  <div>
-    <h4>max-width なし</h4>
-    <FlexContainer style={{ gap: '10px' }}>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-      <div style={{
-        flex: 3,
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 3（大きく拡大）
-      </div>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-    </FlexContainer>
-  </div>
+{
+  <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px', '& > p': { margin: '0' } }}>
+    <div>
+      <h4>max-width なし</h4>
+      <FlexContainer style={{ gap: '10px' }}>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+        <div style={{
+          flex: 3,
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 3（大きく拡大）
+        </div>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+      </FlexContainer>
+    </div>
 
-  <div>
-    <h4>中央のアイテムに max-width: 250px</h4>
-    <FlexContainer style={{ gap: '10px' }}>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#007bff',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-      <div style={{
-        flex: 3,
-        maxWidth: '250px',
-        height: '50px',
-        backgroundColor: '#28a745',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 3<br/>max-width: 250px
-      </div>
-      <div style={{
-        flex: 1,
-        height: '50px',
-        backgroundColor: '#dc3545',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '12px'
-      }}>
-        flex: 1
-      </div>
-    </FlexContainer>
+    <div>
+      <h4>中央のアイテムに max-width: 250px</h4>
+      <FlexContainer style={{ gap: '10px' }}>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+        <div style={{
+          flex: 3,
+          maxWidth: '250px',
+          height: '50px',
+          backgroundColor: '#28a745',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 3<br/>max-width: 250px
+        </div>
+        <div style={{
+          flex: 1,
+          height: '50px',
+          backgroundColor: '#dc3545',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '12px'
+        }}>
+          flex: 1
+        </div>
+      </FlexContainer>
+    </div>
   </div>
-</div>
+}
 
 ## Flexboxの計算ロジック
 
@@ -385,63 +391,65 @@ Flexboxのサイズ計算は以下の段階で行われます：
    - item2: 200px + (100px × 2/4) = 250px（max-width: 300px 内）
    - item3: 100px + (100px × 1/4) = 125px（min-width: 120px 以上）
 
-<FlexContainer style={{ width: '500px', gap: '0' }}>
-  <div style={{
-    flexBasis: '100px',
-    flexGrow: 1,
-    flexShrink: 1,
-    height: '100px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '11px',
-    textAlign: 'center'
-  }}>
-    flex-basis: 100px<br/>
-    flex-grow: 1<br/>
-    → 125px
-  </div>
-  <div style={{
-    flexBasis: '200px',
-    flexGrow: 2,
-    flexShrink: 1,
-    maxWidth: '300px',
-    height: '100px',
-    backgroundColor: '#28a745',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '11px',
-    textAlign: 'center'
-  }}>
-    flex-basis: 200px<br/>
-    flex-grow: 2<br/>
-    max-width: 300px<br/>
-    → 250px
-  </div>
-  <div style={{
-    flexBasis: '100px',
-    flexGrow: 1,
-    flexShrink: 1,
-    minWidth: '120px',
-    height: '100px',
-    backgroundColor: '#dc3545',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '11px',
-    textAlign: 'center'
-  }}>
-    flex-basis: 100px<br/>
-    flex-grow: 1<br/>
-    min-width: 120px<br/>
-    → 125px
-  </div>
-</FlexContainer>
+{
+  <FlexContainer style={{ width: '500px', gap: '0' }}>
+    <div style={{
+      flexBasis: '100px',
+      flexGrow: 1,
+      flexShrink: 1,
+      height: '100px',
+      backgroundColor: '#007bff',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '11px',
+      textAlign: 'center'
+    }}>
+      flex-basis: 100px<br/>
+      flex-grow: 1<br/>
+      → 125px
+    </div>
+    <div style={{
+      flexBasis: '200px',
+      flexGrow: 2,
+      flexShrink: 1,
+      maxWidth: '300px',
+      height: '100px',
+      backgroundColor: '#28a745',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '11px',
+      textAlign: 'center'
+    }}>
+      flex-basis: 200px<br/>
+      flex-grow: 2<br/>
+      max-width: 300px<br/>
+      → 250px
+    </div>
+    <div style={{
+      flexBasis: '100px',
+      flexGrow: 1,
+      flexShrink: 1,
+      minWidth: '120px',
+      height: '100px',
+      backgroundColor: '#dc3545',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '11px',
+      textAlign: 'center'
+    }}>
+      flex-basis: 100px<br/>
+      flex-grow: 1<br/>
+      min-width: 120px<br/>
+      → 125px
+    </div>
+  </FlexContainer>
+}
 
 ## margin: auto の特殊な動作
 
@@ -540,30 +548,31 @@ Flexboxでは `margin: auto` が特殊な動作をします。
   color: #007bff;
 }
 ```
-
-<div
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white',
-  }}
->
-  <div style={{ flex: 1 }}>
-    <h3 style={{ margin: '0 0 5px 0', fontSize: '18px' }}>商品名</h3>
-    <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>商品の説明文がここに入ります</p>
-  </div>
+{ 
   <div
     style={{
-      marginLeft: 'auto',
-      fontWeight: 'bold',
-      color: '#007bff',
-      fontSize: '20px',
+      display: 'flex',
+      alignItems: 'center',
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white',
     }}
   >
-    ¥1,980
+    <div style={{ flex: 1 }}>
+      <h3 style={{ margin: '0 0 5px 0', fontSize: '18px' }}>商品名</h3>
+      <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>商品の説明文がここに入ります</p>
+    </div>
+    <div
+      style={{
+        marginLeft: 'auto',
+        fontWeight: 'bold',
+        color: '#007bff',
+        fontSize: '20px',
+      }}
+    >
+      ¥1,980
+    </div>
   </div>
-</div>
+}

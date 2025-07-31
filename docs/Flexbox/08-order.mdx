@@ -36,7 +36,7 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
 
 ### レスポンシブナビゲーション
 
-モバイルではメニューボタンを右端に、デスクトップでは左端に配置する場合：
+モバイルではメニューボタンを右端に、デスクトップでは左端に配置する場合
 
 ```css title="CSS"
 .navbar {
@@ -65,7 +65,7 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
   
   .menu-button {
     order: 1;
-    display: none;
+    margin-left: 0;
   }
   
   .nav-menu {
@@ -77,59 +77,78 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
 ```
 
 **モバイル表示**:
-<div
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px 20px',
-    backgroundColor: '#333',
-    color: 'white',
-    borderRadius: '8px',
-    marginBottom: '10px',
-  }}
->
-  <div style={{ order: 1, fontSize: '20px', fontWeight: 'bold' }}>MyLogo</div>
-  <button
+{
+  <div
+    class="demo"
     style={{
-      order: 2,
-      marginLeft: 'auto',
-      padding: '8px 12px',
-      backgroundColor: 'transparent',
-      border: '1px solid white',
+      display: 'flex',
+      alignItems: 'center',
+      padding: '10px 20px',
+      backgroundColor: '#333',
       color: 'white',
-      borderRadius: '4px',
-      fontSize: '14px',
+      borderRadius: '8px',
+      marginBottom: '10px',
     }}
   >
-    ☰ メニュー
-  </button>
-</div>
+    <div style={{ order: 1, fontSize: '20px', fontWeight: 'bold' }}>MyLogo</div>
+    <button
+      style={{
+        order: 2,
+        marginLeft: 'auto',
+        padding: '8px 12px',
+        backgroundColor: 'transparent',
+        border: '1px solid white',
+        color: 'white',
+        borderRadius: '4px',
+        fontSize: '14px',
+      }}
+    >
+      ☰ メニュー
+    </button>
+  </div>
+}
 
 **デスクトップ表示**:
-<div
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px 20px',
-    backgroundColor: '#333',
-    color: 'white',
-    borderRadius: '8px',
-  }}
->
-  <div style={{ order: 2, fontSize: '20px', fontWeight: 'bold' }}>MyLogo</div>
-  <nav
+{
+  <div
     style={{
-      order: 3,
-      marginLeft: 'auto',
       display: 'flex',
-      gap: '20px',
+      alignItems: 'center',
+      padding: '10px 20px',
+      backgroundColor: '#333',
+      color: 'white',
+      borderRadius: '8px',
     }}
   >
-    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>ホーム</a>
-    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>サービス</a>
-    <a href="#" style={{ color: 'white', textDecoration: 'none' }}>お問い合わせ</a>
-  </nav>
-</div>
+    <button
+      style={{
+        order: 1,
+        marginLeft: 0,
+        padding: '8px 12px',
+        backgroundColor: 'transparent',
+        border: '1px solid white',
+        color: 'white',
+        borderRadius: '4px',
+        fontSize: '14px',
+      }}
+    >
+      ☰ メニュー
+    </button>
+    <div style={{ order: 2, fontSize: '20px', fontWeight: 'bold', marginLeft: '15px' }}>MyLogo</div>
+    <nav
+      style={{
+        order: 3,
+        marginLeft: 'auto',
+        display: 'flex',
+        gap: '20px',
+      }}
+    >
+      <a href="#" style={{ color: 'white', textDecoration: 'none' }}>ホーム</a>
+      <a href="#" style={{ color: 'white', textDecoration: 'none' }}>サービス</a>
+      <a href="#" style={{ color: 'white', textDecoration: 'none' }}>お問い合わせ</a>
+    </nav>
+  </div>
+}
 
 ### サイドバーレイアウト
 
@@ -166,7 +185,8 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
 }
 ```
 
-**モバイル表示（縦）**:
+**モバイル表示（縦）**
+{
 <div
   style={{
     display: 'flex',
@@ -204,47 +224,50 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
     サイドバー
   </div>
 </div>
+}
 
-**デスクトップ表示（横）**:
-<div
-  style={{
-    display: 'flex',
-    flexDirection: 'row',
-    height: '150px',
-    border: '2px solid #ccc',
-    borderRadius: '8px',
-    overflow: 'hidden',
-    color: 'black',
-  }}
->
+**デスクトップ表示（横）**
+{
   <div
     style={{
-      order: 1,
-      flex: '0 0 150px',
-      padding: '15px',
-      backgroundColor: '#f8f9fa',
-      borderRight: '1px solid #ddd',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flexDirection: 'row',
+      height: '150px',
+      border: '2px solid #ccc',
+      borderRadius: '8px',
+      overflow: 'hidden',
+      color: 'black',
     }}
   >
-    サイドバー
+    <div
+      style={{
+        order: 1,
+        flex: '0 0 150px',
+        padding: '15px',
+        backgroundColor: '#f8f9fa',
+        borderRight: '1px solid #ddd',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      サイドバー
+    </div>
+    <div
+      style={{
+        order: 2,
+        flex: 1,
+        padding: '20px',
+        backgroundColor: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      メインコンテンツ
+    </div>
   </div>
-  <div
-    style={{
-      order: 2,
-      flex: 1,
-      padding: '20px',
-      backgroundColor: 'white',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    メインコンテンツ
-  </div>
-</div>
+}
 
 ### カードの優先順位
 
@@ -280,71 +303,77 @@ order プロパティは整数値（正の数、負の数、0）を取ります�
 }
 ```
 
-**通常の表示**:
-<div
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    backgroundColor: 'white',
-    width: '250px',
-    marginBottom: '10px',
-  }}
->
-  <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
-    スタンダードプラン
-  </h3>
-  <p style={{ order: 2, margin: '0 0 10px 0', fontSize: '20px', fontWeight: 'bold', color: '#007bff' }}>
-    ¥1,000/月
-  </p>
-  <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
-    基本的な機能を含むプランです。
-  </p>
-  <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
-    <li>機能A</li>
-    <li>機能B</li>
-  </ul>
-</div>
+**通常の表示**
+{
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      backgroundColor: 'white',
+      width: '250px',
+      marginBottom: '10px',
+    }}
+  >
+    <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
+      スタンダードプラン
+    </h3>
+    <p style={{ order: 2, margin: '0 0 10px 0', fontSize: '20px', fontWeight: 'bold', color: '#007bff' }}>
+      ¥1,000/月
+    </p>
+    <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
+      基本的な機能を含むプランです。
+    </p>
+    <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
+      <li>機能A</li>
+      <li>機能B</li>
+    </ul>
+  </div>
+}
 
-**スペシャルオファー表示**:
-<div
-  style={{
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '20px',
-    border: '2px solid #e74c3c',
-    borderRadius: '8px',
-    backgroundColor: 'white',
-    width: '250px',
-  }}
->
-  <p style={{ order: 0, margin: '0 0 10px 0', fontSize: '24px', fontWeight: 'bold', color: '#e74c3c' }}>
-    特価！¥500/月
-  </p>
-  <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
-    スペシャルプラン
-  </h3>
-  <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
-    期間限定の特別価格です。
-  </p>
-  <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
-    <li>機能A</li>
-    <li>機能B</li>
-    <li>特別機能C</li>
-  </ul>
-</div>
+**スペシャルオファー表示**
+{
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '20px',
+      border: '2px solid #e74c3c',
+      borderRadius: '8px',
+      backgroundColor: 'white',
+      width: '250px',
+    }}
+  >
+    <p style={{ order: 0, margin: '0 0 10px 0', fontSize: '24px', fontWeight: 'bold', color: '#e74c3c' }}>
+      特価！¥500/月
+    </p>
+    <h3 style={{ order: 1, margin: '0 0 10px 0', fontSize: '18px', color: '#333' }}>
+      スペシャルプラン
+    </h3>
+    <p style={{ order: 3, margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
+      期間限定の特別価格です。
+    </p>
+    <ul style={{ order: 4, margin: 0, paddingLeft: '20px', color: '#666', fontSize: '13px' }}>
+      <li>機能A</li>
+      <li>機能B</li>
+      <li>特別機能C</li>
+    </ul>
+  </div>
+}
 
 ## アクセシビリティへの配慮
 
 ### 重要な注意点
 
-`order` プロパティは**視覚的な順序のみ**を変更し、以下には影響しません：
+`order` プロパティは**視覚的な順序のみ**を変更し、以下には影響しません。
 
 1. **スクリーンリーダーの読み上げ順序**（HTML順序を維持）
-2. **キーボードのTab順序**（HTML順序を維持）
-3. **音声ブラウザの認識順序**（HTML順序を維持）
+2. **音声ブラウザの認識順序**（HTML順序を維持）
+3. **キーボードのTab順序**（HTML順序を維持）
+
+特にTabキーでの移動は多くのユーザーにとって混乱を招く可能性があるため、`order` プロパティを使用する際は注意が必要です。
 
 ## 試してみよう
 

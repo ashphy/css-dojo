@@ -12,44 +12,46 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
 
 カードレイアウトで、コンテンツの長さが異なるために高さが揃わない場合があります。
 
-<div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
-    <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+{
+  <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
+      <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
+      <p style={{ margin: 0, color: '#666' }}>
+        これはとても長いテキストです。複数行にわたって表示されるため、
+        他のカードよりも高さが大きくなってしまいます。
+      </p>
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
+      <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
-    <p style={{ margin: 0, color: '#666' }}>
-      これはとても長いテキストです。複数行にわたって表示されるため、
-      他のカードよりも高さが大きくなってしまいます。
-    </p>
-  </div>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
-    <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
-  </div>
-</div>
+}
 
 ### なぜこの問題が起こるのか？
 
@@ -104,50 +106,52 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 }
 ```
 
-<div style={{ display: 'flex', alignItems: 'stretch', gap: '20px', marginBottom: '20px' }}>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
-    <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+{
+  <div style={{ display: 'flex', alignItems: 'stretch', gap: '20px', marginBottom: '20px' }}>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
+      <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
+      <p style={{ margin: 0, color: '#666' }}>
+        これはとても長いテキストです。複数行にわたって表示されるため、
+        他のカードよりも高さが大きくなってしまいます。
+      </p>
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
+      <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
-    <p style={{ margin: 0, color: '#666' }}>
-      これはとても長いテキストです。複数行にわたって表示されるため、
-      他のカードよりも高さが大きくなってしまいます。
-    </p>
-  </div>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    color: 'black',
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column'
-  }}>
-    <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
-    <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
-  </div>
-</div>
+}
 
 ### 解決法2: 最小高さの設定
 
@@ -163,24 +167,25 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 
 フレックスアイテム内の長いテキストが親要素からはみ出してしまう場合があります。
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #ff0000', marginBottom: '20px', color: "black" }}>
-  <div style={{
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    whiteSpace: 'nowrap'
-  }}>
-    このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+{ 
+  <div style={{ display: 'flex', width: '400px', border: '2px solid #ff0000', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      padding: '10px',
+      backgroundColor: '#f0f0f0',
+      whiteSpace: 'nowrap'
+    }}>
+      このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '10px',
+      backgroundColor: '#e0e0e0'
+    }}>
+      短いテキスト
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#e0e0e0'
-  }}>
-    短いテキスト
-  </div>
-</div>
-
+}
 
 ### なぜこの問題が起こるのか？
 
@@ -241,26 +246,28 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 }
 ```
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #00aa00', marginBottom: '20px', color: "black" }}>
-  <div style={{
-    flex: 1,
-    minWidth: 0,
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
-  }}>
-    このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+{
+  <div style={{ display: 'flex', width: '400px', border: '2px solid #00aa00', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      minWidth: 0,
+      padding: '10px',
+      backgroundColor: '#f0f0f0',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    }}>
+      このテキストは非常に長く、コンテナからはみ出してしまう可能性があります
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '10px',
+      backgroundColor: '#e0e0e0'
+    }}>
+      短いテキスト
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#e0e0e0'
-  }}>
-    短いテキスト
-  </div>
-</div>
+}
 
 ### 解決法2: 改行を許可
 
@@ -293,24 +300,26 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 }
 ```
 
-<div style={{ display: 'flex', width: '400px', border: '2px solid #0066cc', marginBottom: '20px', color: "black" }}>
-  <div style={{
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    wordWrap: 'break-word',
-    overflowWrap: 'break-word'
-  }}>
-    このテキストは非常に長く、コンテナからはみ出してしまう可能性がありますが、改行されます
+{
+  <div style={{ display: 'flex', width: '400px', border: '2px solid #0066cc', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      padding: '10px',
+      backgroundColor: '#f0f0f0',
+      wordWrap: 'break-word',
+      overflowWrap: 'break-word'
+    }}>
+      このテキストは非常に長く、コンテナからはみ出してしまう可能性がありますが、改行されます
+    </div>
+    <div style={{
+      flex: 1,
+      padding: '10px',
+      backgroundColor: '#e0e0e0'
+    }}>
+      短いテキスト
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    padding: '10px',
-    backgroundColor: '#e0e0e0'
-  }}>
-    短いテキスト
-  </div>
-</div>
+}
 
 ## 問題3: フレックスアイテムが縮小しすぎる
 
@@ -318,32 +327,34 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 
 画像や重要なコンテンツが小さくなりすぎてしまう場合があります。
 
-<div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
-  <div style={{
-    flex: 1,
-    height: '60px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '12px'
-  }}>
-    重要な画像エリア<br/>（縮小されすぎ）
+{
+  <div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
+    <div style={{
+      flex: 1,
+      height: '60px',
+      backgroundColor: '#007bff',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>
+      重要な画像エリア<br/>（縮小されすぎ）
+    </div>
+    <div style={{
+      flex: 1,
+      height: '60px',
+      backgroundColor: '#28a745',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>
+      長いテキストコンテンツがここに入ります
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    height: '60px',
-    backgroundColor: '#28a745',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '12px'
-  }}>
-    長いテキストコンテンツがここに入ります
-  </div>
-</div>
+}
 
 ### なぜこの問題が起こるのか？
 
@@ -409,33 +420,35 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 }
 ```
 
-<div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
-  <div style={{
-    flexShrink: 0,
-    width: '150px',
-    height: '60px',
-    backgroundColor: '#007bff',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '12px'
-  }}>
-    重要な画像エリア<br/>（固定幅）
+{
+  <div style={{ display: 'flex', width: '300px', gap: '10px', marginBottom: '20px' }}>
+    <div style={{
+      flexShrink: 0,
+      width: '150px',
+      height: '60px',
+      backgroundColor: '#007bff',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>
+      重要な画像エリア<br/>（固定幅）
+    </div>
+    <div style={{
+      flex: 1,
+      height: '60px',
+      backgroundColor: '#28a745',
+      color: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '12px'
+    }}>
+      テキスト
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    height: '60px',
-    backgroundColor: '#28a745',
-    color: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '12px'
-  }}>
-    テキスト
-  </div>
-</div>
+}
 
 ### 解決法2: min-width を設定
 
@@ -454,108 +467,114 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 
 **ケース1: flex: 1 でアイテムが伸張されスクロールが発生しない**
 
-<div style={{
-  display: 'flex',
-  flexDirection: 'column',
-  height: '150px',
-  border: '2px solid #ff0000',
-  borderRadius: '8px',
-  marginBottom: '20px',
-  color: 'black',
-  backgroundColor: 'white',
-  marginBottom: '150px'
-}}>
-  <div style={{
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    borderBottom: '1px solid #ccc',
-    fontSize: '14px',
-    fontWeight: 'bold'
-  }}>
-    ヘッダー（固定）
-  </div>
-  <div style={{
-    flex: 1, // これが原因でアイテムが引き伸ばされる
-    padding: '10px',
-    fontSize: '12px',
-    // overflow-y: auto がないためスクロールしない
-  }}>
-    <p style={{ margin: '0 0 8px 0' }}>コンテンツが多すぎます</p>
-    <p style={{ margin: '0 0 8px 0' }}>長いテキストがここに入ります</p>
-    <p style={{ margin: '0 0 8px 0' }}>さらに多くのコンテンツ...</p>
-    <p style={{ margin: '0 0 8px 0' }}>もっと多くのコンテンツ...</p>
-    <p style={{ margin: '0 0 8px 0' }}>最後のコンテンツです</p>
-    <p style={{ margin: '0' }}>スクロールが表示されません</p>
-  </div>
-</div>
-
-**ケース2: 固定高さのコンテナで内容がはみ出る**
-
-<div style={{
-  height: '100px',
-  border: '2px solid #ff6600',
-  borderRadius: '8px',
-  marginBottom: '20px',
-  color: 'black',
-  backgroundColor: 'white',
-  marginBottom: '100px'
-}}>
-  <div style={{
-    height: '100%', // 親と同じ高さに設定
-    padding: '10px',
-    fontSize: '12px',
-    // min-height: 0 や overflow: auto がない
-  }}>
-    <p style={{ margin: '0 0 6px 0' }}>このコンテンツは</p>
-    <p style={{ margin: '0 0 6px 0' }}>コンテナの高さを</p>
-    <p style={{ margin: '0 0 6px 0' }}>超えてしまいますが</p>
-    <p style={{ margin: '0 0 6px 0' }}>スクロールが</p>
-    <p style={{ margin: '0 0 6px 0' }}>発生しません</p>
-    <p style={{ margin: '0' }}>下が切れています</p>
-  </div>
-</div>
-
-**ケース3: ネストしたFlexboxでスクロール領域が不明確**
-
-<div style={{
-  display: 'flex',
-  flexDirection: 'column',
-  height: '120px',
-  border: '2px solid #dc3545',
-  borderRadius: '8px',
-  marginBottom: '20px',
-  color: 'black',
-  backgroundColor: 'white',
-  marginBottom: '100px'
-}}>
+{
   <div style={{
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
-    backgroundColor: '#f8f9fa'
+    height: '150px',
+    border: '2px solid #ff0000',
+    borderRadius: '8px',
+    marginBottom: '20px',
+    color: 'black',
+    backgroundColor: 'white',
+    marginBottom: '150px'
   }}>
     <div style={{
-      padding: '8px',
-      backgroundColor: '#e9ecef',
-      borderBottom: '1px solid #dee2e6',
-      fontSize: '12px',
+      padding: '10px',
+      backgroundColor: '#f0f0f0',
+      borderBottom: '1px solid #ccc',
+      fontSize: '14px',
       fontWeight: 'bold'
     }}>
-      ネストしたヘッダー
+      ヘッダー（固定）
     </div>
     <div style={{
-      flex: 1, // min-height: 0 がないため適切に縮小されない
-      padding: '8px',
-      fontSize: '11px'
+      flex: 1, // これが原因でアイテムが引き伸ばされる
+      padding: '10px',
+      fontSize: '12px',
+      // overflow-y: auto がないためスクロールしない
     }}>
-      <p style={{ margin: '0 0 4px 0' }}>多層構造のコンテンツ</p>
-      <p style={{ margin: '0 0 4px 0' }}>スクロール領域が不明確</p>
-      <p style={{ margin: '0 0 4px 0' }}>どこでスクロールするべきか</p>
-      <p style={{ margin: '0 0 4px 0' }}>ブラウザが判断できない</p>
-      <p style={{ margin: '0' }}>結果的に切れて表示される</p>
+      <p style={{ margin: '0 0 8px 0' }}>コンテンツが多すぎます</p>
+      <p style={{ margin: '0 0 8px 0' }}>長いテキストがここに入ります</p>
+      <p style={{ margin: '0 0 8px 0' }}>さらに多くのコンテンツ...</p>
+      <p style={{ margin: '0 0 8px 0' }}>もっと多くのコンテンツ...</p>
+      <p style={{ margin: '0 0 8px 0' }}>最後のコンテンツです</p>
+      <p style={{ margin: '0' }}>スクロールが表示されません</p>
     </div>
   </div>
-</div>
+}
+
+**ケース2: 固定高さのコンテナで内容がはみ出る**
+
+{
+  <div style={{
+    height: '100px',
+    border: '2px solid #ff6600',
+    borderRadius: '8px',
+    marginBottom: '20px',
+    color: 'black',
+    backgroundColor: 'white',
+    marginBottom: '100px'
+  }}>
+    <div style={{
+      height: '100%', // 親と同じ高さに設定
+      padding: '10px',
+      fontSize: '12px',
+      // min-height: 0 や overflow: auto がない
+    }}>
+      <p style={{ margin: '0 0 6px 0' }}>このコンテンツは</p>
+      <p style={{ margin: '0 0 6px 0' }}>コンテナの高さを</p>
+      <p style={{ margin: '0 0 6px 0' }}>超えてしまいますが</p>
+      <p style={{ margin: '0 0 6px 0' }}>スクロールが</p>
+      <p style={{ margin: '0 0 6px 0' }}>発生しません</p>
+      <p style={{ margin: '0' }}>下が切れています</p>
+    </div>
+  </div>
+}
+
+**ケース3: ネストしたFlexboxでスクロール領域が不明確**
+
+{ 
+  <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    height: '120px',
+    border: '2px solid #dc3545',
+    borderRadius: '8px',
+    marginBottom: '20px',
+    color: 'black',
+    backgroundColor: 'white',
+    marginBottom: '100px'
+  }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
+      backgroundColor: '#f8f9fa'
+    }}>
+      <div style={{
+        padding: '8px',
+        backgroundColor: '#e9ecef',
+        borderBottom: '1px solid #dee2e6',
+        fontSize: '12px',
+        fontWeight: 'bold'
+      }}>
+        ネストしたヘッダー
+      </div>
+      <div style={{
+        flex: 1, // min-height: 0 がないため適切に縮小されない
+        padding: '8px',
+        fontSize: '11px'
+      }}>
+        <p style={{ margin: '0 0 4px 0' }}>多層構造のコンテンツ</p>
+        <p style={{ margin: '0 0 4px 0' }}>スクロール領域が不明確</p>
+        <p style={{ margin: '0 0 4px 0' }}>どこでスクロールするべきか</p>
+        <p style={{ margin: '0 0 4px 0' }}>ブラウザが判断できない</p>
+        <p style={{ margin: '0' }}>結果的に切れて表示される</p>
+      </div>
+    </div>
+  </div>
+}
 
 ### なぜこの問題が起こるのか？
 
@@ -643,34 +662,36 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 }
 ```
 
-<div style={{
-  display: 'flex',
-  flexDirection: 'column',
-  height: '200px',
-  border: '2px solid #ccc',
-  borderRadius: '8px',
-  color: 'black',
-  backgroundColor: "white"
-}}>
+{ 
   <div style={{
-    padding: '10px',
-    backgroundColor: '#f0f0f0',
-    borderBottom: '1px solid #ccc'
+    display: 'flex',
+    flexDirection: 'column',
+    height: '200px',
+    border: '2px solid #ccc',
+    borderRadius: '8px',
+    color: 'black',
+    backgroundColor: "white"
   }}>
-    ヘッダー（固定）
+    <div style={{
+      padding: '10px',
+      backgroundColor: '#f0f0f0',
+      borderBottom: '1px solid #ccc'
+    }}>
+      ヘッダー（固定）
+    </div>
+    <div style={{
+      flex: 1,
+      minHeight: 0,
+      overflowY: 'auto',
+      padding: '10px'    
+    }}>
+      <p>スクロール可能なコンテンツ</p>
+      <p>長いテキストがここに入ります。</p>
+      <p>さらに多くのコンテンツ...</p>
+      <p>もっと多くのコンテンツ...</p>
+      <p>スクロールして確認してください。</p>
+      <p>まだまだコンテンツがあります。</p>
+      <p>最後のコンテンツです。</p>
+    </div>
   </div>
-  <div style={{
-    flex: 1,
-    minHeight: 0,
-    overflowY: 'auto',
-    padding: '10px'    
-  }}>
-    <p>スクロール可能なコンテンツ</p>
-    <p>長いテキストがここに入ります。</p>
-    <p>さらに多くのコンテンツ...</p>
-    <p>もっと多くのコンテンツ...</p>
-    <p>スクロールして確認してください。</p>
-    <p>まだまだコンテンツがあります。</p>
-    <p>最後のコンテンツです。</p>
-  </div>
-</div>
+}

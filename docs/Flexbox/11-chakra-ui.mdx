@@ -230,60 +230,6 @@ import { Center } from "@chakra-ui/react"
 }
 ```
 
-<div style={{ 
-  display: 'flex', 
-  alignItems: 'center', 
-  justifyContent: 'center', 
-  height: '200px', 
-  backgroundColor: '#f7fafc',
-  border: '1px solid #e2e8f0',
-  borderRadius: '8px'
-}}>
-  <div style={{ 
-    padding: '10px 20px', 
-    backgroundColor: '#4299e1', 
-    color: 'white', 
-    borderRadius: '6px' 
-  }}>
-    中央に配置されたコンテンツ
-  </div>
-</div>
-
-### Square（正方形の中央配置）
-
-```jsx title="Chakra UI"
-import { Square } from "@chakra-ui/react"
-
-<Square size="150px" bg="blue.500" color="white">
-  <Box>正方形の中央</Box>
-</Square>
-```
-
-```css title="CSS 相当"
-.square-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 150px;
-  background-color: #3182ce;
-  color: white;
-}
-```
-
-<div style={{ 
-  display: 'flex', 
-  alignItems: 'center', 
-  justifyContent: 'center', 
-  width: '150px', 
-  height: '150px', 
-  backgroundColor: '#3182ce',
-  color: 'white',
-  borderRadius: '8px'
-}}>
-  正方形の中央
-</div>
-
 ## Wrapコンポーネント
 
 **Wrap** コンポーネントは、要素間にスペースを追加し、利用可能なスペースが不足した場合に自動的に折り返すFlexboxベースのコンポーネントです。
@@ -320,18 +266,20 @@ import { Wrap, WrapItem } from "@chakra-ui/react"
 }
 ```
 
-<div style={{ 
-  display: 'flex', 
-  flexWrap: 'wrap', 
-  gap: '0.5rem',
-  padding: '10px',
-  backgroundColor: '#f7fafc',
-  border: '1px solid #e2e8f0',
-  borderRadius: '8px'
-}}>
-  <div style={{ padding: '8px', backgroundColor: '#fed7d7', borderRadius: '6px' }}>アイテム 1</div>
-  <div style={{ padding: '8px', backgroundColor: '#c6f6d5', borderRadius: '6px' }}>アイテム 2</div>
-  <div style={{ padding: '8px', backgroundColor: '#bee3f8', borderRadius: '6px' }}>アイテム 3</div>
-  <div style={{ padding: '8px', backgroundColor: '#faf089', borderRadius: '6px' }}>アイテム 4</div>
-  <div style={{ padding: '8px', backgroundColor: '#e9d8fd', borderRadius: '6px' }}>アイテム 5</div>
-</div>
+{ 
+  <div style={{ 
+    display: 'flex', 
+    flexWrap: 'wrap', 
+    gap: '0.5rem',
+    padding: '10px',
+    backgroundColor: '#f7fafc',
+    border: '1px solid #e2e8f0',
+    borderRadius: '8px'
+  }}>
+    <div style={{ padding: '8px', backgroundColor: '#fed7d7', borderRadius: '6px' }}>アイテム 1</div>
+    <div style={{ padding: '8px', backgroundColor: '#c6f6d5', borderRadius: '6px' }}>アイテム 2</div>
+    <div style={{ padding: '8px', backgroundColor: '#bee3f8', borderRadius: '6px' }}>アイテム 3</div>
+    <div style={{ padding: '8px', backgroundColor: '#faf089', borderRadius: '6px' }}>アイテム 4</div>
+    <div style={{ padding: '8px', backgroundColor: '#e9d8fd', borderRadius: '6px' }}>アイテム 5</div>
+  </div>
+}
