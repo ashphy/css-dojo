@@ -57,7 +57,7 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
 
 **Flexboxのデフォルト動作の理解**
 
-Flexboxでは、フレックスアイテムはデフォルトで `align-items: stretch` の動作をします。これは「クロス軸方向に親コンテナいっぱいに伸張する」という意味です。しかし、以下の場合に高さが揃わない問題が発生します：
+Flexboxでは、フレックスアイテムはデフォルトで `align-items: stretch` の動作をします。これは「クロス軸方向に親コンテナいっぱいに伸張する」という意味です。しかし、以下の場合に高さが揃わない問題が発生します。
 
 1. **フレックスアイテムに内在する高さが設定されている場合**
    - 各アイテムの内容（テキスト、画像など）によって決まる高さ（intrinsic height）が異なる
@@ -73,7 +73,7 @@ Flexboxでは、フレックスアイテムはデフォルトで `align-items: s
 
 **CSS仕様の詳細**
 
-CSS Flexbox仕様（CSS3）では、`align-items: stretch` は以下のように動作します：
+CSS Flexbox仕様（CSS3）では、`align-items: stretch` は以下のように動作します。
 - アイテムが「auto height」（`height: auto`）の場合のみstretchが適用される
 - `height` が明示的に設定されている場合、stretchは無効になる
 - アイテムの `align-self` プロパティが `stretch` 以外に設定されている場合も無効
@@ -84,7 +84,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 
 **解決の原理**
 
-この解決法が機能する理由は、各カード要素を `display: flex; flex-direction: column` にすることで、カード内のコンテンツが縦方向のFlexboxレイアウトになるためです：
+この解決法が機能する理由は、各カード要素を `display: flex; flex-direction: column` にすることで、カード内のコンテンツが縦方向のFlexboxレイアウトになるためです。
 
 1. **親コンテナの `align-items: stretch`** により、すべてのカードが同じ高さになる
 2. **カード自体を `display: flex; flex-direction: column`** にすることで、カード内のコンテンツが縦方向に配置される
@@ -191,7 +191,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 
 **Flexboxの縮小アルゴリズムとテキストレンダリングの競合**
 
-この問題は、以下の複合的な要因により発生します：
+この問題は、以下の複合的な要因により発生します。
 
 1. **フレックスアイテムのデフォルト最小サイズ**
    - CSS Flexbox仕様では、フレックスアイテムの `min-width` は `auto` がデフォルト
@@ -210,7 +210,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 
 **CSS仕様の詳細**
 
-CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items」によると：
+CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items」によると
 - フレックスアイテムの暗黙的な最小サイズは、内容に基づいて自動計算される
 - これにより、アイテムがコンテンツより小さくなることを防ぐ
 - ただし、この動作が意図しないオーバーフローを引き起こす場合がある
@@ -219,7 +219,7 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 
 **解決の原理**
 
-`min-width: 0` を設定することで、以下のメカニズムにより問題が解決されます：
+`min-width: 0` を設定することで、以下のメカニズムにより問題が解決されます。
 
 1. **暗黙的最小サイズの無効化**
    - `min-width: 0` により、フレックスアイテムの暗黙的最小サイズ制約が解除される
@@ -273,7 +273,7 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 
 **解決の原理**
 
-改行を許可する手法は、テキストレンダリングエンジンの動作を変更することで問題を解決します：
+改行を許可する手法は、テキストレンダリングエンジンの動作を変更することで問題を解決します。
 
 1. **Word Breaking アルゴリズムの変更**
    - `word-wrap: break-word`（現在は `overflow-wrap: break-word` が推奨）により、長い単語でも強制的に改行される
