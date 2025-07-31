@@ -4,7 +4,7 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 # 高度なサイズ制御
 
 このセクションでは、Flexboxにおけるより高度なサイズ制御について詳しく解説します。
-`min-width`、`max-width`、`width`プロパティとFlexプロパティの相互作用、そして `margin: auto` の特殊な動作について理解しましょう。
+`min-width`、`max-width`、`width`プロパティとFlexプロパティの相互作用について理解しましょう。
 
 ## width と flex-basis の違い
 
@@ -451,128 +451,15 @@ Flexboxのサイズ計算は以下の段階で行われます。
   </FlexContainer>
 }
 
-## margin: auto の特殊な動作
+## まとめ
 
-Flexboxでは `margin: auto` が特殊な動作をします。
+高度なサイズ制御を理解することで、より柔軟で予測可能なFlexboxレイアウトを作成できます。
 
-### 水平方向の margin: auto
+### 重要なポイント
 
-```css title="CSS"
-.flex-container {
-  display: flex;
-}
+- **width vs flex-basis**: `flex-basis` はFlexboxの計算における理想的なサイズ、`width` は固定幅
+- **制約の適用**: `min-width` と `max-width` はFlex計算結果を制限する
+- **計算順序**: 初期サイズ → flex-grow/shrink → 制約適用の順番で処理される
+- **margin: auto**: 特殊な動作については[専用ページ](./10-margin-auto)で詳しく解説
 
-.item {
-  margin-left: auto; /* 要素を右端に押し出す */
-}
-```
-
-<FlexContainer>
-  <FlexItemFixed>左端の要素</FlexItemFixed>
-  <FlexItemFixed style={{ marginLeft: 'auto' }}>margin-left: auto</FlexItemFixed>
-</FlexContainer>
-
-### 複数要素での margin: auto
-
-```css title="CSS"
-.item2 {
-  margin-left: auto;
-  margin-right: auto; /* 中央に配置 */
-}
-```
-
-<FlexContainer>
-  <FlexItemFixed>左端</FlexItemFixed>
-  <FlexItemFixed style={{ marginLeft: 'auto', marginRight: 'auto' }}>中央</FlexItemFixed>
-  <FlexItemFixed>右端</FlexItemFixed>
-</FlexContainer>
-
-### 垂直方向の margin: auto
-
-```css title="CSS"
-.flex-container {
-  height: 150px;
-  align-items: flex-start;
-}
-
-.item {
-  margin-top: auto; /* 下端に配置 */
-}
-```
-
-<FlexContainer style={{ height: '150px', alignItems: 'flex-start' }}>
-  <FlexItemFixed style={{ height: 'auto' }}>通常の位置</FlexItemFixed>
-  <FlexItemFixed style={{ height: 'auto', marginTop: 'auto' }}>margin-top: auto</FlexItemFixed>
-  <FlexItemFixed style={{ height: 'auto' }}>通常の位置</FlexItemFixed>
-</FlexContainer>
-
-### margin: auto の優先順位
-
-`margin: auto` は `justify-content` や `align-items` よりも優先されます。
-
-```css title="CSS"
-.flex-container {
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.special-item {
-  margin: auto; /* justify-content と align-items を無視 */
-}
-```
-
-<FlexContainer style={{ height: '120px', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
-  <FlexItemFixed style={{ height: 'auto', margin: 'auto' }}>margin: auto</FlexItemFixed>
-  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
-</FlexContainer>
-
-## 実用的なレイアウトパターン
-
-### カードの価格を右端に配置
-
-```css title="CSS"
-.product-card {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-}
-
-.product-info {
-  flex: 1;
-}
-
-.product-price {
-  margin-left: auto; /* 価格を右端に */
-  font-weight: bold;
-  color: #007bff;
-}
-```
-{ 
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white',
-    }}
-  >
-    <div style={{ flex: 1 }}>
-      <h3 style={{ margin: '0 0 5px 0', fontSize: '18px' }}>商品名</h3>
-      <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>商品の説明文がここに入ります</p>
-    </div>
-    <div
-      style={{
-        marginLeft: 'auto',
-        fontWeight: 'bold',
-        color: '#007bff',
-        fontSize: '20px',
-      }}
-    >
-      ¥1,980
-    </div>
-  </div>
-}
+これらの概念を組み合わせることで、複雑なレイアウト要件にも対応できるようになります。

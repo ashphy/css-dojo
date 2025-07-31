@@ -1,0 +1,280 @@
+import { FlexContainer } from './components/flex-container';
+import { FlexItemFixed } from './components/flex-items-fixed';
+import { FlexItem } from './components/flex-items';
+
+# auto margin
+
+Flexboxでは `margin: auto` が通常のブロック要素とは異なる特殊な動作をします。
+この強力な機能を使うことで、`justify-content` や `align-items` では実現できない柔軟なレイアウトを作ることができます。
+
+## 基本概念
+
+Flexboxにおける `margin: auto` は、余剰スペースを自動的に"消費"します。
+実際に例を見てみましょう。
+
+## 水平方向の margin: auto
+
+主軸上ではアイテムは一つのグループとして扱われるため、`justify-items` プロパティや `justify-self` プロパティは存在しません。
+その代わり、`margin: auto` を使用してアイテムを柔軟に配置することができます。
+
+### 要素を右端に配置
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+}
+
+.item {
+  margin-left: auto; /* 要素を右端に押し出す */
+}
+```
+
+<FlexContainer>
+  <FlexItemFixed>左端の要素</FlexItemFixed>
+  <FlexItemFixed style={{ marginLeft: 'auto' }}>margin-left: auto</FlexItemFixed>
+</FlexContainer>
+
+### 要素を中央に配置
+
+```css title="CSS"
+.item {
+  margin-left: auto;
+  margin-right: auto; /* 中央に配置 */
+}
+```
+
+<FlexContainer>
+  <FlexItemFixed>左端</FlexItemFixed>
+  <FlexItemFixed style={{ marginLeft: 'auto', marginRight: 'auto' }}>中央</FlexItemFixed>
+  <FlexItemFixed>右端</FlexItemFixed>
+</FlexContainer>
+
+## 垂直方向の margin: auto
+
+`margin: auto`は垂直方向にも働きます。
+
+### 要素を下端に配置
+
+```css title="CSS"
+.flex-container {
+  height: 150px;
+  align-items: flex-start;
+}
+
+.item {
+  margin-top: auto; /* 下端に配置 */
+}
+```
+
+<FlexContainer style={{ height: '150px', alignItems: 'flex-start' }}>
+  <FlexItem style={{ height: 'auto' }}>通常の位置</FlexItem>
+  <FlexItem style={{ height: 'auto', marginTop: 'auto' }}>margin-top: auto</FlexItem>
+  <FlexItem style={{ height: 'auto' }}>通常の位置</FlexItem>
+</FlexContainer>
+
+### 垂直中央配置
+
+```css title="CSS"
+.item {
+  margin-top: auto;
+  margin-bottom: auto; /* 垂直中央に配置 */
+}
+```
+
+<FlexContainer style={{ height: '150px', alignItems: 'flex-start' }}>
+  <FlexItemFixed style={{ height: 'auto' }}>上端</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto', marginTop: 'auto', marginBottom: 'auto' }}>中央</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto' }}>上端</FlexItemFixed>
+</FlexContainer>
+
+## 水平・垂直の組み合わせ
+
+### 完全な中央配置
+
+```css title="CSS"
+.item {
+  margin: auto; /* 水平・垂直両方向で中央配置 */
+}
+```
+
+<FlexContainer style={{ height: '120px', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto', margin: 'auto' }}>margin: auto</FlexItemFixed>
+  <FlexItemFixed style={{ height: 'auto' }}>通常のアイテム</FlexItemFixed>
+</FlexContainer>
+
+## margin: auto の優先順位
+
+`margin: auto` は `justify-content` や `align-items` よりも常に優先されます。
+
+```css title="CSS"
+.flex-container {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.special-item {
+  margin: auto; /* justify-content と align-items を無視 */
+}
+```
+
+{
+  <div style={{ marginBottom: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div>
+      <h4>justify-content: flex-start, align-items: flex-start</h4>
+      <FlexContainer style={{ height: '120px', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+        <FlexItemFixed style={{ height: 'auto' }}>通常</FlexItemFixed>
+        <FlexItemFixed style={{ height: 'auto', margin: 'auto' }}>margin: auto で中央</FlexItemFixed>
+        <FlexItemFixed style={{ height: 'auto' }}>通常</FlexItemFixed>
+      </FlexContainer>
+    </div>
+    
+    <div>
+      <h4>justify-content: center, align-items: center</h4>
+      <FlexContainer style={{ height: '120px', justifyContent: 'center', alignItems: 'center' }}>
+        <FlexItemFixed style={{ height: 'auto' }}>中央</FlexItemFixed>
+        <FlexItemFixed style={{ height: 'auto', marginLeft: 'auto' }}>margin-left: auto で右へ</FlexItemFixed>
+        <FlexItemFixed style={{ height: 'auto' }}>中央</FlexItemFixed>
+      </FlexContainer>
+    </div>
+  </div>
+}
+
+:::tip
+Flexboxのプロパティで実現できない場合に`margin: auto`を使うようにするとよいでしょう。
+:::
+
+## 実用的なレイアウトパターン
+
+### ナビゲーションメニュー
+
+```css title="CSS"
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.user-menu {
+  margin-left: auto; /* ユーザーメニューを右端に */
+}
+```
+
+{
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      padding: '10px 20px',
+      backgroundColor: '#f8f9fa',
+      border: '1px solid #dee2e6',
+      borderRadius: '8px',
+      marginBottom: '20px'
+    }}
+  >
+    <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#007bff' }}>Logo</div>
+    <div style={{ display: 'flex', gap: '20px', marginLeft: '30px' }}>
+      <a href="#" style={{ textDecoration: 'none', color: '#495057' }}>ホーム</a>
+      <a href="#" style={{ textDecoration: 'none', color: '#495057' }}>製品</a>
+      <a href="#" style={{ textDecoration: 'none', color: '#495057' }}>サポート</a>
+    </div>
+    <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px' }}>
+      <button style={{ padding: '5px 15px', border: '1px solid #007bff', backgroundColor: 'transparent', color: '#007bff', borderRadius: '4px' }}>ログイン</button>
+      <button style={{ padding: '5px 15px', border: 'none', backgroundColor: '#007bff', color: 'white', borderRadius: '4px' }}>登録</button>
+    </div>
+  </div>
+}
+
+### 商品カード
+
+```css title="CSS"
+.product-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-price {
+  margin-left: auto; /* 価格を右端に */
+  font-weight: bold;
+  color: #007bff;
+}
+```
+
+{ 
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      padding: '20px',
+      border: '1px solid #ddd',
+      borderRadius: '8px',
+      color: 'black',
+      backgroundColor: 'white',
+      marginBottom: '20px'
+    }}
+  >
+    <div style={{ flex: 1 }}>
+      <h3 style={{ margin: '0 0 5px 0', fontSize: '18px' }}>商品名</h3>
+      <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>商品の説明文がここに入ります</p>
+    </div>
+    <div
+      style={{
+        marginLeft: 'auto',
+        fontWeight: 'bold',
+        color: '#007bff',
+        fontSize: '20px',
+      }}
+    >
+      ¥1,980
+    </div>
+  </div>
+}
+
+### フッターレイアウト
+
+```css title="CSS"
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.copyright {
+  margin-left: auto; /* コピーライトを右端に */
+  font-size: 14px;
+  color: #666;
+}
+```
+
+{
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      padding: '20px',
+      backgroundColor: '#343a40',
+      color: 'white',
+      gap: '20px',
+      borderRadius: '8px'
+    }}
+  >
+    <div style={{ fontWeight: 'bold' }}>Company Name</div>
+    <a href="#" style={{ color: '#adb5bd', textDecoration: 'none' }}>プライバシーポリシー</a>
+    <a href="#" style={{ color: '#adb5bd', textDecoration: 'none' }}>利用規約</a>
+    <a href="#" style={{ color: '#adb5bd', textDecoration: 'none' }}>お問い合わせ</a>
+    <div style={{ marginLeft: 'auto', fontSize: '14px', color: '#6c757d' }}>
+      © 2024 Company Name. All rights reserved.
+    </div>
+  </div>
+}
