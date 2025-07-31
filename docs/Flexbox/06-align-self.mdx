@@ -3,6 +3,9 @@ import { FlexContainer } from './components/flex-container';
 import { FlexItemFixed } from './components/flex-items-fixed';
 import { FlexItem } from './components/flex-items';
 import { Playground } from './components/playground';
+import { TargetLayout } from './components/target-layout';
+
+import chatInterfaceStyle from './exercises/chat-interface.module.css';
 
 # 個別アイテムの配置
 
@@ -224,7 +227,32 @@ align-self プロパティは以下の値を取ることができます
 
 ### 課題: チャットインターフェース
 
-LLMとのチャットアプリのようなレイアウトを作成してください。人間のメッセージは右寄せ、AIの応答は左寄せに配置します。
+LLMとのチャットアプリのようなレイアウトを作成してください。人間のメッセージは右寄せ、AIの応答は左寄せに配置してください。
+
+<TargetLayout style={{ height: "400px" }}>
+  <div className={chatInterfaceStyle['chat-container']}>
+    <div className={`${chatInterfaceStyle.message} ${chatInterfaceStyle['human-message']}`}>
+      <div className={chatInterfaceStyle['message-content']}>
+        Flexboxについて教えてください
+      </div>
+    </div>
+    <div className={`${chatInterfaceStyle.message} ${chatInterfaceStyle['ai-message']}`}>
+      <div className={chatInterfaceStyle['message-content']}>
+        Flexboxは、要素を効率的に配置・配布・整列させるためのCSSレイアウト手法です。特に1次元のレイアウト（行または列）に優れています。
+      </div>
+    </div>
+    <div className={`${chatInterfaceStyle.message} ${chatInterfaceStyle['human-message']}`}>
+      <div className={chatInterfaceStyle['message-content']}>
+        align-selfはどう使うのですか？
+      </div>
+    </div>
+    <div className={`${chatInterfaceStyle.message} ${chatInterfaceStyle['ai-message']}`}>
+      <div className={chatInterfaceStyle['message-content']}>
+        align-selfは個別のアイテムの配置を制御できます。このチャットのように、人間のメッセージを右寄せ、AIのメッセージを左寄せにできます。
+      </div>
+    </div>
+  </div>
+</TargetLayout>
 
 <Playground
   htmlCode={`<div class="chat-container">
@@ -286,12 +314,6 @@ LLMとのチャットアプリのようなレイアウトを作成してくだ�
   border-bottom-right-radius: 5px;
 }`}
 />
-
-**期待される結果:**
-- チャットコンテナが縦方向のフレックスコンテナになっている
-- AIのメッセージが左寄せで表示されている
-- 人間のメッセージが右寄せで表示されている
-- メッセージが縦方向にリスト形式で配置されている
 
 <details>
 <summary>解答例を見る</summary>
