@@ -2,6 +2,7 @@ import { AlignSelfDemo, AlignSelfExample } from './components/align-self-demo';
 import { FlexContainer } from './components/flex-container';
 import { FlexItemFixed } from './components/flex-items-fixed';
 import { FlexItem } from './components/flex-items';
+import { Playground } from './components/playground';
 
 # 個別アイテムの配置
 
@@ -216,3 +217,111 @@ align-self プロパティは以下の値を取ることができます
 各アイテムの `align-self` を個別に設定して動作を確認してみましょう。
 
 <AlignSelfDemo />
+
+## 演習課題
+
+`align-self` を使って実用的なチャットアプリのレイアウトを作成してみましょう。
+
+### 課題: チャットインターフェース
+
+LLMとのチャットアプリのようなレイアウトを作成してください。人間のメッセージは右寄せ、AIの応答は左寄せに配置します。
+
+<Playground
+  htmlCode={`<div class="chat-container">
+  <div class="message human-message">
+    <div class="message-content">
+      Flexboxについて教えてください
+    </div>
+  </div>
+  <div class="message ai-message">
+    <div class="message-content">
+      Flexboxは、要素を効率的に配置・配布・整列させるためのCSSレイアウト手法です。特に1次元のレイアウト（行または列）に優れています。
+    </div>
+  </div>
+  <div class="message human-message">
+    <div class="message-content">
+      align-selfはどう使うのですか？
+    </div>
+  </div>
+  <div class="message ai-message">
+    <div class="message-content">
+      align-selfは個別のアイテムの配置を制御できます。このチャットのように、人間のメッセージを右寄せ、AIのメッセージを左寄せにできます。
+    </div>
+  </div>
+</div>`}
+  cssCode={`.chat-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  height: 400px;
+  overflow-y: auto;
+  /* ここにFlexboxのプロパティを追加してください */
+}
+
+.message {
+  margin-bottom: 15px;
+  max-width: 70%;
+  /* ここにalign-selfプロパティを追加してください */
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.ai-message .message-content {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border-bottom-left-radius: 5px;
+}
+
+.human-message .message-content {
+  background-color: #007bff;
+  color: white;
+  border-bottom-right-radius: 5px;
+}`}
+/>
+
+**期待される結果:**
+- チャットコンテナが縦方向のフレックスコンテナになっている
+- AIのメッセージが左寄せで表示されている
+- 人間のメッセージが右寄せで表示されている
+- メッセージが縦方向にリスト形式で配置されている
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
+.chat-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin-bottom: 15px;
+  max-width: 70%;
+}
+
+.ai-message {
+  align-self: flex-start;
+}
+
+.human-message {
+  align-self: flex-end;
+}
+```
+
+</details>
