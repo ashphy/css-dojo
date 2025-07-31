@@ -121,3 +121,206 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
 :::info
 文章の折り返しの制御は複雑なので、[文章の折り返し指定のCSS最新版 - ICS MEDIA](https://ics.media/entry/240411/)を読むのがおすすめです。
 :::
+
+## 問題2: フレックスアイテム内の子要素でheight: 100%が効かない
+
+### 問題の発生例
+
+フレックスアイテムの中にある子要素に `height: 100%` を設定しても、期待通りに親の高さいっぱいに広がらない場合があります。
+
+{
+  <div style={{ display: 'flex', border: '2px solid #ff0000', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#f0f0f0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      <div style={{
+        height: '100%',
+        backgroundColor: '#ff6b6b',
+        padding: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        height: 100%が効かない
+      </div>
+    </div>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#e0e0e0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+          通常のコンテンツ<br />
+          通常のコンテンツ<br />
+          通常のコンテンツ<br />
+          通常のコンテンツ<br />
+          通常のコンテンツ<br />
+          通常のコンテンツ<br />
+      通常のコンテンツ
+    </div>
+  </div>
+}
+
+### なぜこの問題が起こるのか？
+
+**Flexboxの高さ計算とCSS仕様の相互作用**
+
+この問題は、Flexboxの動作原理とCSSの `height: 100%` の計算方法が関係しています。
+
+1. **`height: 100%` の計算基準**
+   - `height: 100%` は親要素の**specified value**（指定値）を基準に計算される
+   - Flexboxの `align-items: stretch` は**used value**（使用値）を変更するだけ
+   - 親要素の指定値が `auto` の場合、`height: 100%` は解決できない
+
+2. **Flexboxの伸縮メカニズム**
+   - デフォルトで `align-items: stretch` が適用される
+   - これにより、フレックスアイテムは視覚的には親の高さまで伸びる
+   - しかし、CSS的な高さの指定値は依然として `auto` のまま
+
+3. **ブラウザの実装上の課題**
+   - Chrome/Safari系では特にこの問題が顕著
+   - Firefox では一部異なる動作を示す場合がある
+
+### 解決法1: align-items: stretch を利用（推奨）
+
+最も確実で推奨される解決方法は、`height: 100%` を削除し、Flexboxの自然な伸縮機能を利用することです。
+
+```css title="CSS"
+.flex-container {
+  display: flex;
+  height: 200px;
+  align-items: stretch; /* デフォルトなので省略可能 */
+}
+
+.flex-item {
+  /* height指定なし */
+}
+
+.child-element {
+  /* height: 100% を削除 */
+  /* Flexboxの伸縮で自然に高さが決まる */
+}
+```
+
+{
+  <div style={{ display: 'flex', height: '200px', border: '2px solid #00aa00', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#f0f0f0',
+      padding: '10px',
+      margin: '5px',
+      display: 'flex'
+    }}>
+      <div style={{
+        flex: 1,
+        backgroundColor: '#51cf66',
+        padding: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        自然に親の高さまで伸びる
+      </div>
+    </div>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#e0e0e0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      通常のコンテンツ
+    </div>
+  </div>
+}
+
+### 解決法2: 親要素に明示的な高さを設定
+
+フレックスアイテムに明示的な高さを設定することで、子要素の `height: 100%` が正常に機能します。
+
+```css title="CSS"
+.flex-item {
+  height: 100%; /* 明示的に高さを設定 */
+}
+
+.child-element {
+  height: 100%; /* これで正常に機能する */
+}
+```
+
+{
+  <div style={{ display: 'flex', height: '200px', border: '2px solid #0066cc', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      height: '100%',
+      backgroundColor: '#f0f0f0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      <div style={{
+        height: '100%',
+        backgroundColor: '#339af0',
+        padding: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        height: 100%が正常に機能
+      </div>
+    </div>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#e0e0e0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      通常のコンテンツ
+    </div>
+  </div>
+}
+
+### 解決法3: min-heightを使用
+
+`min-height: 100%` を使用することで、より柔軟な高さ制御が可能になります。
+
+```css title="CSS"
+.child-element {
+  min-height: 100%;
+}
+```
+
+{
+  <div style={{ display: 'flex', height: '200px', border: '2px solid #7c3aed', marginBottom: '20px', color: "black" }}>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#f0f0f0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      <div style={{
+        minHeight: '100%',
+        backgroundColor: '#a78bfa',
+        padding: '10px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        min-height: 100%を使用
+      </div>
+    </div>
+    <div style={{
+      flex: 1,
+      backgroundColor: '#e0e0e0',
+      padding: '10px',
+      margin: '5px'
+    }}>
+      通常のコンテンツ
+    </div>
+  </div>
+}
+
+:::tip
+最も推奨される解決方法は**解決法1**です。`height: 100%` に依存せず、Flexboxの自然な動作を活用することで、ブラウザ間の互換性も確保できます。
+:::
