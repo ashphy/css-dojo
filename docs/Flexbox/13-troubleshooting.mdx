@@ -6,162 +6,7 @@ import { FlexItemFixed } from './components/flex-items-fixed';
 Flexboxを使用していると遭遇しがちな問題とその解決方法を、実例とともに解説します。
 これらの問題を理解することで、より効果的にFlexboxを活用できるようになります。
 
-## 問題1: 高さが揃わない
-
-### 問題の発生例
-
-カードレイアウトで、コンテンツの長さが異なるために高さが揃わない場合があります。
-
-{
-  <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
-      <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
-      <p style={{ margin: 0, color: '#666' }}>
-        これはとても長いテキストです。複数行にわたって表示されるため、
-        他のカードよりも高さが大きくなってしまいます。
-      </p>
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
-      <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
-    </div>
-  </div>
-}
-
-### なぜこの問題が起こるのか？
-
-**Flexboxのデフォルト動作の理解**
-
-Flexboxでは、フレックスアイテムはデフォルトで `align-items: stretch` の動作をします。これは「クロス軸方向に親コンテナいっぱいに伸張する」という意味です。しかし、以下の場合に高さが揃わない問題が発生します。
-
-1. **フレックスアイテムに内在する高さが設定されている場合**
-   - 各アイテムの内容（テキスト、画像など）によって決まる高さ（intrinsic height）が異なる
-   - `height` や `min-height` が明示的に設定されている
-
-2. **ネストしたFlexboxの影響**
-   - 子要素がFlexboxコンテナになっている場合、親の `stretch` 指示が子要素まで伝播しない
-   - 子要素は自身のコンテンツに応じたサイズになる
-
-3. **Box Modelの影響**
-   - `padding`、`border`、`margin` がアイテムごとに異なる場合
-   - `box-sizing` の設定により、計算される高さが変わる
-
-**CSS仕様の詳細**
-
-CSS Flexbox仕様（CSS3）では、`align-items: stretch` は以下のように動作します。
-- アイテムが「auto height」（`height: auto`）の場合のみstretchが適用される
-- `height` が明示的に設定されている場合、stretchは無効になる
-- アイテムの `align-self` プロパティが `stretch` 以外に設定されている場合も無効
-
-### 解決法1: align-items: stretch（デフォルト）
-
-Flexboxのデフォルト動作である `align-items: stretch` を利用します。
-
-**解決の原理**
-
-この解決法が機能する理由は、各カード要素を `display: flex; flex-direction: column` にすることで、カード内のコンテンツが縦方向のFlexboxレイアウトになるためです。
-
-1. **親コンテナの `align-items: stretch`** により、すべてのカードが同じ高さになる
-2. **カード自体を `display: flex; flex-direction: column`** にすることで、カード内のコンテンツが縦方向に配置される
-3. **カード内の最後の要素に `flex-grow: 1`** を適用することで、余白を均等に埋める
-
-この手法は「Equal Height Cards」と呼ばれ、Bootstrap 4以降でも採用されている標準的なパターンです。
-
-```css title="CSS"
-.card-container {
-  display: flex;
-  align-items: stretch; /* デフォルト値 */
-  gap: 20px;
-}
-
-.card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-```
-
-{
-  <div style={{ display: 'flex', alignItems: 'stretch', gap: '20px', marginBottom: '20px' }}>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white',
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 1</h3>
-      <p style={{ margin: 0, color: '#666' }}>短いテキスト</p>
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white',
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 2</h3>
-      <p style={{ margin: 0, color: '#666' }}>
-        これはとても長いテキストです。複数行にわたって表示されるため、
-        他のカードよりも高さが大きくなってしまいます。
-      </p>
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '20px',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      color: 'black',
-      backgroundColor: 'white',
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0' }}>カード 3</h3>
-      <p style={{ margin: 0, color: '#666' }}>中程度のテキストです。</p>
-    </div>
-  </div>
-}
-
-### 解決法2: 最小高さの設定
-
-```css title="CSS"
-.card {
-  min-height: 200px;
-}
-```
-
-## 問題2: テキストがはみ出る・溢れる
+## 問題1: テキストがはみ出る・溢れる
 
 ### 問題の発生例
 
@@ -194,7 +39,7 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 この問題は、以下の複合的な要因により発生します。
 
 1. **フレックスアイテムのデフォルト最小サイズ**
-   - CSS Flexbox仕様では、フレックスアイテムの `min-width` は `auto` がデフォルト
+   - `min-width` は `auto` がデフォルト
    - `min-width: auto` は、アイテムの「intrinsic minimum width」（内在する最小幅）を意味する
    - テキストの場合、これは最も長い単語の幅、または `white-space: nowrap` の場合はテキスト全体の幅
 
@@ -206,37 +51,11 @@ Flexboxのデフォルト動作である `align-items: stretch` を利用しま�
 3. **Flexboxの空間分配アルゴリズム**
    - Flexboxは「available space」（利用可能な空間）を各アイテムに分配
    - しかし、アイテムの最小サイズ制約により、実際には指定された割合通りにならない場合がある
-   - 特に `flex: 1` の場合でも、`min-width: auto` により縮小が制限される
-
-**CSS仕様の詳細**
-
-CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items」によると
-- フレックスアイテムの暗黙的な最小サイズは、内容に基づいて自動計算される
-- これにより、アイテムがコンテンツより小さくなることを防ぐ
-- ただし、この動作が意図しないオーバーフローを引き起こす場合がある
+   - 特に `flex: 1` の場合でも、`min-width: auto` により縮小できる幅が制限される
 
 ### 解決法1: min-width: 0 を設定
 
-**解決の原理**
-
-`min-width: 0` を設定することで、以下のメカニズムにより問題が解決されます。
-
-1. **暗黙的最小サイズの無効化**
-   - `min-width: 0` により、フレックスアイテムの暗黙的最小サイズ制約が解除される
-   - これにより、アイテムはコンテンツサイズに関係なく、Flexboxの空間分配に従って縮小可能になる
-
-2. **overflow処理の有効化**
-   - 最小サイズ制約が解除されることで、`overflow` プロパティが正常に機能する
-   - `overflow: hidden` でコンテンツの切り取りが可能になる
-   - `text-overflow: ellipsis` で省略記号（...）の表示が可能になる
-
-3. **レンダリングパフォーマンスの改善**
-   - ブラウザがテキストの幅を再計算する必要がなくなる
-   - レイアウト計算が高速化される
-
-**重要な注意点**
-
-この解決法は CSS Grid でも同様に必要で、`min-width: 0` は現代のレイアウトシステムにおける重要なテクニックです。
+`min-width: 0` を設定することで、フレックスアイテムの暗黙的最小サイズ制約が解除され、テキストがコンテナの幅に合わせて縮小可能になります。
 
 ```css title="CSS"
 .flex-item {
@@ -271,31 +90,10 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
 
 ### 解決法2: 改行を許可
 
-**解決の原理**
-
-改行を許可する手法は、テキストレンダリングエンジンの動作を変更することで問題を解決します。
-
-1. **Word Breaking アルゴリズムの変更**
-   - `word-wrap: break-word`（現在は `overflow-wrap: break-word` が推奨）により、長い単語でも強制的に改行される
-   - Unicode Line Breaking Algorithm に従い、適切な改行ポイントが決定される
-
-2. **テキストフローの調整**
-   - ブラウザのテキストレイアウトエンジンが、コンテナ幅に合わせてテキストを再配置
-   - 日本語の場合、文字間での改行も可能（`word-break: break-all` との組み合わせでより柔軟に）
-
-3. **レスポンシブデザインとの親和性**
-   - コンテナサイズが変更されても、テキストが自動的に再配置される
-   - モバイルデバイスでの表示において特に有効
-
-**ブラウザサポートと互換性**
-
-- `overflow-wrap: break-word` は CSS3 仕様
-- `word-wrap: break-word` は古いブラウザ用の代替プロパティ
-- 両方を記述することで、幅広いブラウザサポートを実現
+強制的な改行を許可することで、テキストがコンテナ内に収まるようにします。
 
 ```css title="CSS"
 .flex-item {
-  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 ```
@@ -306,7 +104,6 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
       flex: 1,
       padding: '10px',
       backgroundColor: '#f0f0f0',
-      wordWrap: 'break-word',
       overflowWrap: 'break-word'
     }}>
       このテキストは非常に長く、コンテナからはみ出してしまう可能性がありますが、改行されます
@@ -320,3 +117,7 @@ CSS Flexbox Module Level 1 仕様の「4.5. Implied Minimum Size of Flex Items�
     </div>
   </div>
 }
+
+:::info
+文章の折り返しの制御は複雑なので、[文章の折り返し指定のCSS最新版 - ICS MEDIA](https://ics.media/entry/240411/)を読むのがおすすめです。
+:::
