@@ -1,7 +1,13 @@
+import dedent from 'ts-dedent';
+
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
 import { FlexItemFixed } from './components/flex-items-fixed';
 import { FlexAlignDemo } from './components/flex-align-demo';
+import { Playground } from './components/playground';
+import { TargetLayout } from './components/target-layout';
+
+import exercise_1_style from './exercises/exercise-1.module.css';
 
 # フレックスボックスの配置制御
 
@@ -220,80 +226,6 @@ import { FlexAlignDemo } from './components/flex-align-demo';
     <FlexItem style={{ fontSize: '18px' }}>中くらい</FlexItem>
 </FlexContainer>
 
-## 組み合わせの実例
-
-justify-content と align-items を組み合わせることで、様々な配置パターンを実現できます。
-
-### 完全中央配置
-
-最も一般的な使用例の一つです。
-
-```css title="CSS"
-.flex-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-```
-
-<FlexContainer style={{ justifyContent: 'center', alignItems: 'center', height: '200px' }}>
-    <FlexItemFixed>完全中央配置</FlexItemFixed>
-</FlexContainer>
-
-### カードレイアウトの配置
-
-```css title="CSS"
-.card-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: stretch;
-  gap: 20px;
-}
-```
-
-<FlexContainer style={{ justifyContent: 'space-around', alignItems: 'stretch', height: '120px', gap: '20px' }}>
-    <div style={{
-      flex: 1,
-      padding: '15px',
-      color: 'black',
-      backgroundColor: 'white',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      カード 1
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '15px',
-      color: 'black',
-      backgroundColor: 'white',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      カード 2
-    </div>
-    <div style={{
-      flex: 1,
-      padding: '15px',
-      color: 'black',
-      backgroundColor: 'white',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      カード 3
-    </div>
-</FlexContainer>
-
 ## flex-direction との関係
 
 justify-content は主軸の方向の配置、align-items は交差軸の方向の配置を制御しますので、
@@ -304,6 +236,153 @@ flex-direction の値によって影響を与える方向が変わります。
 flex-direction、justify-content と align-items の組み合わせを試してみましょう。
 
 <FlexAlignDemo />
+
+## 演習課題
+
+### 課題1-1: 水平中央配置
+
+3つの要素を横一列に並べ、コンテナの中央に配置してください。
+
+**要件:**
+- 3つの要素が水平方向に並んでいる
+- 要素全体がコンテナの中央に配置されている
+- 要素間に適度な余白がある
+
+<TargetLayout> 
+  <div className={exercise_1_style.container}>
+    <div className={exercise_1_style.item}>アイテム1</div>
+    <div className={exercise_1_style.item}>アイテム2</div>
+    <div className={exercise_1_style.item}>アイテム3</div>
+  </div>
+</TargetLayout>
+
+<Playground
+  htmlCode={dedent`<div class="container">
+    <div class="item">アイテム1</div>
+    <div class="item">アイテム2</div>
+    <div class="item">アイテム3</div>
+  </div>`}
+  cssCode={dedent`.container {
+    height: 200px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    /* ここにFlexboxのプロパティを追加してください */
+  }
+
+  .item {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+  }`}
+/>
+
+**ヒント:** `display: flex`, `justify-content`, `gap` プロパティを使用してください。
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
+.container {
+  height: 200px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+```
+
+</details>
+
+### 課題1-2: 完全中央配置
+
+1つの要素をコンテナの完全な中央（水平・垂直ともに中央）に配置してください。
+
+<Playground
+  htmlCode={`<div class="container">
+  <div class="item">中央に配置</div>
+</div>`}
+  cssCode={`.container {
+  height: 200px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  /* ここにFlexboxのプロパティを追加してください */
+}
+
+.item {
+  background-color: #28a745;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+}`}
+/>
+
+**ヒント:** `justify-content` と `align-items` の両方を使用してください。
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
+.container {
+  height: 200px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+</details>
+
+### 課題1-3: 縦並び配置
+
+3つの要素を縦一列に並べ、中央に配置してください。
+
+<Playground
+  htmlCode={`<div class="container">
+  <div class="item">上</div>
+  <div class="item">中央</div>
+  <div class="item">下</div>
+</div>`}
+  cssCode={`.container {
+  height: 300px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  /* ここにFlexboxのプロパティを追加してください */
+}
+
+.item {
+  background-color: #dc3545;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 5px;
+  text-align: center;
+}`}
+/>
+
+**ヒント:** `flex-direction: column` を使用してください。
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
+.container {
+  height: 300px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+```
+
+</details>
 
 ## 実用的なレイアウトパターン
 
