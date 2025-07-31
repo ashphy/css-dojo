@@ -1,6 +1,8 @@
 import { AlignContentDemo } from './components/align-content-demo';
 import { FlexContainer } from './components/flex-container';
 import { FlexItemFixed } from './components/flex-items-fixed';
+import { Playground } from './components/playground';
+import { TargetLayout } from './components/target-layout';
 
 # 複数行の配置制御
 
@@ -157,3 +159,107 @@ align-content プロパティは以下の値を取ることができます。
 `align-content`と`align-items` の各値の動作を確認してみましょう。
 
 <AlignContentDemo />
+
+## 演習課題: タグクラウドの配置
+
+ブログやSNSでよく見るタグクラウドを作成してください。異なるサイズのタグを複数行で表示し、行全体を均等に配置します。
+
+<TargetLayout>
+  <div style={{
+    width: '400px',
+    height: '300px',
+    border: '2px solid #ccc',
+    borderRadius: '8px',
+    padding: '20px',
+    backgroundColor: '#f8f9fa',
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignContent: 'space-evenly',
+    gap: '10px'
+  }}>
+    {['JavaScript', 'React', 'CSS', 'HTML', 'TypeScript', 'Node.js', 'Vue.js', 'Python', 'Docker', 'Git', 'Flexbox', 'SCSS'].map((tag, i) => (
+      <div
+        key={tag}
+        style={{
+          backgroundColor: '#007bff',
+          color: 'white',
+          padding: '8px 16px',
+          borderRadius: '20px',
+          fontSize: '14px',
+          fontWeight: '500',
+          cursor: 'pointer',
+          transition: 'background-color 0.2s',
+        }}
+      >
+        {tag}
+      </div>
+    ))}
+  </div>
+</TargetLayout>
+
+<Playground
+  htmlCode={`<div class="tag-cloud">
+  <span class="tag">JavaScript</span>
+  <span class="tag">React</span>
+  <span class="tag">CSS</span>
+  <span class="tag">HTML</span>
+  <span class="tag">TypeScript</span>
+  <span class="tag">Node.js</span>
+  <span class="tag">Vue.js</span>
+  <span class="tag">Python</span>
+  <span class="tag">Docker</span>
+  <span class="tag">Git</span>
+  <span class="tag">Flexbox</span>
+  <span class="tag">SCSS</span>
+</div>`}
+  cssCode={`.tag-cloud {
+  width: 400px;
+  height: 300px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  /* ここにFlexboxのプロパティを追加してください */
+}
+
+.tag {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tag:hover {
+  background-color: #0056b3;
+}`}
+/>
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
+.tag-cloud {
+  width: 400px;
+  height: 300px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-evenly;
+  gap: 10px;
+}
+```
+
+**ポイント:**
+- `display: flex` でフレックスコンテナにする
+- `flex-wrap: wrap` で複数行への折り返しを有効にする
+- `align-content: space-evenly` で行間を均等に配置
+- `gap: 10px` でタグ間の間隔を統一
+
+</details>
