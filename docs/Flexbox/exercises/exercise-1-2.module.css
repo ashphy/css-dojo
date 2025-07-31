@@ -5,12 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
 }
 
 .item {
-  background-color: #007bff;
+  background-color: #28a745;
   color: white;
-  padding: 15px 20px;
-  border-radius: 5px;
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-weight: bold;
 }

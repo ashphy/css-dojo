@@ -1,8 +1,9 @@
 interface TargetLayoutProps {
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
-export function TargetLayout({ children }: TargetLayoutProps) {
+export function TargetLayout({ children, style }: TargetLayoutProps) {
   return (
     <div style={{ paddingBlock: "20px", borderRadius: "4px" }}>
       <div
@@ -25,6 +26,7 @@ export function TargetLayout({ children }: TargetLayoutProps) {
           padding: "10px",
           color: "black",
           backgroundColor: "white",
+          ...style,
         }}
       >
         {children}

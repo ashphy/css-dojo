@@ -8,6 +8,8 @@ import { Playground } from './components/playground';
 import { TargetLayout } from './components/target-layout';
 
 import exercise_1_style from './exercises/exercise-1.module.css';
+import exercise_1_2_style from './exercises/exercise-1-2.module.css';
+import exercise_3_style from './exercises/exercise-3.module.css';
 
 # フレックスボックスの配置制御
 
@@ -239,7 +241,7 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 
 ## 演習課題
 
-### 課題1-1: 水平中央配置
+### 課題1: 水平中央配置
 
 3つの要素を横一列に並べ、コンテナの中央に配置してください。
 
@@ -277,8 +279,6 @@ flex-direction、justify-content と align-items の組み合わせを試して�
   }`}
 />
 
-**ヒント:** `display: flex`, `justify-content`, `gap` プロパティを使用してください。
-
 <details>
 <summary>解答例を見る</summary>
 
@@ -296,9 +296,15 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 
 </details>
 
-### 課題1-2: 完全中央配置
+### 課題2: 完全中央配置
 
 1つの要素をコンテナの完全な中央（水平・垂直ともに中央）に配置してください。
+
+<TargetLayout>
+  <div className={exercise_1_2_style.container}>
+    <div className={exercise_1_2_style.item}>中央に配置</div>
+  </div>
+</TargetLayout>
 
 <Playground
   htmlCode={`<div class="container">
@@ -320,8 +326,6 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 }`}
 />
 
-**ヒント:** `justify-content` と `align-items` の両方を使用してください。
-
 <details>
 <summary>解答例を見る</summary>
 
@@ -338,9 +342,17 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 
 </details>
 
-### 課題1-3: 縦並び配置
+### 課題3: 縦並び配置
 
 3つの要素を縦一列に並べ、中央に配置してください。
+
+<TargetLayout style={{ height: "300px" }}>
+  <div className={exercise_3_style.container}>
+    <div className={exercise_3_style.item}>上</div>
+    <div className={exercise_3_style.item}>中央</div>
+    <div className={exercise_3_style.item}>下</div>
+  </div>
+</TargetLayout>
 
 <Playground
   htmlCode={`<div class="container">
@@ -364,8 +376,6 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 }`}
 />
 
-**ヒント:** `flex-direction: column` を使用してください。
-
 <details>
 <summary>解答例を見る</summary>
 
@@ -383,128 +393,3 @@ flex-direction、justify-content と align-items の組み合わせを試して�
 ```
 
 </details>
-
-## 実用的なレイアウトパターン
-
-### ヘッダーレイアウト
-
-ロゴを左に、ナビゲーションを右に配置する一般的なパターン：
-
-```css title="CSS"
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-}
-```
-
-<FlexContainer style={{ justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px' }}>
-    <div style={{ 
-      fontSize: '20px', 
-      fontWeight: 'bold',
-      color: '#333'
-    }}>
-      ロゴ
-    </div>
-    <nav style={{ display: 'flex', gap: '20px' }}>
-      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>ホーム</a>
-      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>サービス</a>
-      <a href="#" style={{ color: '#666', textDecoration: 'none' }}>お問い合わせ</a>
-    </nav>
-</FlexContainer>
-
-### モーダルの中央配置
-
-画面中央にモーダルを配置する場合：
-
-```css title="CSS"
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-```
-
-<div style={{
-  position: 'relative',
-  height: '200px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: 'black',
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  borderRadius: '8px'
-}}>
-  <div style={{
-    padding: '30px',
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-    textAlign: 'center'
-  }}>
-    モーダルコンテンツ
-  </div>
-</div>
-
-### フッター配置
-
-コンテンツの量に関係なく、フッターをページ下部に固定：
-
-```css title="CSS"
-.page-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  flex: 1;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-```
-
-<div style={{
-  height: '300px',
-  display: 'flex',
-  flexDirection: 'column',
-  border: '1px solid #ddd',
-  borderRadius: '8px',
-  overflow: 'hidden'
-}}>
-  <div style={{
-    flex: 1,
-    padding: '20px',
-    color: 'black',
-    backgroundColor: 'white',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }}>
-    メインコンテンツ エリア
-  </div>
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-        padding: '20px',
-    color: 'black',
-    backgroundColor: '#f5f5f5'
-  }}>
-    フッター (常に下部に配置)
-  </div>
-</div>
