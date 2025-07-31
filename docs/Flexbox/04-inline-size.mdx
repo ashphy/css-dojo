@@ -1,5 +1,7 @@
 import { FlexContainer } from './components/flex-container';
 import { FlexItem } from './components/flex-items';
+import { Playground } from './components/playground';
+import { TargetLayout } from './components/target-layout';
 
 # フレックスアイテムのサイズ
 
@@ -261,66 +263,154 @@ flex: <flex-grow> <flex-shrink> <flex-basis>;
 </FlexContainer>
 </div>
 
-## 実用例
+## 演習課題
 
 ### カードレイアウト
 
-異なるサイズのカードを含むレスポンシブなレイアウト：
+異なるサイズのカードを含むレスポンシブなレイアウトを作成しましょう。
 
-```css title="CSS"
+<TargetLayout>
+  <FlexContainer style={{ gap: '20px' }}>
+      <div style={{
+        flex: '1',
+        padding: '20px',
+        backgroundColor: '#fff',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>基本プラン</h3>
+        <p style={{ margin: 0, color: '#666' }}>月額 ¥1,000</p>
+      </div>
+      <div style={{
+        flex: '2',
+        padding: '20px',
+        backgroundColor: '#e3f2fd',
+        border: '2px solid #2196f3',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>プレミアムプラン</h3>
+        <p style={{ margin: 0, color: '#666' }}>月額 ¥2,000（推奨）</p>
+      </div>
+      <div style={{
+        flex: '1',
+        padding: '20px',
+        backgroundColor: '#fff',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>エンタープライズ</h3>
+        <p style={{ margin: 0, color: '#666' }}>要お問い合わせ</p>
+      </div>
+  </FlexContainer>
+</TargetLayout>
+
+<Playground
+  htmlCode={`<div class="card-container">
+  <div class="card basic">
+    <h3>基本プラン</h3>
+    <p>月額 ¥1,000</p>
+  </div>
+  <div class="card premium">
+    <h3>プレミアムプラン</h3>
+    <p>月額 ¥2,000（推奨）</p>
+  </div>
+  <div class="card enterprise">
+    <h3>エンタープライズ</h3>
+    <p>要お問い合わせ</p>
+  </div>
+</div>`}
+  cssCode={`.card-container {
+}
+
+.card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: #666;
+}
+
+.basic {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.premium {
+  flex: 2;
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
+}
+
+.enterprise {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}`}
+/>
+
+<details>
+<summary>解答例を見る</summary>
+
+```css
 .card-container {
   display: flex;
   gap: 20px;
 }
 
 .card {
-  flex: 1;
   min-width: 200px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.card.featured {
-  flex: 2; /* プレミアムプランは2倍の幅 */
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: #666;
+}
+
+.basic {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.premium {
+  flex: 2;
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
+}
+
+.enterprise {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
 }
 ```
 
-<FlexContainer style={{ gap: '20px' }}>
-    <div style={{
-      flex: '1',
-      minWidth: '200px',
-      padding: '20px',
-      backgroundColor: '#fff',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>基本プラン</h3>
-      <p style={{ margin: 0, color: '#666' }}>月額 ¥1,000</p>
-    </div>
-    <div style={{
-      flex: '2',
-      minWidth: '200px',
-      padding: '20px',
-      backgroundColor: '#e3f2fd',
-      border: '2px solid #2196f3',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>プレミアムプラン</h3>
-      <p style={{ margin: 0, color: '#666' }}>月額 ¥2,000（推奨）</p>
-    </div>
-    <div style={{
-      flex: '1',
-      minWidth: '200px',
-      padding: '20px',
-      backgroundColor: '#fff',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
-      <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>エンタープライズ</h3>
-      <p style={{ margin: 0, color: '#666' }}>要お問い合わせ</p>
-    </div>
-</FlexContainer>
+**ポイント:**
+- `flex: 1` と `flex: 2` の組み合わせで、プレミアムプランを2倍の幅にする
+- `min-width: 200px` でカードの最小幅を保証し、レスポンシブ対応
+- `gap: 20px` でカード間の余白を統一
+
+</details>
 
 ### サイドバーレイアウト
 
