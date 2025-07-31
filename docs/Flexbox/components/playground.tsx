@@ -201,7 +201,7 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
           <Section>
             <SectionHeader color="#e34c26">HTML</SectionHeader>
             <Editor
-              height="180px"
+              height="300px"
               defaultLanguage="html"
               theme={editorTheme}
               value={currentHtmlCode}
@@ -215,7 +215,6 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
                 renderLineHighlight: "line",
                 smoothScrolling: true,
                 wordWrap: "off",
-                automaticLayout: true,
               }}
             />
           </Section>
@@ -224,7 +223,7 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
           <Section>
             <SectionHeader color="#1572b6">CSS</SectionHeader>
             <Editor
-              height="400px"
+              height="300px"
               defaultLanguage="css"
               theme={editorTheme}
               value={currentCssCode}
@@ -238,7 +237,6 @@ export function Playground({ htmlCode, cssCode }: PlaygroundProps) {
                 renderLineHighlight: "line",
                 smoothScrolling: true,
                 wordWrap: "off",
-                automaticLayout: true,
               }}
             />
           </Section>
