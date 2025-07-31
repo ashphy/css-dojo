@@ -21,7 +21,6 @@ export function TargetLayout({ children, style }: TargetLayoutProps) {
 
       <div
         style={{
-          height: "200px",
           border: "1px solid #ccc",
           padding: "10px",
           color: "black",
