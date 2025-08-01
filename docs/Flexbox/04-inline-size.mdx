@@ -148,10 +148,10 @@ import { TargetLayout } from './components/target-layout';
 
 異なる `flex-shrink` 値を設定すると、比率に応じて縮小します。
 
-<FlexContainer style={{ width: '300px' }}>
-    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
-    <FlexItem style={{ flexShrink: 3, flexBasis: '150px' }}>flex-shrink: 3</FlexItem>
-    <FlexItem style={{ flexShrink: 1, flexBasis: '150px' }}>flex-shrink: 1</FlexItem>
+<FlexContainer style={{ width: '500px' }}>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '200px', minWidth: 0 }}>flex-shrink: 1</FlexItem>
+    <FlexItem style={{ flexShrink: 3, flexBasis: '200px', minWidth: 0 }}>flex-shrink: 3</FlexItem>
+    <FlexItem style={{ flexShrink: 1, flexBasis: '200px', minWidth: 0 }}>flex-shrink: 1</FlexItem>
 </FlexContainer>
 
 ## flex ショートハンド
