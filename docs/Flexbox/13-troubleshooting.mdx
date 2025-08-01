@@ -168,7 +168,7 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
 
 ### なぜこの問題が起こるのか？
 
-この問題は、Flexboxの動作原理とCSSの `height: 100%` の計算方法が関係しています。
+この問題は、FlexboxとCSSの `height: 100%` の計算方法が関係しています。
 
 - `height: 100%` は親要素の指定値（specified value）を基準に計算される[^1]
 - 親要素に幅/高さが明示的に指定されていない場合、その値は不定値（indefinite size）となる[^2]
@@ -184,7 +184,10 @@ Flexboxを使用していると遭遇しがちな問題とその解決方法を�
 
 ### 解決法1: align-items: stretch を利用（推奨）
 
-最も確実で推奨される解決方法は、`height: 100%` を削除し、Flexboxの自然な伸縮機能を利用することです。
+`align-items: stretch`が指定されると、そのフレックスアイテムの交差軸の大きさは確定した物として扱われ、%指定が有効になります。[^4]
+
+[^4]: [11 Determine the used cross size of each flex item: CSS Flexible Box Layout Module Level 1
+](https://www.w3.org/TR/css-flexbox-1/#algo-stretch)
 
 ```css title="CSS"
 .flex-container {
